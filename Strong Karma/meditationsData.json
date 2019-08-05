@@ -1,0 +1,36 @@
+[
+    {
+        "date": "August 4th, 2019",
+        "hinderances": {
+          "desire" : 5.0,
+          "aversion" : 5.0,
+          "anxiety" : 5.0,
+          "dullness" : 5.0,
+          "doubt" : 5.0
+        },
+        "factors": {
+          "faith" : 5.0,
+          "energy" : 5.0,
+          "mindfulness" : 5.0,
+          "concentration" : 5.0,
+          "insight" : 5.0
+        },
+        "entry": "Mindulness of breath",
+        "id": 1001,
+    },
+    {
+        "date": "July 29, 2019",
+        "hinderances": {
+          "desire" : 5.0,
+          "anxiety" : 5.0,
+          "doubt" : 5.0
+        },
+        "factors": {
+          "faith" : 5.0,
+          "mindfulness" : 5.0,
+          "concentration" : 5.0,
+        },
+        "entry": "See Hear In",
+        "id": 1002,
+    }
+]
