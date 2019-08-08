@@ -38,6 +38,7 @@ struct Meditation : Hashable, Identifiable, Codable {
 
 
 final class UserData: ObservableObject {
+  var audioPlayer = MedAudio()
     @Published var showFavoritesOnly = false
     @Published var meditations = meditationsData
 }

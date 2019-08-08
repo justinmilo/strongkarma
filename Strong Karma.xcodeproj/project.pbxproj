@@ -16,6 +16,8 @@
 		D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5423B22F721B300A0D90D /* Meditation.swift */; };
 		D0B5423E22F721CD00A0D90D /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5423D22F721CD00A0D90D /* View.swift */; };
 		D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423F22F78B6900A0D90D /* meditationsData.json */; };
+		D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */; };
+		D0B5424422FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav in Resources */ = {isa = PBXBuildFile; fileRef = D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		D0B5423B22F721B300A0D90D /* Meditation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meditation.swift; sourceTree = "<group>"; };
 		D0B5423D22F721CD00A0D90D /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D0B5423F22F78B6900A0D90D /* meditationsData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = meditationsData.json; sourceTree = "<group>"; };
+		D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "91196__surly__buddhist-prayer-bell.wav"; sourceTree = "<group>"; };
+		D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "91196__surly__buddhist-prayer-bell-cut.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
 				D0B5423522F7213A00A0D90D /* Info.plist */,
 				D0B5423F22F78B6900A0D90D /* meditationsData.json */,
+				D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */,
+				D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */,
 				D0B5422F22F7213A00A0D90D /* Preview Content */,
 			);
 			path = "Strong Karma";
@@ -143,8 +149,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B5423422F7213A00A0D90D /* LaunchScreen.storyboard in Resources */,
+				D0B5424422FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav in Resources */,
 				D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */,
 				D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */,
+				D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */,
 				D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

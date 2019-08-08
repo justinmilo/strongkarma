@@ -109,20 +109,173 @@ struct EntryCellView : View {
   }
 }
 
+import AVFoundation
+class MedAudio {
+
+  var player: AVAudioPlayer? = nil
+
+  
+  func playAudioWithDelay(seconds: Double)
+  {
+
+    
+    let file = Bundle.main.url(forResource: "91196__surly__buddhist-prayer-bell-cut", withExtension: "wav")
+
+    do {
+       player = try AVAudioPlayer(contentsOf: file!)
+        player?.volume = 0.75
+        player?.prepareToPlay()
+
+    } catch let error as NSError {
+        print("error: \(error.localizedDescription)")
+    }
+
+
+    //let seconds = 1.0//Time To Delay
+    let when = DispatchTime.now() + seconds
+
+    DispatchQueue.main.asyncAfter(deadline: when) {
+      print(self.player)
+      if self.player?.isPlaying == false {
+          print("Just playing")
+
+        self.player?.play()
+        }
+    }
+  }
+    
+   
+}
+
+struct TimerButton : View {
+  
+  @EnvironmentObject private var userData: UserData
+
+  
+  var timer : Timer {
+    Timer.scheduledTimer(withTimeInterval: 1, repeats: true
+    ){_ in
+      self.nowDate = Date()
+    }
+  }
+  var delay : Double // in minutes
+  @State var nowDate: Date = Date()
+  @State var startDate : Date = nil
+  @State var referenceDate : Date = nil
+  let calendar = Calendar(identifier: .gregorian)
+  
+  func countDownString(from date: Date, until nowDate: Date) -> String {
+    let components = calendar.dateComponents([.minute, .second], from: nowDate, to: date)
+    return String(format: "%02dm:%02ds", components.minute ?? 0, components.second ?? 0)
+  }
+  
+  
+  var body: some View {
+    HStack {
+      Button(action: {
+        
+        self.startDate = Date()
+        
+        self.referenceDate = Date() + self.delay
+        
+        let _ = self.timer
+        
+        self.userData.audioPlayer.playAudioWithDelay(seconds:
+          self.delay)
+        
+        scheduleNotification()
+        
+      }){
+        Text("Start")
+          .foregroundColor(.white)
+          .frame(width: 60, height: 60, alignment: .center)
+          
+          .background(
+            Circle()
+              .foregroundColor(.secondary))
+        
+      }
+      if (referenceDate != nil && referenceDate! > nowDate) {
+        Text( countDownString(from: nowDate, until: referenceDate!) )
+          .font(.largeTitle)
+      }
+      }
+
+      
+    
+  }
+  
+}
+
+import AVFoundation
+struct NewMeditataion : View {
+  
+  private let types : [String] = ["Mindfulness of Breath", "See Hear Feel"  ]
+  private let minutesList : [Double] = (0 ... 60/5).map(Double.init).map{$0*5.0}
+  private let secondsList : [Double] = (0 ... 60).map(Double.init).map{$0}
+  @State var selType = 0
+  @State var selMin = 0
+  @State var selSec = 0
+
+  private var meditation : String { types[selType] }
+  private var minutes : Double { minutesList[self.selMin] }
+
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+  
+  var body: some View {
+    
+    NavigationView {
+      Form{
+        Button(action: {
+          print(self.meditation)
+          print(self.minutes)
+          self.presentationMode.value.dismiss()
+        }) { Text("Dismiss") }
+        
+        Picker(selection: self.$selType, label: Text("Type")) {
+          ForEach(0 ..< self.types.count) {
+            Text(self.types[$0]).tag($0)
+          }
+        }
+        
+        Picker(selection: self.$selMin, label: Text("Minutes")) {
+          ForEach(0 ..< self.minutesList.count) {
+            Text( String(self.minutesList[$0])
+            ).tag($0)
+          }
+        }
+        Picker(selection: self.$selSec, label: Text("Seconds")) {
+          ForEach(0 ..< self.secondsList.count) {
+            Text( String(self.secondsList[$0])
+            ).tag($0)
+          }
+        }
+        
+        TimerButton(delay:self.minutesList[selMin] * 60 + secondsList[selSec])
+          .environmentObject(UserData())
+        // }
+        //
+      }
+    }.navigationBarTitle(Text("Practice Notes"))
+    
+  }
+  
+  
+  
+  
+  
+  
+    
+  
+}
+
 struct ContentView2 : View {
   
   @EnvironmentObject private var userData: UserData
   @State private var popover = false
-  @State private var date = Date()
-  private var durations : [[String]] = {
-    let hours = (0 ... 48).map(String.init)
-    let minutes = (0 ... 60).map(String.init)
-    let seconds = (0 ... 60).map(String.init)
+  
 
-    return [
-      hours, minutes, seconds
-    ]
-  }()
   
   var body: some View {
      NavigationView {
@@ -134,8 +287,8 @@ struct ContentView2 : View {
                 EntryCellView(entry:sec)
           }
           Text("Notice the object, see it beautiful awareness, let it through")
-          .lineLimit(3)
-          .padding()
+            .lineLimit(3)
+            .padding()
         }
         
         Button(action: {
@@ -143,47 +296,14 @@ struct ContentView2 : View {
         }){
           Circle()
             .frame(width: 44.0, height: 44.0, alignment: .center)
-            .foregroundColor(.black)
+            .foregroundColor(.secondary)
           
         }
-        
-        
         }.navigationBarTitle(Text("Practice Notes"))
      }
-     .popover(isPresented: self.$popover) {
       
-      GeometryReader { geometry in
-
-          HStack
-          {
-               Picker(selection: self.$selection, label: Text(""))
-               {
-                    ForEach(0 ..< self.durations[0].count)
-                    {
-                        Text(self.durations[0][$0])
-                           .tag($0)
-                    }
-                }
-                .pickerStyle(.wheel)
-                .fixedSize(horizontal: true, vertical: true)
-                .frame(width: geometry.size.width / 2, height: geometry.size.height, alignment: .center)
-
-
-                Picker(selection: self.$selection2, label: Text(""))
-                {
-                     ForEach(0 ..< self.durations[1].count)
-                     {
-                         Text(self.durations[1][$0])
-                             .tag($0)
-                     }
-                }
-                .pickerStyle(.wheel)
-                .fixedSize(horizontal: true, vertical: true)
-                .frame(width: geometry.size.width / 2, height: geometry.size.height, alignment: .center)
-
-          }
-      }
-      
+     .sheet(isPresented: self.$popover) {
+      NewMeditataion()
      }
   }
 }

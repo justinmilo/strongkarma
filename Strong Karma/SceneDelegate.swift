@@ -9,6 +9,41 @@
 import UIKit
 import SwiftUI
 
+
+let center = UNUserNotificationCenter.current()
+
+
+func scheduleNotification() {
+    //let center = UNUserNotificationCenter.current()
+  print("Getting Here1")
+
+    let content = UNMutableNotificationContent()
+    content.title = "Late wake up call"
+    content.body = "The early bird catches the worm, but the second mouse gets the cheese."
+    content.categoryIdentifier = "alarm"
+    content.userInfo = ["customData": "fizzbuzz"]
+    content.sound = UNNotificationSound.default
+
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+  print("Getting Here2")
+    center.add(request)
+}
+
+func registerCategories() {
+    //let center = UNUserNotificationCenter.current()
+//    center.delegate = self
+
+    let show = UNNotificationAction(identifier: "show", title: "Tell me more…", options: .foreground)
+    let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
+
+    center.setNotificationCategories([category])
+}
+
+
+
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
@@ -21,10 +56,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // Use a UIHostingController as window root view controller
     if let windowScene = scene as? UIWindowScene {
+      center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+          if granted {
+              print("Yay!")
+          } else {
+              print("D'oh")
+          }
+      }
+      
+      
         let window = UIWindow(windowScene: windowScene)
       window.rootViewController = UIHostingController(rootView:
-        ContentView2()
-          .environmentObject(UserData()))
+  //      ContentView2()
+        NewMeditataion()
+          .environmentObject(UserData())
+        )
         self.window = window
         window.makeKeyAndVisible()
     }
