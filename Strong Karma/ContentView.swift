@@ -221,42 +221,59 @@ struct NewMeditataion : View {
   private var minutes : Double { minutesList[self.selMin] }
 
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+  
+  @State var textFieldText : String  = ""
   
   var body: some View {
     
     NavigationView {
       Form{
-        Button(action: {
+        Section {
+          Button(action: {
           print(self.meditation)
           print(self.minutes)
           self.presentationMode.value.dismiss()
-        }) { Text("Dismiss") }
-        
-        Picker(selection: self.$selType, label: Text("Type")) {
-          ForEach(0 ..< self.types.count) {
-            Text(self.types[$0]).tag($0)
-          }
+          }) { Text("Dismiss") }
         }
         
-        Picker(selection: self.$selMin, label: Text("Minutes")) {
-          ForEach(0 ..< self.minutesList.count) {
-            Text( String(self.minutesList[$0])
-            ).tag($0)
+        Section {
+          Picker(selection: self.$selType, label: Text("Type")) {
+            ForEach(0 ..< self.types.count) {
+              Text(self.types[$0]).tag($0)
+            }
           }
+          
+          Picker(selection: self.$selMin, label: Text("Minutes")) {
+            ForEach(0 ..< self.minutesList.count) {
+              Text( String(self.minutesList[$0])
+              ).tag($0)
+            }
+          }
+          Picker(selection: self.$selSec, label: Text("Seconds")) {
+            ForEach(0 ..< self.secondsList.count) {
+              Text( String(self.secondsList[$0])
+              ).tag($0)
+            }
+          }
+          
+          TimerButton(delay:self.minutesList[selMin] * 60 + secondsList[selSec])
+            .environmentObject(UserData())
+          
         }
-        Picker(selection: self.$selSec, label: Text("Seconds")) {
-          ForEach(0 ..< self.secondsList.count) {
-            Text( String(self.secondsList[$0])
-            ).tag($0)
-          }
+        Section {
+        Text( "TextField Dude")
         }
         
-        TimerButton(delay:self.minutesList[selMin] * 60 + secondsList[selSec])
-          .environmentObject(UserData())
-        // }
-        //
+        Section {
+          Text( "TextField Below")
+
+          TextField("Description of Meditation", text: $textFieldText, onEditingChanged: { _ in }, onCommit: {})
+            .lineLimit(nil)
+        }
+        
       }
+      
+      
     }.navigationBarTitle(Text("Practice Notes"))
     
   }
