@@ -37,12 +37,6 @@ struct Meditation : Hashable, Identifiable, Codable {
 }
 
 
-final class UserData: ObservableObject {
-  var audioPlayer = MedAudio()
-    @Published var showFavoritesOnly = false
-    @Published var meditations = meditationsData
-}
-
 let meditationsData: [Meditation] = load("meditationsData.json")
 
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {

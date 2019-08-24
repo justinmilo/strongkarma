@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD062230B81BA0042B118 /* NewMeditation.swift */; };
+		D02AD065230B82520042B118 /* MedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD064230B82520042B118 /* MedAudio.swift */; };
+		D02AD067230B82960042B118 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD066230B82960042B118 /* TimerButton.swift */; };
+		D0ABD9B723119DD50092698C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9B623119DD50092698C /* Reducer.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
 		D0B5422C22F7213800A0D90D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ContentView.swift */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D02AD062230B81BA0042B118 /* NewMeditation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeditation.swift; sourceTree = "<group>"; };
+		D02AD064230B82520042B118 /* MedAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedAudio.swift; sourceTree = "<group>"; };
+		D02AD066230B82960042B118 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		D0ABD9B623119DD50092698C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +77,10 @@
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				D0B5422B22F7213800A0D90D /* ContentView.swift */,
+				D0ABD9B623119DD50092698C /* Reducer.swift */,
+				D02AD066230B82960042B118 /* TimerButton.swift */,
+				D02AD064230B82520042B118 /* MedAudio.swift */,
+				D02AD062230B81BA0042B118 /* NewMeditation.swift */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
 				D0B5423D22F721CD00A0D90D /* View.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
@@ -164,8 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */,
+				D02AD067230B82960042B118 /* TimerButton.swift in Sources */,
+				D02AD065230B82520042B118 /* MedAudio.swift in Sources */,
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
 				D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */,
+				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,
 				D0B5423E22F721CD00A0D90D /* View.swift in Sources */,
 				D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */,
 				D0B5422C22F7213800A0D90D /* ContentView.swift in Sources */,
