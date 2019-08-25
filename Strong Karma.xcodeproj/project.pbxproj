@@ -11,6 +11,7 @@
 		D02AD065230B82520042B118 /* MedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD064230B82520042B118 /* MedAudio.swift */; };
 		D02AD067230B82960042B118 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD066230B82960042B118 /* TimerButton.swift */; };
 		D0ABD9B723119DD50092698C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9B623119DD50092698C /* Reducer.swift */; };
+		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
 		D0B5422C22F7213800A0D90D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ContentView.swift */; };
@@ -29,6 +30,8 @@
 		D02AD064230B82520042B118 /* MedAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedAudio.swift; sourceTree = "<group>"; };
 		D02AD066230B82960042B118 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		D0ABD9B623119DD50092698C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
+		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +77,8 @@
 		D0B5422622F7213800A0D90D /* Strong Karma */ = {
 			isa = PBXGroup;
 			children = (
+				D0ABD9DF2311E5680092698C /* Testing.playground */,
+				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				D0B5422B22F7213800A0D90D /* ContentView.swift */,
@@ -165,6 +170,7 @@
 				D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */,
 				D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */,
 				D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */,
+				D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */,
 				D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -88,7 +88,7 @@ import AVFoundation
 
 struct ContentView2 : View {
   
-  @EnvironmentObject private var userData: UserData
+  @ObservedObject var store: Store<UserData, AppAction>
   @State private var popover = false
   
 
@@ -99,7 +99,7 @@ struct ContentView2 : View {
       VStack {
         
         List {
-          ForEach(userData.meditations) { sec in
+          ForEach(store.value.meditations) { sec in
                 EntryCellView(entry:sec)
           }
           Text("Notice the object, see it beautiful awareness, let it through")
@@ -119,7 +119,8 @@ struct ContentView2 : View {
      }
       
      .sheet(isPresented: self.$popover) {
-      NewMeditataion()
+      NewNewMeditataion()
+        .environmentObject(self.store)
      }
   }
 }

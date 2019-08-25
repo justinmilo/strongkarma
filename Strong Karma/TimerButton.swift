@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TimerButton : View {
   
-  @EnvironmentObject private var userData: UserData
+  @ObservedObject var store: Store<UserData, AppAction>
 
   
   var timer : Timer {
@@ -41,10 +41,9 @@ struct TimerButton : View {
         
         let _ = self.timer
         
-        self.userData.audioPlayer.playAudioWithDelay(seconds:
+        self.store.value.audioPlayer.playAudioWithDelay(seconds:
           self.delay)
         
-        scheduleNotification()
         
       }){
         Text("Start")

@@ -10,36 +10,6 @@ import UIKit
 import SwiftUI
 
 
-let center = UNUserNotificationCenter.current()
-
-
-func scheduleNotification() {
-    //let center = UNUserNotificationCenter.current()
-  print("Getting Here1")
-
-    let content = UNMutableNotificationContent()
-    content.title = "Late wake up call"
-    content.body = "The early bird catches the worm, but the second mouse gets the cheese."
-    content.categoryIdentifier = "alarm"
-    content.userInfo = ["customData": "fizzbuzz"]
-    content.sound = UNNotificationSound.default
-
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-  print("Getting Here2")
-    center.add(request)
-}
-
-func registerCategories() {
-    //let center = UNUserNotificationCenter.current()
-//    center.delegate = self
-
-    let show = UNNotificationAction(identifier: "show", title: "Tell me more…", options: .foreground)
-    let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
-
-    center.setNotificationCategories([category])
-}
 
 
 
@@ -54,23 +24,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+    
+    print("Got Here")
     // Use a UIHostingController as window root view controller
     if let windowScene = scene as? UIWindowScene {
-      center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-          if granted {
-              print("Yay!")
-          } else {
-              print("D'oh")
-          }
-      }
+      
       
       
         let window = UIWindow(windowScene: windowScene)
+      let store : Store<UserData, AppAction>  = Store(initialValue: UserData(), reducer: reducer)
+      print("Got Here2")
       window.rootViewController = UIHostingController(rootView:
   //      ContentView2()
-        NewMeditataion()
-          .environmentObject(UserData())
-        )
+        NewNewMeditataion()
+          .environmentObject(store)
+      )
+      print("Got Here3")
         self.window = window
         window.makeKeyAndVisible()
     }
