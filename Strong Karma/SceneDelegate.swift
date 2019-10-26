@@ -32,11 +32,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : Store<UserData, AppAction>  = Store(initialValue: UserData(), reducer: reducer)
+      let store : Store<UserData, AppAction>  = Store(initialValue: UserData(meditations: Current.file.load() ), reducer: reducer) {
+        userData in
+        Current.file.save(userData.meditations)
+        print(Current.file.load())
+      }
       print("Got Here2")
       window.rootViewController = UIHostingController(rootView:
-  //      ContentView2()
-        NewNewMeditataion()
+        ContentView2()
+        //NewNewMeditataion()
           .environmentObject(store)
       )
       print("Got Here3")

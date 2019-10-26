@@ -16,21 +16,7 @@
           "insight" : 5.0
         },
         "entry": "Mindulness of breath",
-        "id": 1001,
-    },
-    {
-        "date": "July 29, 2019",
-        "hinderances": {
-          "desire" : 5.0,
-          "anxiety" : 5.0,
-          "doubt" : 5.0
-        },
-        "factors": {
-          "faith" : 5.0,
-          "mindfulness" : 5.0,
-          "concentration" : 5.0,
-        },
-        "entry": "See Hear In",
-        "id": 1002,
+        "duration" : 500.00,
+        "id": "cef0cbf3-6458-4f13-a418-ee4d7e7505dd",
     }
 ]
