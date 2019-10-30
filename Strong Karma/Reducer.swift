@@ -85,7 +85,7 @@ final class NotificationPlace : NSObject, UNUserNotificationCenterDelegate {
    }
 }
 
-final class Store<Value, Action>: ObservableObject  {
+final class OldStore<Value, Action>: ObservableObject  {
  
   private let notificationPlace = NotificationPlace()
   
@@ -151,7 +151,7 @@ enum AppAction {
   case addMeditationWithDuration(Double)
   case updateLatestDate(Date)
   case startTimer(Date)
-
+  case updateMeditation(Int, Meditation)
 }
 
 import SwiftUI
@@ -191,9 +191,11 @@ func reducer( state: inout UserData, action: AppAction) -> Void {
                  duration: seconds,
                  hinderances: nil,
                  factors: nil,
-                 entry: nil))
+                 entry: nil //,
+                 //title: "Untitled"
+    ))
     
-    
-    
+  case let .updateMeditation(index, meditation):
+    state.meditations[index] = meditation
   }
 }

@@ -9,11 +9,11 @@
 import SwiftUI
 
 class MeditationTimer {
-  init(store: Store<UserData, AppAction>) {
+  init(store: OldStore<UserData, AppAction>) {
     self.store = store
   }
   
-  var store: Store<UserData, AppAction>
+  var store: OldStore<UserData, AppAction>
 
   var timer : Timer?
 
@@ -42,8 +42,8 @@ class MeditationTimer {
   
 }
 
-struct NewNewMeditataion : View {
-  @EnvironmentObject var store: Store<UserData, AppAction>
+struct NewMeditationView : View {
+  @EnvironmentObject var store: OldStore<UserData, AppAction>
   
   @State var selMin = 0
   private let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
@@ -79,8 +79,12 @@ struct NewNewMeditataion : View {
   }
   
   
-  
-  
-  
-  
+}
+
+
+
+struct NewMeditationView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewMeditationView()
+    }
 }

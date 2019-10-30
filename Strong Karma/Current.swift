@@ -8,7 +8,17 @@
 
 import Foundation
 
-
+extension Meditation {
+    static var dummy = Meditation(
+        id: UUID(),
+        date: "My Date",
+        duration: 50,
+        hinderances: nil,
+        factors: nil,
+        entry: "Some Entry"
+        //, title:"Untitled"
+    )
+}
 
 struct World {
   var file = FileIO()

@@ -36,6 +36,6 @@ struct EntryCellView : View {
 
 struct EntryCellView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryCellView(entry: Meditation(id: UUID(), date: "My Date", duration: 50, hinderances: nil, factors: nil, entry: "Some Entry"))
+        EntryCellView(entry: Meditation.dummy)
     }
 }

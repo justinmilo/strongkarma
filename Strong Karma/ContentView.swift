@@ -51,7 +51,7 @@ import AVFoundation
 
 struct ContentView2 : View {
   
-  @EnvironmentObject var store: Store<UserData, AppAction>
+  @EnvironmentObject var store: OldStore<UserData, AppAction>
   @State private var popover = false
   
 
@@ -62,9 +62,10 @@ struct ContentView2 : View {
       VStack {
         
         List {
-          ForEach(store.value.meditations) { sec in
-            NavigationLink(destination: SwiftUIView()){
-                EntryCellView(entry:sec)
+            ForEach(0..<store.value.meditations.count) { sec in
+                NavigationLink(destination: SwiftUIView(index: sec, meditation: self.store.value.meditations[sec])){
+                EntryCellView(entry:
+                    self.store.value.meditations[sec])
             }
           }
           Text("Welcome the object, let it in, see it, let it through")
@@ -84,8 +85,16 @@ struct ContentView2 : View {
      }
       
      .sheet(isPresented: self.$popover) {
-      NewNewMeditataion()
+      NewMeditationView()
         .environmentObject(self.store)
      }
   }
+}
+
+
+
+struct ContentView2_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView2()
+    }
 }

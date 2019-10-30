@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
 		21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */; };
 		21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */; };
@@ -14,7 +15,7 @@
 		D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD062230B81BA0042B118 /* NewMeditation.swift */; };
 		D0ABD9B723119DD50092698C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9B623119DD50092698C /* Reducer.swift */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
-		D0ABD9E1231215310092698C /* NewNewMeditation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* NewNewMeditation.swift */; };
+		D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* NewMeditationView.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
 		D0B5422C22F7213800A0D90D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ContentView.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellView.swift; sourceTree = "<group>"; };
 		21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposableArchitecture.swift; sourceTree = "<group>"; };
@@ -37,7 +39,7 @@
 		D0ABD9B623119DD50092698C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		D0ABD9E0231215310092698C /* NewNewMeditation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNewMeditation.swift; sourceTree = "<group>"; };
+		D0ABD9E0231215310092698C /* NewMeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeditationView.swift; sourceTree = "<group>"; };
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21CE37172369F0CF00DBCD53 /* Supplimental Views */ = {
+			isa = PBXGroup;
+			children = (
+				21CE37152369F0CA00DBCD53 /* TextView.swift */,
+			);
+			path = "Supplimental Views";
+			sourceTree = "<group>";
+		};
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
@@ -90,12 +100,13 @@
 				D0B5422B22F7213800A0D90D /* ContentView.swift */,
 				D00790E2232EBF8B00C2370F /* MiscViews.swift */,
 				21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */,
+				21CE37172369F0CF00DBCD53 /* Supplimental Views */,
 				21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */,
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
 				21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */,
 				D0D0967A231360500066CE66 /* Current.swift */,
 				D02AD062230B81BA0042B118 /* NewMeditation.swift */,
-				D0ABD9E0231215310092698C /* NewNewMeditation.swift */,
+				D0ABD9E0231215310092698C /* NewMeditationView.swift */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
@@ -194,12 +205,13 @@
 				D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */,
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
 				D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */,
+				21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */,
 				21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */,
 				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,
 				21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */,
-				D0ABD9E1231215310092698C /* NewNewMeditation.swift in Sources */,
+				D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */,
 				D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */,
 				D00790E3232EBF8B00C2370F /* MiscViews.swift in Sources */,
 				D0B5422C22F7213800A0D90D /* ContentView.swift in Sources */,

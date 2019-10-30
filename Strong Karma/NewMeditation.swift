@@ -12,9 +12,9 @@ import AVFoundation
 
 
 
-struct NewMeditataion : View {
+struct TD_NewMeditataion : View {
   
-  @ObservedObject var store: Store<UserData, AppAction>
+  @ObservedObject var store: OldStore<UserData, AppAction>
   
   private let types : [String] = ["Mindfulness of Breath", "See Hear Feel"  ]
   private let minutesList : [Double] = (0 ... 60/5).map(Double.init).map{$0*5.0}
@@ -85,6 +85,20 @@ struct NewMeditataion : View {
   
     
   
+}
+
+
+struct TD_NewMeditataion_Previews : PreviewProvider {
+    static var previews: some View {
+        TD_NewMeditataion(store:
+            OldStore(initialValue: UserData(meditations: [Meditation.dummy] ), reducer: reducer) {
+              userData in
+              Current.file.save(userData.meditations)
+              print(Current.file.load())
+                
+            }
+        )
+    }
 }
 
 

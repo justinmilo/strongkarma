@@ -18,6 +18,7 @@ struct Meditation : Hashable, Identifiable, Codable {
   var hinderances : Hinderances?
   var factors : Factors?
   var entry : String?
+//  var title : String = "No Title"
   
   // Record of factors
   struct Factors : Hashable, Codable {
