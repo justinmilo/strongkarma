@@ -11,8 +11,8 @@
 		21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */; };
 		21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */; };
+		21F75840236C696A00EBB6AB /* PrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7583F236C696A00EBB6AB /* PrepView.swift */; };
 		D00790E3232EBF8B00C2370F /* MiscViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00790E2232EBF8B00C2370F /* MiscViews.swift */; };
-		D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02AD062230B81BA0042B118 /* NewMeditation.swift */; };
 		D0ABD9B723119DD50092698C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9B623119DD50092698C /* Reducer.swift */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* NewMeditationView.swift */; };
@@ -34,8 +34,8 @@
 		21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellView.swift; sourceTree = "<group>"; };
 		21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposableArchitecture.swift; sourceTree = "<group>"; };
+		21F7583F236C696A00EBB6AB /* PrepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepView.swift; sourceTree = "<group>"; };
 		D00790E2232EBF8B00C2370F /* MiscViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViews.swift; sourceTree = "<group>"; };
-		D02AD062230B81BA0042B118 /* NewMeditation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMeditation.swift; sourceTree = "<group>"; };
 		D0ABD9B623119DD50092698C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -74,6 +74,14 @@
 			path = "Supplimental Views";
 			sourceTree = "<group>";
 		};
+		21F75841236C734E00EBB6AB /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				21F7583F236C696A00EBB6AB /* PrepView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +113,8 @@
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
 				21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */,
 				D0D0967A231360500066CE66 /* Current.swift */,
-				D02AD062230B81BA0042B118 /* NewMeditation.swift */,
 				D0ABD9E0231215310092698C /* NewMeditationView.swift */,
+				21F75841236C734E00EBB6AB /* Subviews */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
@@ -202,11 +210,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D02AD063230B81BA0042B118 /* NewMeditation.swift in Sources */,
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
 				D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */,
 				21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */,
 				21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */,
+				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */,
 				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,

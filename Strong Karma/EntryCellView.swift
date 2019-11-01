@@ -23,12 +23,11 @@ struct EntryCellView : View {
       Text(formatTime(time: entry.duration) ?? "Empty")
         .font(.footnote)
       
-      
       entry.factors.map(FactorsView.init)
         .foregroundColor(.gray)
       entry.hinderances.map(HinderancesView.init)
         .foregroundColor(.gray)
-
+      
     }
   }
 }

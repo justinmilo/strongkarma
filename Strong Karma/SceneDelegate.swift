@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : OldStore<UserData, AppAction>  = OldStore(initialValue: UserData(meditations: Current.file.load() ), reducer: reducer) {
+      let store : OldStore<UserData, AppAction>  = OldStore(initialValue: UserData(meditations: Current.file.load() ), reducer: appReducer) {
         userData in
         Current.file.save(userData.meditations)
         print(Current.file.load())

@@ -18,7 +18,34 @@ extension Meditation {
         entry: "Some Entry"
         //, title:"Untitled"
     )
+  static var dummy1 = Meditation(
+      id: UUID(),
+      date: "11/11/11",
+      duration: 50,
+      hinderances: nil,
+      factors: nil,
+      entry: "Mindfulness of Breath"
+      //, title:"Untitled"
+  )
+  static var dummy2 = Meditation(
+      id: UUID(),
+      date: "12/12/12",
+      duration: 50,
+      hinderances: nil,
+      factors: nil,
+      entry: "A Journey In"
+      //, title:"Untitled"
+  )
 }
+
+extension OldStore where Value == UserData, Action == AppAction {
+    static var dummy = OldStore(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer) {
+    userData in
+    Current.file.save(userData.meditations)
+    print(Current.file.load())
+    }
+}
+
 
 struct World {
   var file = FileIO()

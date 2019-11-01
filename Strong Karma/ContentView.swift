@@ -53,41 +53,75 @@ struct ContentView2 : View {
   
   @EnvironmentObject var store: OldStore<UserData, AppAction>
   @State private var popover = false
-  
-
+  @State private var timerGoing = true
   
   var body: some View {
-     NavigationView {
-
+    NavigationView {
       VStack {
-        
         List {
-            ForEach(0..<store.value.meditations.count) { sec in
-                NavigationLink(destination: SwiftUIView(index: sec, meditation: self.store.value.meditations[sec])){
-                EntryCellView(entry:
-                    self.store.value.meditations[sec])
+          ForEach(0..<store.value.meditations.count) { sec in
+            NavigationLink(destination: SwiftUIView(index: sec, meditation: self.store.value.meditations[sec])){
+              EntryCellView(entry:
+                self.store.value.meditations[sec])
             }
           }
-          Text("Welcome the object, let it in, see it, let it through")
+          Text("Welcome the arrising, see it, let it through")
             .lineLimit(3)
             .padding()
+          
+         
         }
         
-        Button(action: {
-          self.popover = true
-        }){
-          Circle()
-            .frame(width: 44.0, height: 44.0, alignment: .center)
-            .foregroundColor(.secondary)
-          
+        if (timerGoing == true) {
+
+          Button(action: {
+            self.popover = true
+          }){
+            VStack {
+            HStack {
+              Spacer()
+              Text("5:00")
+                .font(.title)
+                //.fontWeight(.heavy)
+                .foregroundColor(.accentColor)
+              Spacer()
+            }
+              HStack {
+                Spacer()
+                Text("See Hear Feel")
+                  .foregroundColor(.secondary)
+                Spacer()
+              }
+            }
+          .padding(EdgeInsets(top: 10, leading: 0, bottom: 20, trailing: 0))
+            
+            .background(
+            LinearGradient(gradient: Gradient(colors: [.gray, .white]), startPoint: .top, endPoint: .bottom)
+              .opacity(/*@START_MENU_TOKEN@*/0.413/*@END_MENU_TOKEN@*/)
+          )
         }
-        }.navigationBarTitle(Text("Practice Notes"))
-     }
+      }
+        if (timerGoing == false) {
+          Button(action: {
+            self.popover = true
+          }){
+            Circle()
+              .frame(width: 44.0, height: 44.0, alignment: .center)
+              .foregroundColor(.secondary)
+            
+          }
+        }
+      }
+      .navigationBarTitle(Text("Practice Notes"))
+      .edgesIgnoringSafeArea(.bottom)
       
-     .sheet(isPresented: self.$popover) {
+    }
+      
+    .sheet(isPresented: self.$popover) {
       NewMeditationView()
         .environmentObject(self.store)
-     }
+    }
+    .accentColor(Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
   }
 }
 
@@ -96,5 +130,6 @@ struct ContentView2 : View {
 struct ContentView2_Previews: PreviewProvider {
     static var previews: some View {
         ContentView2()
+            .environmentObject(OldStore<UserData,AppAction>.dummy)
     }
 }

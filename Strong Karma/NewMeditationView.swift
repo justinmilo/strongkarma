@@ -52,12 +52,28 @@ struct NewMeditationView : View {
     MeditationTimer(store: self.store)
   }
 
+  var timeLeft : String {
+    store.value.timerData?.timeLeftLabel ?? ":"
+  }
+  
+  
   var body: some View {
 
     return VStack{
+      Spacer()
+
+      Text(timeLeft).font(.largeTitle)
+        
+      Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: Text("Type")) {
+        Text("Concentration").tag(1)
+        Text("Mindfullness of Breath").tag(2)
+        Text("See Hear Feel").tag(3)
+        Text("Self Inquiry").tag(4)
+        Text("Do Nothing").tag(4)
+        Text("Positive Feel").tag(5)
+        Text("Free Style").tag(5)
+      }
       
-      Text(store.value.timerData?.timeLeftLabel ?? "No Timer")
-        .font(.largeTitle)
       
       Picker(selection: self.$selMin, label: Text("Min")) {
         ForEach(0 ..< self.minutesList.count) {
@@ -70,8 +86,16 @@ struct NewMeditationView : View {
         Text("Start")
           .font(.title)
       }
-      
-    }.padding()
+      Spacer()
+
+    }
+    .padding()
+    .background(
+      LinearGradient(gradient: Gradient(colors: [.gray, .white]), startPoint: .top, endPoint: .bottom)
+        .opacity(/*@START_MENU_TOKEN@*/0.413/*@END_MENU_TOKEN@*/)
+    )
+      .edgesIgnoringSafeArea(.bottom)
+    .accentColor(Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
   }
   
   func startTimer() {
@@ -86,5 +110,16 @@ struct NewMeditationView : View {
 struct NewMeditationView_Previews: PreviewProvider {
     static var previews: some View {
         NewMeditationView()
+        .environmentObject(OldStore<UserData,AppAction>.dummy)
     }
+}
+
+func LText(_ label: String) -> some View{
+  
+  return
+    Text(label)
+      .font(.title)
+      .foregroundColor(.secondary)
+
+  
 }

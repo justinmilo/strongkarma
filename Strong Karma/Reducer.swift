@@ -156,7 +156,7 @@ enum AppAction {
 
 import SwiftUI
 
-func reducer( state: inout UserData, action: AppAction) -> Void {
+func appReducer( state: inout UserData, action: AppAction) -> Void {
   switch action {
   case let .startTimer(finishDate):
     state.timerData = TimerData(endDate: finishDate)
