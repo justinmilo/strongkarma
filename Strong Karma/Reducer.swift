@@ -85,38 +85,6 @@ final class NotificationPlace : NSObject, UNUserNotificationCenterDelegate {
    }
 }
 
-public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
-public typealias Reducer<Value,Action> = (inout Value, Action) -> [Effect<Action>]
-
-final class OldStore<Value, Action>: ObservableObject  {
- 
-  private let notificationPlace = NotificationPlace()
-  
-  private let reducer: Reducer<Value,Action>
-  @Published private(set) var value: Value
-
-  
-  init(initialValue: Value, reducer: @escaping Reducer<Value,Action>) {
-    self.reducer = reducer
-    self.value = initialValue
-  }
-
-  func send(_ action: Action) {
-    let effects = self.reducer(&self.value, action)
-    effects.forEach { effect in
-      effect(self.send)
-    }
-  }
-  
-  func scheduleNotification(notificationType: String, seconds: TimeInterval, completion: @escaping ()->()) {
-    notificationPlace.scheduleNotification(notificationType: notificationType, seconds: seconds, completion: completion )
-  }
-  
-  func saveStore() {
-    
-  }
-  
-}
 
 func formatTime (time: Double) -> String? {
   let formatter = DateComponentsFormatter()
@@ -129,22 +97,23 @@ func formatTime (time: Double) -> String? {
 
 import UserNotifications
 
-struct TimerData {
-  var endDate : Date
-  var timeLeft : Double?
-  var timeLeftLabel : String {
-
-    return formatTime(time: self.timeLeft ?? 0.0) ?? "Empty"
-  }
-}
-
 struct UserData {
   var timerData : TimerData?
   var showFavoritesOnly = false
   var meditations : [Meditation]
+  
+  struct TimerData {
+    var endDate : Date
+    var timeLeft : Double?
+    var timeLeftLabel : String {
+
+      return formatTime(time: self.timeLeft ?? 0.0) ?? "Empty"
+    }
+  }
 }
 
 enum AppAction {
+  case addButtonTapped
   case changeCurrentTimerLabelTo(Double)
   case addMeditationWithDuration(Double)
   case updateLatestDate(Date)
@@ -156,8 +125,13 @@ import SwiftUI
 
 func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
   switch action {
+  case .addButtonTapped:
+    return [{ c in
+      c(.addMeditationWithDuration(300.0))
+    }]
+    
   case let .startTimer(finishDate):
-    state.timerData = TimerData(endDate: finishDate)
+    state.timerData = UserData.TimerData(endDate: finishDate)
     return []
     
   case let .updateLatestDate(currentDate):

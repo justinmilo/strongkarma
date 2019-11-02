@@ -72,9 +72,10 @@ struct ContentView : View {
             .padding()
         }
         .navigationBarTitle(Text("Practice Notes"))
-        .navigationBarItems(trailing: Button(action: {
-          self.addEntryPopover = true
-        }){
+        .navigationBarItems(trailing:
+          Button(action: {
+            self.addEntryPopover = true
+          }){
           Circle()
             .frame(width: 33.0, height: 33.0, alignment: .center)
             .foregroundColor(.secondary)
