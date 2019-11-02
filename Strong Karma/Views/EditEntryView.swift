@@ -13,12 +13,13 @@ struct DetailState {
     var title : String
 }
 
-struct SwiftUIView: View {
+struct EditEntryView: View {
     
-    @EnvironmentObject var store: OldStore<UserData, AppAction>
     var index : Int
     var meditation : Meditation
-    
+    @ObservedObject var store: OldStore<UserData, AppAction>
+
+  
     @State var value : String = ""
     
     @State var text : String = "Test example" {
@@ -75,6 +76,6 @@ struct SwiftUIView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView(index: 0, meditation: Meditation.dummy)
+      EditEntryView(index: 0, meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
     }
 }

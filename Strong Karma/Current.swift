@@ -15,8 +15,8 @@ extension Meditation {
         duration: 50,
         hinderances: nil,
         factors: nil,
-        entry: "Some Entry"
-        //, title:"Untitled"
+        entry: "Some Entry",
+        title:"Untitled"
     )
   static var dummy1 = Meditation(
       id: UUID(),
@@ -24,8 +24,8 @@ extension Meditation {
       duration: 50,
       hinderances: nil,
       factors: nil,
-      entry: "Mindfulness of Breath"
-      //, title:"Untitled"
+      entry: "Mindfulness of Breath",
+      title:"Untitled"
   )
   static var dummy2 = Meditation(
       id: UUID(),
@@ -33,8 +33,8 @@ extension Meditation {
       duration: 50,
       hinderances: nil,
       factors: nil,
-      entry: "A Journey In"
-      //, title:"Untitled"
+      entry: "A Journey In",
+      title:"Untitled"
   )
 }
 

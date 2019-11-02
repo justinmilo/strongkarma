@@ -191,8 +191,8 @@ func appReducer( state: inout UserData, action: AppAction) -> Void {
                  duration: seconds,
                  hinderances: nil,
                  factors: nil,
-                 entry: nil //,
-                 //title: "Untitled"
+                 entry: nil,
+                 title: "Untitled"
     ))
     
   case let .updateMeditation(index, meditation):

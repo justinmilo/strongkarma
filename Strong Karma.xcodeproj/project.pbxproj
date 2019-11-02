@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
-		21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */; };
+		21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */; };
 		21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */; };
 		21F75840236C696A00EBB6AB /* PrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7583F236C696A00EBB6AB /* PrepView.swift */; };
@@ -31,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntryView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellView.swift; sourceTree = "<group>"; };
 		21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposableArchitecture.swift; sourceTree = "<group>"; };
 		21F7583F236C696A00EBB6AB /* PrepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepView.swift; sourceTree = "<group>"; };
@@ -77,9 +77,23 @@
 		21F75841236C734E00EBB6AB /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				D00790E2232EBF8B00C2370F /* MiscViews.swift */,
+				21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */,
 				21F7583F236C696A00EBB6AB /* PrepView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		21F75842236C752E00EBB6AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D0B5422B22F7213800A0D90D /* ContentView.swift */,
+				21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */,
+				D0ABD9E0231215310092698C /* NewMeditationView.swift */,
+				21CE37172369F0CF00DBCD53 /* Supplimental Views */,
+				21F75841236C734E00EBB6AB /* Subviews */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D0B5421B22F7213800A0D90D = {
@@ -105,16 +119,10 @@
 				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
-				D0B5422B22F7213800A0D90D /* ContentView.swift */,
-				D00790E2232EBF8B00C2370F /* MiscViews.swift */,
-				21F5DFC92364ACDC00C10E23 /* SwiftUIView.swift */,
-				21CE37172369F0CF00DBCD53 /* Supplimental Views */,
-				21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */,
+				21F75842236C752E00EBB6AB /* Views */,
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
 				21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */,
 				D0D0967A231360500066CE66 /* Current.swift */,
-				D0ABD9E0231215310092698C /* NewMeditationView.swift */,
-				21F75841236C734E00EBB6AB /* Subviews */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
@@ -216,7 +224,7 @@
 				21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */,
 				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
-				21F5DFCA2364ACDC00C10E23 /* SwiftUIView.swift in Sources */,
+				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,
 				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,
 				21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */,
 				D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */,

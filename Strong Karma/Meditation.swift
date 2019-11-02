@@ -18,7 +18,7 @@ struct Meditation : Hashable, Identifiable, Codable {
   var hinderances : Hinderances?
   var factors : Factors?
   var entry : String?
-//  var title : String = "No Title"
+  var title : String
   
   // Record of factors
   struct Factors : Hashable, Codable {
@@ -36,5 +36,31 @@ struct Meditation : Hashable, Identifiable, Codable {
     var dullness : Double?
     var doubt : Double?
   }
+}
+
+
+extension Meditation {
+  private enum CodingKeys: String, CodingKey{
+    case id
+    case date
+    case duration
+    case hinderances
+    case factors
+    case entry
+    case title
+  }
+  
+  init(from decoder: Decoder) throws{
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(UUID.self, forKey: .id)
+    date = try container.decode(String.self, forKey: .date)
+    duration = try container.decode(Double.self, forKey: .duration)
+    hinderances = try container.decode(Hinderances.self, forKey: .hinderances)
+    factors = try container.decode(Factors.self, forKey: .factors)
+    entry = try container.decode(String.self, forKey: .entry)
+    title = (try container.decodeIfPresent(String.self, forKey: .title)) ?? "No Title"
+  }
+  
+  
 }
 

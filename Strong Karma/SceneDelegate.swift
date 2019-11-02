@@ -39,9 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
       print("Got Here2")
       window.rootViewController = UIHostingController(rootView:
-        ContentView2()
-        //NewNewMeditataion()
-          .environmentObject(store)
+        ContentView(store: store)
       )
       print("Got Here3")
         self.window = window

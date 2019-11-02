@@ -129,26 +129,7 @@ struct TextFieldAlert<Presenting>: View where Presenting: View {
   
 }
 
-struct ContentView : View {
 
-    @State private var isShowingAlert = false
-    @State private var alertInput = ""
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                Button(action: {
-                    withAnimation {
-                        self.isShowingAlert.toggle()
-                    }
-                }) {
-                    Text("Show alert")
-                }
-            }
-            .navigationBarTitle(Text("A List"), displayMode: .large)
-        }
-      }
-}
 extension View {
 
     func textFieldAlert(isShowing: Binding<Bool>,
