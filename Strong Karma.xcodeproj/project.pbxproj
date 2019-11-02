@@ -10,7 +10,6 @@
 		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
 		21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */; };
-		21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */; };
 		21F75840236C696A00EBB6AB /* PrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7583F236C696A00EBB6AB /* PrepView.swift */; };
 		D00790E3232EBF8B00C2370F /* MiscViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00790E2232EBF8B00C2370F /* MiscViews.swift */; };
 		D0ABD9B723119DD50092698C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9B623119DD50092698C /* Reducer.swift */; };
@@ -33,7 +32,6 @@
 		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntryView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellView.swift; sourceTree = "<group>"; };
-		21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposableArchitecture.swift; sourceTree = "<group>"; };
 		21F7583F236C696A00EBB6AB /* PrepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepView.swift; sourceTree = "<group>"; };
 		D00790E2232EBF8B00C2370F /* MiscViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViews.swift; sourceTree = "<group>"; };
 		D0ABD9B623119DD50092698C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				21F75842236C752E00EBB6AB /* Views */,
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
-				21F5DFCD2364BCB500C10E23 /* ComposableArchitecture.swift */,
 				D0D0967A231360500066CE66 /* Current.swift */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
@@ -221,7 +218,6 @@
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
 				D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */,
 				21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */,
-				21F5DFCE2364BCB500C10E23 /* ComposableArchitecture.swift in Sources */,
 				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,

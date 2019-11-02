@@ -25,23 +25,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
     
-    print("Got Here")
     // Use a UIHostingController as window root view controller
     if let windowScene = scene as? UIWindowScene {
       
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : OldStore<UserData, AppAction>  = OldStore(initialValue: UserData(meditations: Current.file.load() ), reducer: appReducer) {
-        userData in
-        Current.file.save(userData.meditations)
-        print(Current.file.load())
-      }
-      print("Got Here2")
+      let store : OldStore<UserData, AppAction>  = OldStore(initialValue: UserData(meditations: Current.file.load() ), reducer: appReducer)
       window.rootViewController = UIHostingController(rootView:
         ContentView(store: store)
       )
-      print("Got Here3")
         self.window = window
         window.makeKeyAndVisible()
     }

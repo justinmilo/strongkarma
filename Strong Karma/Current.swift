@@ -39,11 +39,7 @@ extension Meditation {
 }
 
 extension OldStore where Value == UserData, Action == AppAction {
-    static var dummy = OldStore(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer) {
-    userData in
-    Current.file.save(userData.meditations)
-    print(Current.file.load())
-    }
+    static var dummy = OldStore(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer)
 }
 
 

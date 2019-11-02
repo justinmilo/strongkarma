@@ -85,27 +85,27 @@ final class NotificationPlace : NSObject, UNUserNotificationCenterDelegate {
    }
 }
 
+public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+public typealias Reducer<Value,Action> = (inout Value, Action) -> [Effect<Action>]
+
 final class OldStore<Value, Action>: ObservableObject  {
  
   private let notificationPlace = NotificationPlace()
   
-  
-  let reducer: (inout Value, Action) -> Void
+  private let reducer: Reducer<Value,Action>
   @Published private(set) var value: Value
 
-  let actionCallback: (Value) -> ()
   
-  init(initialValue: Value, reducer: @escaping (inout Value, Action) -> Void, callback: @escaping (Value) -> () ) {
+  init(initialValue: Value, reducer: @escaping Reducer<Value,Action>) {
     self.reducer = reducer
     self.value = initialValue
-    print("got Here store")
-    actionCallback = callback
   }
 
   func send(_ action: Action) {
-    self.reducer(&self.value, action)
-    
-    self.actionCallback(self.value)
+    let effects = self.reducer(&self.value, action)
+    effects.forEach { effect in
+      effect(self.send)
+    }
   }
   
   func scheduleNotification(notificationType: String, seconds: TimeInterval, completion: @escaping ()->()) {
@@ -144,43 +144,45 @@ struct UserData {
   var meditations : [Meditation]
 }
 
-
-
 enum AppAction {
   case changeCurrentTimerLabelTo(Double)
   case addMeditationWithDuration(Double)
   case updateLatestDate(Date)
   case startTimer(Date)
-  case updateMeditation(Int, Meditation)
+  case updateMeditation( Meditation)
 }
 
 import SwiftUI
 
-func appReducer( state: inout UserData, action: AppAction) -> Void {
+func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
   switch action {
   case let .startTimer(finishDate):
     state.timerData = TimerData(endDate: finishDate)
+    return []
     
   case let .updateLatestDate(currentDate):
-    if let date = state.timerData?.endDate, currentDate < date {
-      let seconds = DateInterval(start: currentDate, end: date).duration
-      if seconds >= 0 {
-        state.timerData?.timeLeft = seconds
-      }
-      else {
+    guard
+      let date = state.timerData?.endDate,
+      currentDate < date,
+      DateInterval(start: currentDate, end: date).duration >= 0 else {
         state.timerData = nil
-      }
-    }else {
-      state.timerData = nil
+        return []
     }
+    
+    let seconds = DateInterval(start: currentDate, end: date).duration
+    state.timerData?.timeLeft = seconds
+    
+    return []
+    
   
   case let .changeCurrentTimerLabelTo(newT):
-    print(newT)
     if newT >= 0 {
       state.timerData?.timeLeft = newT
+      return []
     }
     else {
       state.timerData = nil
+      return []
     }
     
     
@@ -194,8 +196,16 @@ func appReducer( state: inout UserData, action: AppAction) -> Void {
                  entry: nil,
                  title: "Untitled"
     ))
+    return []
     
-  case let .updateMeditation(index, meditation):
+  case let .updateMeditation(meditation):
+    guard let index = (state.meditations.firstIndex { m in
+      m.id == meditation.id
+    }) else {
+      fatalError("Tried to update non existant Meditaiton")
+    }
+    
     state.meditations[index] = meditation
+    return []
   }
 }

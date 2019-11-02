@@ -60,11 +60,11 @@ struct ContentView : View {
     VStack {
       NavigationView {
         List {
-          ForEach(0..<store.value.meditations.count) { sec in
+          ForEach(store.value.meditations) { med in
             NavigationLink(destination:
-              EditEntryView(index: sec, meditation: self.store.value.meditations[sec], store: self.store)
+              EditEntryView(meditation: med, store: self.store)
             ){
-              EntryCellView(entry: self.store.value.meditations[sec])
+              EntryCellView(entry: med)
             }
           }
           Text("Welcome the arrising, see it, let it through")
@@ -84,7 +84,7 @@ struct ContentView : View {
       
       
       if (timerGoing == true) {
-        TimerBottom(enabled: self.$popover)
+        TimerBottom(enabled: self.$popover, store: self.store)
       }
       
       if (timerGoing == false) {
@@ -98,7 +98,7 @@ struct ContentView : View {
       Text("").hidden().sheet(isPresented: self.$addEntryPopover) { () -> EditEntryView in
         self.store.send(.addMeditationWithDuration(300.0))
         let index = self.store.value.meditations.count - 1
-        return EditEntryView(index: index, meditation: self.store.value.meditations[index], store: self.store)
+        return EditEntryView(meditation: self.store.value.meditations[index], store: self.store)
       }
       
     }
@@ -132,6 +132,8 @@ struct ContentView_Previews: PreviewProvider {
 
 struct TimerBottom : View {
   @Binding var enabled : Bool
+  @ObservedObject var store: OldStore<UserData, AppAction>
+
   var body: some View {
 
     Button(action: {
@@ -140,7 +142,7 @@ struct TimerBottom : View {
       VStack {
         HStack {
           Spacer()
-          Text("5:00")
+          Text(store.value.timerData?.timeLeftLabel ?? ":")
             .font(.title)
             .foregroundColor(.accentColor)
           Spacer()

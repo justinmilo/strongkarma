@@ -15,7 +15,6 @@ struct DetailState {
 
 struct EditEntryView: View {
     
-    var index : Int
     var meditation : Meditation
     @ObservedObject var store: OldStore<UserData, AppAction>
 
@@ -42,7 +41,7 @@ struct EditEntryView: View {
                 self.text = $0
                 var med = self.meditation
                    med.entry = $0
-                self.store.send( .updateMeditation(self.index,med) )
+                self.store.send( .updateMeditation(med) )
                })
         
         
@@ -76,6 +75,6 @@ struct EditEntryView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-      EditEntryView(index: 0, meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
     }
 }
