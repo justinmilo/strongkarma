@@ -11,6 +11,7 @@ import UIKit
 
 struct TextView: UIViewRepresentable {
     @Binding var text: String
+  var onCommit: () -> Void = {}
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -25,6 +26,7 @@ struct TextView: UIViewRepresentable {
         myTextView.isScrollEnabled = true
         myTextView.isEditable = true
         myTextView.isUserInteractionEnabled = true
+     
         //myTextView.backgroundColor = UIColor(white: 0.0, alpha: 0.05)
 
         return myTextView
@@ -49,5 +51,9 @@ struct TextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
         }
+      
+      func textViewDidEndEditing(_ textView: UITextView) {
+        self.parent.onCommit()
+      }
     }
 }

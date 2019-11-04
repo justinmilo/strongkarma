@@ -101,6 +101,7 @@ struct UserData {
   var timerData : TimerData?
   var showFavoritesOnly = false
   var meditations : [Meditation]
+  var newMeditation : Meditation? = nil
   
   struct TimerData {
     var endDate : Date
@@ -114,11 +115,15 @@ struct UserData {
 
 enum AppAction {
   case addButtonTapped
+  case updateNewMeditation(Meditation)
+  case addMeditationDismissed
+  case deleteMeditationAt(IndexSet)
   case changeCurrentTimerLabelTo(Double)
   case addMeditationWithDuration(Double)
   case updateLatestDate(Date)
   case startTimer(Date)
-  case updateMeditation( Meditation)
+  case replaceOrAddMeditation( Meditation)
+  case saveData
 }
 
 import SwiftUI
@@ -126,9 +131,30 @@ import SwiftUI
 func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
   switch action {
   case .addButtonTapped:
-    return [{ c in
-      c(.addMeditationWithDuration(300.0))
-    }]
+   let med = Meditation(id: UUID(),
+    date: Date().description,
+    duration: 300,
+    hinderances: nil,
+    factors: nil,
+    entry: "",
+    title: "Untitled")
+   state.newMeditation = med
+    return []
+
+    
+  case let .updateNewMeditation(updated):
+    state.newMeditation = updated
+    return []
+
+  case .addMeditationDismissed:
+    let transfer = state.newMeditation!
+    state.newMeditation = nil
+    return [{ $0(.replaceOrAddMeditation(transfer))}]
+    
+  case let .deleteMeditationAt(indexSet):
+    state.meditations.remove(atOffsets: indexSet)
+    return []
+
     
   case let .startTimer(finishDate):
     state.timerData = UserData.TimerData(endDate: finishDate)
@@ -167,19 +193,41 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
                  duration: seconds,
                  hinderances: nil,
                  factors: nil,
-                 entry: nil,
+                 entry: "",
                  title: "Untitled"
     ))
     return []
     
-  case let .updateMeditation(meditation):
+  case let .replaceOrAddMeditation(meditation):
     guard let index = (state.meditations.firstIndex { m in
       m.id == meditation.id
     }) else {
-      fatalError("Tried to update non existant Meditaiton")
+      state.meditations.append(meditation)
+      return [{ $0(.saveData) }]
+
     }
     
     state.meditations[index] = meditation
-    return []
+
+    return [{ $0(.saveData) }]
+    
+  case .saveData:
+    let meds = state.meditations
+    
+    return [{_ in
+      print("Saving")
+      print(meds)
+
+
+      Current.file.save(meds)
+      print("Saved")
+      print("Showing")
+
+      print(Current.file.load())
+      print("Showed")
+
+      }]
+    
   }
+  
 }

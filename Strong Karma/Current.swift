@@ -83,12 +83,15 @@ func getDocumentsURL() -> URL?{
 func _load() -> [Meditation] {
   let documentsResult = Current.file.loadFromDocuments()
   if case .success = documentsResult {
+    print ("Document loadFromDocuments ")
     return try! documentsResult.get()
   }
   let bundleResult = Current.file.loadFromBundle()
+  print ("Document loadFromBundle ")
+
   //if case let .success(itemList) = bundleResult {
   //TODO decouple
-    Current.file.save(bundleResult)//itemList)
+  Current.file.save(bundleResult)//itemList)
   return bundleResult
   //  return  try! documentsResult.get()
 //  }
@@ -100,17 +103,25 @@ func _load() -> [Meditation] {
 func _loadFromDocuments() -> Result<[Meditation], LoadError>{
   
   guard let url = Current.file.persistenceURL else {
+    print ("no persistenceURL ")
+
     return .failure( LoadError.badURL )
   }
   guard let data = try? Data(contentsOf: url) else {
+    print (" LoadError.noData ")
+
     return .failure( LoadError.noData )
   }
+  print(url)
   do {
     let decoder = JSONDecoder()
     let jsonData = try decoder.decode(Array<Meditation>.self, from: data)
     return .success(jsonData)
   } catch  {
-    return .failure( .noJson )
+    print (error)
+    print (" LoadError.noJson ")
+
+    return .failure(.noJson)
   }
 }
 

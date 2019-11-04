@@ -54,10 +54,24 @@ struct ContentView : View {
   @ObservedObject var store: OldStore<UserData, AppAction>
   @State private var popover = false
   @State private var timerGoing = true
-  @State private var addEntryPopover = false
+  private var addEntryPopover : Bool {
+    if let _ = store.value.newMeditation {
+      return true
+    } else {
+      return false
+    }
+  }
   
   var body: some View {
-    VStack {
+    let binding = Binding<Bool>(
+    get: { self.addEntryPopover },
+    set: { value in
+      if value == false {
+        self.store.send(.addMeditationDismissed)
+      }
+    })
+    
+    return VStack {
       NavigationView {
         List {
           ForEach(store.value.meditations) { med in
@@ -66,6 +80,8 @@ struct ContentView : View {
             ){
               EntryCellView(entry: med)
             }
+          }.onDelete { (indexSet) in
+            self.store.send(.deleteMeditationAt(indexSet))
           }
           Text("Welcome the arrising, see it, let it through")
             .lineLimit(3)
@@ -74,7 +90,7 @@ struct ContentView : View {
         .navigationBarTitle(Text("Practice Notes"))
         .navigationBarItems(trailing:
           Button(action: {
-            self.addEntryPopover = true
+            self.store.send(.addButtonTapped)
           }){
           Circle()
             .frame(width: 33.0, height: 33.0, alignment: .center)
@@ -96,10 +112,9 @@ struct ContentView : View {
         NewMeditationView()
           .environmentObject(self.store)
       }
-      Text("").hidden().sheet(isPresented: self.$addEntryPopover) { () -> EditEntryView in
-        self.store.send(.addMeditationWithDuration(300.0))
-        let index = self.store.value.meditations.count - 1
-        return EditEntryView(meditation: self.store.value.meditations[index], store: self.store)
+      Text("").hidden().sheet(
+        isPresented: binding){ () -> EditEntryView in
+          return EditEntryView(meditation: self.store.value.newMeditation!, store: self.store)
       }
       
     }
@@ -115,6 +130,7 @@ struct ContentView : View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+  
       ContentView(store: OldStore<UserData,AppAction>.dummy)
            
     }

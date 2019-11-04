@@ -14,7 +14,7 @@ struct EntryCellView : View {
   var body : some View {
     VStack(alignment: HorizontalAlignment.leading, spacing: nil) {
       
-      Text(entry.entry ?? "")
+      Text(entry.title)
         .font(.headline)
       date(from:entry.date).map{
         Text(formattedDate(from: $0))
