@@ -9,10 +9,6 @@
 import SwiftUI
 
 func date(from string: String) -> Date? {
-  let isoDate = "2016-04-14T10:44:00+0000"
-
-  let isoDate2 = "2016-04-14 10:44:00 +0000"
-
   let dateFormatter = DateFormatter()
   dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
   dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX

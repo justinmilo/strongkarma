@@ -149,7 +149,7 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
   case .addMeditationDismissed:
     let transfer = state.newMeditation!
     state.newMeditation = nil
-    return [{ $0(.replaceOrAddMeditation(transfer))}]
+    return [Effect{ $0(.replaceOrAddMeditation(transfer))}]
     
   case let .deleteMeditationAt(indexSet):
     state.meditations.remove(atOffsets: indexSet)
@@ -203,21 +203,19 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
       m.id == meditation.id
     }) else {
       state.meditations.append(meditation)
-      return [{ $0(.saveData) }]
-
+      return [Effect{ $0(.saveData) }]
     }
     
     state.meditations[index] = meditation
 
-    return [{ $0(.saveData) }]
+    return [Effect{ $0(.saveData) }]
     
   case .saveData:
     let meds = state.meditations
     
-    return [{_ in
+    return [Effect{_ in
       print("Saving")
       print(meds)
-
 
       Current.file.save(meds)
       print("Saved")

@@ -9,8 +9,19 @@
 import Combine
 import Foundation
 
+public struct Effect<A> {
+  var run : (@escaping (A) -> Void) -> Void
+  
+  func map<B>(_ f: @escaping (A)->B) -> Effect<B> {
+    return Effect<B> { callback -> Void in
+      self.run( { a in
+        callback(f(a))
+      })
+    }
+  }
+}
 
-public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+
 public typealias Reducer<Value,Action> = (inout Value, Action) -> [Effect<Action>]
 
 final class OldStore<Value, Action>: ObservableObject  {
@@ -29,7 +40,7 @@ final class OldStore<Value, Action>: ObservableObject  {
   func send(_ action: Action) {
     let effects = self.reducer(&self.value, action)
     effects.forEach { effect in
-      effect(self.send)
+      effect.run(self.send)
     }
   }
   
@@ -49,7 +60,7 @@ public func logging<Value, Action>(
   return { value, action in
     let effects = reducer(&value, action)
     let newValue = value
-    return [{ _ in
+    return [Effect{ _ in
       print("Action: \(action)")
       print("Value:")
       dump(newValue)
