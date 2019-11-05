@@ -50,13 +50,7 @@ struct ContentView : View {
   @ObservedObject var store: OldStore<UserData, AppAction>
   @State private var popover = false
   @State private var timerGoing = true
-  private var addEntryPopover : Bool {
-    if let _ = store.value.newMeditation {
-      return true
-    } else {
-      return false
-    }
-  }
+  private var addEntryPopover : Bool { guard let _ = store.value.newMeditation else { return false }; return true }
   
   var body: some View {
     let binding = Binding<Bool>(
