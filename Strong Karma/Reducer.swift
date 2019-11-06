@@ -118,10 +118,9 @@ enum AppAction {
   case updateNewMeditation(Meditation)
   case addMeditationDismissed
   case deleteMeditationAt(IndexSet)
-  case changeCurrentTimerLabelTo(Double)
   case addMeditationWithDuration(Double)
-  case updateLatestDate(Date)
-  case startTimer(Date)
+  case startTimerPushed(startDate:Date, duration:Double, type:String)
+  case timerFired
   case replaceOrAddMeditation( Meditation)
   case saveData
 }
@@ -155,12 +154,14 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     state.meditations.remove(atOffsets: indexSet)
     return []
 
+  case let .startTimerPushed(startDate: date, duration:seconds, type: type):
+    state.timerData = UserData.TimerData(endDate: date+seconds)
+    return [Effect{ callback in
+      callback(.timerFired)
+    }]
     
-  case let .startTimer(finishDate):
-    state.timerData = UserData.TimerData(endDate: finishDate)
-    return []
-    
-  case let .updateLatestDate(currentDate):
+  case .timerFired:
+    let currentDate = Date()
     guard
       let date = state.timerData?.endDate,
       currentDate < date,
@@ -172,18 +173,17 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     let seconds = DateInterval(start: currentDate, end: date).duration
     state.timerData?.timeLeft = seconds
     
-    return []
+    return [Effect{callback in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+      callback(.timerFired)
+       // Put any code you want to be delayed here
+    }
     
+    }]
   
-  case let .changeCurrentTimerLabelTo(newT):
-    if newT >= 0 {
-      state.timerData?.timeLeft = newT
-      return []
-    }
-    else {
-      state.timerData = nil
-      return []
-    }
+    
+    
+    
     
     
   case let .addMeditationWithDuration(seconds):

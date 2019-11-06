@@ -8,49 +8,25 @@
 
 import SwiftUI
 
-class MeditationTimer {
-  init(store: OldStore<UserData, AppAction>) {
-    self.store = store
-  }
-  
-  var store: OldStore<UserData, AppAction>
 
-  var timer : Timer?
-
-  // sideEffects
-  func startTimer(duration: Double) {
-    
-    self.store.send(.startTimer(Date() + duration))
-    
-    
-      self.timer =  Timer.scheduledTimer(withTimeInterval: 1, repeats: true
-        ){_ in
-          let currentDate = Date()
-          self.store.send( .updateLatestDate( currentDate ))
-          
-          if self.store.value.timerData == nil {
-            self.timer?.invalidate()
-          }
-        }
-    
-    self.store.send( .changeCurrentTimerLabelTo(duration))
-    
-    self.store.scheduleNotification(notificationType: "Meditation Complete", seconds: duration) {
-      self.store.send(.addMeditationWithDuration(duration))
-    }
-  }
-  
+enum Type : String, CaseIterable {
+  case concentration = "Concentration"
+  case mindfullnessOfBreath = "Mindfullness of Breath"
+  case seeHearFeel = "See Hear Feel"
+  case selfInquiry = "Self Inquiry"
+  case doNothing = "Do Nothing"
+  case positiveFeel = "Positive Feel"
+  case freeStyle = "Free Style"
 }
 
 struct NewMeditationView : View {
   @EnvironmentObject var store: OldStore<UserData, AppAction>
   
   @State var selMin = 0
+  @State var selType = 0
   private let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
   private var seconds : Double { minutesList[self.selMin]   * 60 }
-  var meditationTimer : MeditationTimer {
-    MeditationTimer(store: self.store)
-  }
+  
 
   var timeLeft : String {
     store.value.timerData?.timeLeftLabel ?? ":"
@@ -64,14 +40,10 @@ struct NewMeditationView : View {
 
       Text(timeLeft).font(.largeTitle)
         
-      Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: Text("Type")) {
-        Text("Concentration").tag(1)
-        Text("Mindfullness of Breath").tag(2)
-        Text("See Hear Feel").tag(3)
-        Text("Self Inquiry").tag(4)
-        Text("Do Nothing").tag(4)
-        Text("Positive Feel").tag(5)
-        Text("Free Style").tag(5)
+      Picker(selection: self.$selType, label: Text("Type")) {
+        ForEach(0 ..< Type.allCases.count) { index in
+          Text(Type.allCases[index].rawValue).tag(index)
+        }
       }
       
       
@@ -82,7 +54,11 @@ struct NewMeditationView : View {
         }
       }
       
-      Button(action: self.startTimer ) {
+      Button(action: {
+        self.store.send(
+          .startTimerPushed(startDate:Date(), duration: self.seconds, type: Type.allCases[self.selType].rawValue ))
+        self.notification()
+      } ) {
         Text("Start")
           .font(.title)
       }
@@ -98,8 +74,11 @@ struct NewMeditationView : View {
     .accentColor(Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
   }
   
-  func startTimer() {
-    self.meditationTimer.startTimer(duration: self.seconds)
+  func notification() {
+        
+    self.store.scheduleNotification(notificationType: "Meditation Complete", seconds: self.seconds) {
+      self.store.send(.addMeditationWithDuration(self.seconds))
+    }
   }
   
   
