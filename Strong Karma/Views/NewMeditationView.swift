@@ -25,7 +25,7 @@ struct NewMeditationView : View {
   @State var selMin = 0
   @State var selType = 0
   private let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
-  private var seconds : Double { minutesList[self.selMin]   * 60 }
+  private var seconds : Double { minutesList[self.selMin]  * 60 }
   
 
   var timeLeft : String {
@@ -57,7 +57,6 @@ struct NewMeditationView : View {
       Button(action: {
         self.store.send(
           .startTimerPushed(startDate:Date(), duration: self.seconds, type: Type.allCases[self.selType].rawValue ))
-        self.notification()
       } ) {
         Text("Start")
           .font(.title)
@@ -73,14 +72,7 @@ struct NewMeditationView : View {
       .edgesIgnoringSafeArea(.bottom)
     .accentColor(Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
   }
-  
-  func notification() {
-        
-    self.store.scheduleNotification(notificationType: "Meditation Complete", seconds: self.seconds) {
-      self.store.send(.addMeditationWithDuration(self.seconds))
-    }
-  }
-  
+
   
 }
 

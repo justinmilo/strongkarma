@@ -11,8 +11,12 @@ import UserNotifications
 
 
 final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
+  
+  static let singleton = NotificationHelper()
+  
+  var store: OldStore<UserData, AppAction>?
+  
   override init() {
-    
     let options: UNAuthorizationOptions = [.alert, .sound, .badge]
     notificationCenter.requestAuthorization(options: options) {
         (didAllow, error) in
@@ -27,22 +31,16 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
       }
       else {
         print("notifications are!! authorized")
-
       }
     }
     super.init()
     
-    notificationCenter.delegate = self
   }
   
   let notificationCenter = UNUserNotificationCenter.current()
-  var completion: ()->() = { }
    
-  func scheduleNotification(notificationType: String, seconds: TimeInterval, completion: @escaping ()->() ) {
-     print ("got Here")
-    
-    self.completion = completion
-    
+  func scheduleNotification(notificationType: String, seconds: TimeInterval ) {
+        
      let content = UNMutableNotificationContent()
      let userActions = "User Actions"
      
@@ -74,7 +72,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     print ("userNotificationHere")
-    self.completion()
+    self.store?.send(.notification(.willPresentNotification))
     }
    
    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
@@ -82,7 +80,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
    }
    
    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-
-
+    self.store?.send(.notification(.didRecieveResponse))
+    completionHandler()
    }
 }

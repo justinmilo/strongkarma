@@ -25,6 +25,8 @@ struct UserData {
   var showFavoritesOnly = false
   var meditations : [Meditation]
   var newMeditation : Meditation? = nil
+  var timedMeditation : Meditation? = nil
+
   
   struct TimerData {
     var endDate : Date
@@ -36,7 +38,21 @@ struct UserData {
   }
 }
 
+
 enum AppAction {
+  
+  case scheduleNotification
+  case notification(NotificationAction)
+  
+  enum NotificationAction{
+    case willPresentNotification
+    case didRecieveResponse
+  }
+  
+  case putTimedMeditationOnDeck(Meditation)
+  case takeTimedMeditationOffDeck
+
+  
   case addButtonTapped
   case updateNewMeditation(Meditation)
   case addMeditationDismissed
@@ -52,6 +68,36 @@ import SwiftUI
 
 func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
   switch action {
+    
+  case .scheduleNotification:
+    let duration = state.timedMeditation!.duration
+    return [Effect{ _ in
+      NotificationHelper.singleton.scheduleNotification(notificationType: "Meditation Complete", seconds: duration)
+      }]
+    
+  case .notification(.willPresentNotification):
+
+    return [Effect{callback in
+      callback(.takeTimedMeditationOffDeck)
+      }]
+
+  case .notification(.didRecieveResponse):
+    return [Effect{callback in
+      callback(.takeTimedMeditationOffDeck)
+      }]
+    
+  case let .putTimedMeditationOnDeck(med):
+    state.timedMeditation = med
+    return []
+
+    
+  case .takeTimedMeditationOffDeck:
+    let tempMed = state.timedMeditation!
+    state.timedMeditation = nil
+    return [Effect{callback in
+      callback(.replaceOrAddMeditation(tempMed))
+      }]
+    
   case .addButtonTapped:
    let med = Meditation(id: UUID(),
     date: Date().description,
@@ -79,9 +125,19 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
 
   case let .startTimerPushed(startDate: date, duration:seconds, type: type):
     state.timerData = UserData.TimerData(endDate: date+seconds)
-    return [Effect{ callback in
-      callback(.timerFired)
-    }]
+    return [
+      Effect{$0(.timerFired)},
+      Effect{$0(.putTimedMeditationOnDeck(
+        Meditation(id: UUID(),
+                   date: Date().description,
+                   duration: seconds,
+                   hinderances: nil,
+                   factors: nil,
+                   entry: "",
+                   title: type
+      )))},
+      Effect{$0(.scheduleNotification)},
+    ]
     
   case .timerFired:
     let currentDate = Date()
@@ -130,7 +186,6 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     }
     
     state.meditations[index] = meditation
-
     return [Effect{ $0(.saveData) }]
     
   case .saveData:

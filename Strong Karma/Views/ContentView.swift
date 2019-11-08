@@ -156,8 +156,8 @@ struct TimerBottom : View {
         }
         HStack {
           Spacer()
-          Text("See Hear Feel")
-            .foregroundColor(.secondary)
+          Text(self.store.value.timedMeditation?.title ?? "")
+              .foregroundColor(.secondary)
           Spacer()
         }
       }

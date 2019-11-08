@@ -33,14 +33,6 @@ final class OldStore<Value, Action>: ObservableObject  {
     }
   }
   
-  func scheduleNotification(notificationType: String, seconds: TimeInterval, completion: @escaping ()->()) {
-    notificationPlace.scheduleNotification(notificationType: notificationType, seconds: seconds, completion: completion )
-  }
-  
-  func saveStore() {
-    
-  }
-  
 }
 
 public func logging<Value, Action>(
