@@ -9,24 +9,13 @@
 import Combine
 import Foundation
 
-public struct Effect<A> {
-  var run : (@escaping (A) -> Void) -> Void
-  
-  func map<B>(_ f: @escaping (A)->B) -> Effect<B> {
-    return Effect<B> { callback -> Void in
-      self.run( { a in
-        callback(f(a))
-      })
-    }
-  }
-}
 
 
 public typealias Reducer<Value,Action> = (inout Value, Action) -> [Effect<Action>]
 
 final class OldStore<Value, Action>: ObservableObject  {
  
-  private let notificationPlace = NotificationPlace()
+  private let notificationPlace = NotificationHelper()
   
   private let reducer: Reducer<Value,Action>
   @Published private(set) var value: Value

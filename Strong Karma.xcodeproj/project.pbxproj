@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2142C1B42373317D00304808 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142C1B32373317D00304808 /* Effect.swift */; };
+		21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21988BCC23730AD000A1E2FF /* NotificationHelper.swift */; };
 		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
 		21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2142C1B32373317D00304808 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		21988BCC23730AD000A1E2FF /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntryView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* EntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCellView.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
+				2142C1B32373317D00304808 /* Effect.swift */,
 				D0B5422622F7213800A0D90D /* Strong Karma */,
 				D0B5422522F7213800A0D90D /* Products */,
 			);
@@ -118,6 +123,7 @@
 				D0ABD9DF2311E5680092698C /* Testing.playground */,
 				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
+				21988BCC23730AD000A1E2FF /* NotificationHelper.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				21F75842236C752E00EBB6AB /* Views */,
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
@@ -218,12 +224,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2142C1B42373317D00304808 /* Effect.swift in Sources */,
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
 				D0B5423C22F721B300A0D90D /* Meditation.swift in Sources */,
 				21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */,
 				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,
+				21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */,
 				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,
 				21F5DFCC2364B8F900C10E23 /* EntryCellView.swift in Sources */,
 				D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */,
