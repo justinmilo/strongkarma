@@ -27,24 +27,18 @@ struct EditEntryView: View {
   
   
   var body: some View {
-    
-    
-    
-    return      VStack{
-      Text(title)
-        .font(.largeTitle)
+    VStack{
       TextField("Title", text: self.$title, onEditingChanged: {_ in }, onCommit:updateOnCommit )
-      
+        .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 25))
+        .font(.largeTitle)
       TextView(
         text: self.$entry, onCommit: updateOnCommit
       )
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-        .padding(.all)
         .padding(EdgeInsets(top: 5, leading: 25, bottom: 0, trailing: 25))
     }.onDisappear() {
       self.updateOnCommit()
     }
-    
   }
   func updateOnCommit() {
 

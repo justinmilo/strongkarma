@@ -8,26 +8,30 @@
 
 import SwiftUI
 
-struct EntryCellView : View {
+struct ListItemView : View {
   var entry : Meditation
   
   var body : some View {
     VStack(alignment: HorizontalAlignment.leading, spacing: nil) {
-      
+      HStack{
       Text(entry.title)
-        .font(.headline)
+        
+        Spacer()
+        Text(formatTime(time: entry.duration) ?? "Empty")
+               .font(.footnote)
+        .foregroundColor(.gray)
+        
+      }
       date(from:entry.date).map{
         Text(formattedDate(from: $0))
           .foregroundColor(.gray)
       }
-      Text(formatTime(time: entry.duration) ?? "Empty")
-        .font(.footnote)
-      
-      entry.factors.map(FactorsView.init)
-        .foregroundColor(.gray)
-      entry.hinderances.map(HinderancesView.init)
-        .foregroundColor(.gray)
-      
+      if entry.entry != "" {
+        Spacer()
+        Text(entry.entry)
+          .foregroundColor(.gray)
+      }
+      Spacer()
     }
   }
 }
@@ -35,6 +39,6 @@ struct EntryCellView : View {
 
 struct EntryCellView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryCellView(entry: Meditation.dummy)
+        ListItemView(entry: Meditation.dummy)
     }
 }

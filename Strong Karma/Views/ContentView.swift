@@ -64,11 +64,11 @@ struct ContentView : View {
     return VStack {
       NavigationView {
         List {
-          ForEach(store.value.meditations) { med in
+          ForEach(store.value.meditations.reversed()) { med in
             NavigationLink(destination:
               EditEntryView(meditation: med, store: self.store)
             ){
-              EntryCellView(entry: med)
+              ListItemView(entry: med)
             }
           }.onDelete { (indexSet) in
             self.store.send(.deleteMeditationAt(indexSet))
@@ -90,11 +90,11 @@ struct ContentView : View {
       }
       
       
-      if (timerGoing == true) {
+      if (self.store.value.timedMeditation != nil) {
         TimerBottom(enabled: self.$popover, store: self.store)
       }
       
-      if (timerGoing == false) {
+      else {
         CircleBottom(enabled: self.$popover)
       }
       
@@ -109,7 +109,8 @@ struct ContentView : View {
       
     }
     .edgesIgnoringSafeArea(.bottom)
-    .accentColor(Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
+    .accentColor(Color(#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)))
+
   }
   
   
@@ -120,21 +121,14 @@ struct ContentView : View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-  
-      ContentView(store: OldStore<UserData,AppAction>.dummy)
-           
+  Group {
+    ContentView(store: OldStore<UserData,AppAction>.dummy)
+      .environment(\.colorScheme, .dark)
+    
+    ContentView(store: OldStore<UserData,AppAction>.dummy)
+      }
     }
 }
-
-//
-//
-//  NavigationLink(destination: {
-//    self.store.send(.addMeditationWithDuration(300.0))
-//    let index = self.store.value.meditations.count - 1
-//    return EditEntryView(index: index, meditation: self.store.value.meditations[index], store: self.store)
-//  }){
-//    Text("+")
-//  }
 
 
 struct TimerBottom : View {
