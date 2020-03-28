@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2142C1B42373317D00304808 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2142C1B32373317D00304808 /* Effect.swift */; };
+		21809C35242F9F8A00AEED4B /* ComposableArchitecture in Resources */ = {isa = PBXBuildFile; fileRef = 21809C34242F9F8A00AEED4B /* ComposableArchitecture */; };
 		21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21988BCC23730AD000A1E2FF /* NotificationHelper.swift */; };
+		219E35492420245D00FD0299 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219E35482420245D00FD0299 /* MeditationView.swift */; };
 		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
 		21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */; };
 		21F5DFCC2364B8F900C10E23 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* ListItemView.swift */; };
@@ -33,7 +35,9 @@
 
 /* Begin PBXFileReference section */
 		2142C1B32373317D00304808 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		21809C34242F9F8A00AEED4B /* ComposableArchitecture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ComposableArchitecture; sourceTree = "<group>"; };
 		21988BCC23730AD000A1E2FF /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		219E35482420245D00FD0299 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEntryView.swift; sourceTree = "<group>"; };
 		21F5DFCB2364B8F900C10E23 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				D0B5422B22F7213800A0D90D /* ContentView.swift */,
 				21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */,
 				D0ABD9E0231215310092698C /* NewMeditationView.swift */,
+				219E35482420245D00FD0299 /* MeditationView.swift */,
 				21CE37172369F0CF00DBCD53 /* Supplimental Views */,
 				21F75841236C734E00EBB6AB /* Subviews */,
 			);
@@ -127,6 +132,7 @@
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				21F75842236C752E00EBB6AB /* Views */,
 				D0ABD9B623119DD50092698C /* Reducer.swift */,
+				21809C34242F9F8A00AEED4B /* ComposableArchitecture */,
 				21F75843236DD3C200EBB6AB /* ComposableArchitecture.swift */,
 				D0D0967A231360500066CE66 /* Current.swift */,
 				D0B5423B22F721B300A0D90D /* Meditation.swift */,
@@ -213,6 +219,7 @@
 				D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */,
 				D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */,
 				D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */,
+				21809C35242F9F8A00AEED4B /* ComposableArchitecture in Resources */,
 				D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +239,7 @@
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,
 				21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */,
+				219E35492420245D00FD0299 /* MeditationView.swift in Sources */,
 				D0ABD9B723119DD50092698C /* Reducer.swift in Sources */,
 				21F5DFCC2364B8F900C10E23 /* ListItemView.swift in Sources */,
 				D0ABD9E1231215310092698C /* NewMeditationView.swift in Sources */,

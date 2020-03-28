@@ -119,16 +119,6 @@ struct ContentView : View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-  Group {
-    ContentView(store: OldStore<UserData,AppAction>.dummy)
-      .environment(\.colorScheme, .dark)
-    
-    ContentView(store: OldStore<UserData,AppAction>.dummy)
-      }
-    }
-}
 
 
 struct TimerBottom : View {
@@ -177,4 +167,16 @@ struct CircleBottom : View {
       
     }
   }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+  Group {
+    ContentView(store: OldStore<UserData,AppAction>.dummy)
+      .environment(\.colorScheme, .dark)
+    
+    ContentView(store: OldStore<UserData,AppAction>.dummy)
+      }
+    }
 }

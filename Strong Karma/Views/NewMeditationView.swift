@@ -73,7 +73,6 @@ struct NewMeditationView : View {
     )
       .edgesIgnoringSafeArea(.bottom)
       .accentColor(Color(#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)))
-     // Color(red: 0.50, green: 0.30, blue: 0.20, opacity: 0.5))
   }
 
   

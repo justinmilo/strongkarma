@@ -56,6 +56,13 @@ struct EditEntryView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
   static var previews: some View {
-    EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+
+   Group {
+      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+         .environment(\.colorScheme, .dark)
+      
+      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+   }
+   }
   }
-}
+
