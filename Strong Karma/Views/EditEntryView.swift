@@ -10,19 +10,24 @@ import SwiftUI
 
 
 struct EditEntryView: View {
+  struct Stater : Equatable { }
   
   var meditation : Meditation
-  @ObservedObject var store: OldStore<UserData, AppAction>
+  var store: Store<UserData, AppAction>
+  @ObservedObject var viewStore : ViewStore<Stater>
   
   @State var title : String
   @State var entry : String
   
-  init (meditation med: Meditation, store: OldStore<UserData, AppAction>) {
+  init (meditation med: Meditation, store: Store<UserData, AppAction>) {
     _title = State(initialValue: med.title)
     _entry = State(initialValue: med.entry)
 
     self.meditation = med
     self.store = store
+    self.viewStore = store
+      .scope(value: {_ in Stater()}, action: {$0})
+      .view
   }
   
   
@@ -53,16 +58,16 @@ struct EditEntryView: View {
 }
 
 
-
-struct SwiftUIView_Previews: PreviewProvider {
-  static var previews: some View {
-
-   Group {
-      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
-         .environment(\.colorScheme, .dark)
-      
-      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
-   }
-   }
-  }
+//
+//struct SwiftUIView_Previews: PreviewProvider {
+//  static var previews: some View {
+//
+//   Group {
+//      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+//         .environment(\.colorScheme, .dark)
+//
+//      EditEntryView( meditation: Meditation.dummy, store: OldStore<UserData, AppAction>.dummy)
+//   }
+//   }
+//  }
 

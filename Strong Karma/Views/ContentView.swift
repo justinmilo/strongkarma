@@ -46,25 +46,34 @@ import AVFoundation
 
 
 struct ContentView : View {
+  struct Stater: Equatable {
+    var reversedMeditations : [Meditation]
+    var addEntryPopover : Bool
+    var timedMeditation : Meditation?
+    var newMeditation : Meditation?
+  }
   
-  @ObservedObject var store: OldStore<UserData, AppAction>
   @State private var popover = false
+  
+  var store: Store<UserData, AppAction>
+  @ObservedObject var viewStore: ViewStore<Stater>
+
   @State private var timerGoing = true
-  private var addEntryPopover : Bool { guard let _ = store.value.newMeditation else { return false }; return true }
+  
+  public init(store: Store<UserData, AppAction>) {
+    self.store = store
+    self.viewStore = self.store
+      .scope(value: Stater.init(userData:), action: { $0 })
+      .view
+  }
   
   var body: some View {
-    let binding = Binding<Bool>(
-    get: { self.addEntryPopover },
-    set: { value in
-      if value == false {
-        self.store.send(.addMeditationDismissed)
-      }
-    })
+    
     
     return VStack {
       NavigationView {
         List {
-          ForEach(store.value.meditations.reversed()) { med in
+          ForEach(viewStore.value.reversedMeditations) { med in
             NavigationLink(destination:
               EditEntryView(meditation: med, store: self.store)
             ){
@@ -90,21 +99,40 @@ struct ContentView : View {
       }
       
       
-      if (self.store.value.timedMeditation != nil) {
-        TimerBottom(enabled: self.$popover, store: self.store)
+      if (self.viewStore.value.timedMeditation != nil) {
+        TimerBottom(
+          enabled: self.$popover,
+          store: self.store.scope(
+            value: { TimerBottomState(
+              timerData: $0.timerData,
+              timedMeditation: $0.timedMeditation,
+              enabled: false)
+          },
+            action: { .timerBottom($0) }))
       }
-      
+        
       else {
         CircleBottom(enabled: self.$popover)
       }
       
-      Text("").hidden().sheet(isPresented: self.$popover) {
-        NewMeditationView()
-          .environmentObject(self.store)
+      Text("")
+        .hidden()
+        .sheet(isPresented: self.$popover) {
+          MeditationView(store: self.store.scope(value: {$0}, action: {$0}))
       }
-      Text("").hidden().sheet(
-        isPresented: binding){ () -> EditEntryView in
-          return EditEntryView(meditation: self.store.value.newMeditation!, store: self.store)
+      
+      
+      
+      Text("")
+        .hidden()
+        .sheet(
+          isPresented:
+          self.store.send({_ in .addMeditationDismissed },
+                          viewStore: self.viewStore,
+                          binding: \ContentView.Stater.addEntryPopover)
+        ) { () -> EditEntryView in
+          return EditEntryView(meditation: self.viewStore.value.newMeditation!,
+                               store: self.store)
       }
       
     }
@@ -117,66 +145,27 @@ struct ContentView : View {
   
 }
 
-
-
-
-
-struct TimerBottom : View {
-  @Binding var enabled : Bool
-  @ObservedObject var store: OldStore<UserData, AppAction>
-
-  var body: some View {
-
-    Button(action: {
-      self.enabled = true
-    }){
-      VStack {
-        HStack {
-          Spacer()
-          Text(store.value.timerData?.timeLeftLabel ?? ":")
-            .font(.title)
-            .foregroundColor(.accentColor)
-          Spacer()
-        }
-        HStack {
-          Spacer()
-          Text(self.store.value.timedMeditation?.title ?? "")
-              .foregroundColor(.secondary)
-          Spacer()
-        }
-      }
-      .padding(EdgeInsets(top: 10, leading: 0, bottom: 20, trailing: 0))
-        
-      .background(
-        LinearGradient(gradient: Gradient(colors: [.gray, .white]), startPoint: .top, endPoint: .bottom)
-          .opacity(/*@START_MENU_TOKEN@*/0.413/*@END_MENU_TOKEN@*/)
-      )
-    }
-  }
-}
-
-struct CircleBottom : View {
-  @Binding var enabled : Bool
-  var body: some View {
-    Button(action: {
-      self.enabled = true
-    }){
-      Circle()
-        .frame(width: 44.0, height: 44.0, alignment: .center)
-        .foregroundColor(.secondary)
-      
-    }
+extension ContentView.Stater {
+  init(userData: UserData) {
+    self.reversedMeditations = userData.meditations.reversed()
+    self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
+    self.timedMeditation = userData.timedMeditation
+    self.newMeditation = userData.newMeditation
   }
 }
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-  Group {
-    ContentView(store: OldStore<UserData,AppAction>.dummy)
-      .environment(\.colorScheme, .dark)
-    
-    ContentView(store: OldStore<UserData,AppAction>.dummy)
-      }
-    }
-}
+
+
+
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//  Group {
+//    ContentView(store: OldStore<UserData,AppAction>.dummy)
+//      .environment(\.colorScheme, .dark)
+//
+//    ContentView(store: OldStore<UserData,AppAction>.dummy)
+//      }
+//    }
+//}

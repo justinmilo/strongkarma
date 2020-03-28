@@ -31,8 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : OldStore<UserData, AppAction>  = OldStore(initialValue: UserData(meditations: Current.file.load() ), reducer: logging(appReducer))
-      NotificationHelper.singleton.store = store
+      let store : Store<UserData, AppAction>  = Store(initialValue: UserData(meditations: Current.file.load() ), reducer: logging(appReducer))
+      //NotificationHelper.singleton.store = store
       window.rootViewController = UIHostingController(rootView:
         ContentView(store: store)
       )

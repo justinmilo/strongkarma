@@ -10,9 +10,6 @@ import Combine
 import Foundation
 
 
-
-public typealias Reducer<Value,Action> = (inout Value, Action) -> [Effect<Action>]
-
 final class OldStore<Value, Action>: ObservableObject  {
  
   private let notificationPlace = NotificationHelper()
@@ -33,19 +30,4 @@ final class OldStore<Value, Action>: ObservableObject  {
     }
   }
   
-}
-
-public func logging<Value, Action>(
-  _ reducer: @escaping Reducer<Value, Action>
-) -> Reducer<Value, Action> {
-  return { value, action in
-    let effects = reducer(&value, action)
-    let newValue = value
-    return [Effect{ _ in
-      print("Action: \(action)")
-      print("Value:")
-      dump(newValue)
-      print("---")
-    }] + effects
-  }
 }

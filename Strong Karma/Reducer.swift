@@ -62,6 +62,8 @@ enum AppAction {
   case timerFired
   case replaceOrAddMeditation( Meditation)
   case saveData
+  
+  case timerBottom(TimerBottomAction)
 }
 
 import SwiftUI
@@ -204,6 +206,8 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
 
       }]
     
+  case .timerBottom(_):
+    return []
   }
   
 }
