@@ -49,7 +49,7 @@ struct TimerBottom : View {
   var body: some View {
 
     Button(action: {
-      self.store.send(.buttonPressed)
+      self.enabled = true
     }){
       VStack {
         HStack {

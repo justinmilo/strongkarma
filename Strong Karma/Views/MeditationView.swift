@@ -12,6 +12,9 @@ struct MeditationView: View {
   struct Stater : Equatable {
     var timeLeft: String
     let minutesList : [Double]
+    var selType : Int
+    var selMin  : Int
+    var types : [String]
   }
   var store: Store<UserData, AppAction>
   @ObservedObject var viewStore : ViewStore<Stater>
@@ -22,33 +25,36 @@ struct MeditationView: View {
       .scope(value: Stater.init(userData:), action: {$0})
       .view
   }
-
-   @State var selType = 0
-   @State var selMin = 0
   
 
   
   var body: some View {
-    
-    let seconds  : Double =  self.viewStore.value.minutesList[self.selMin]  * 60
-    
+
     return VStack{
       Spacer()
-      Text("Concentration")
+      Text(self.viewStore.value.currentType)
         .font(.largeTitle)
       Spacer()
       
-      Text("56:00") // timeLeft
+      Text(self.viewStore.value.timeLeft) // timeLeft
         .foregroundColor(Color(#colorLiteral(red: 0.4843137264, green: 0.6065605269, blue: 0.9686274529, alpha: 1)))
         .font(.largeTitle)
       
-      Picker("Type", selection: self.$selType) {
-        ForEach(0 ..< Type.allCases.count) { index in
-          Text(Type.allCases[index].rawValue).tag(index)
-        }
+      Picker("Type", selection:
+        self.store.send(
+          {.pickTypeOfMeditation($0)},
+          viewStore: self.viewStore,
+          binding: \.selType)) {
+            ForEach(0 ..< self.viewStore.value.types.count) { index in
+              Text(self.viewStore.value.types[index]).tag(index)
+            }
       }.labelsHidden()
       
-      Picker("Min", selection: self.$selMin) {
+      Picker("Min", selection:
+        self.store.send(
+          {.pickMeditationTime($0)},
+          viewStore: self.viewStore,
+          binding: \.selMin)) {
         ForEach(0 ..< self.viewStore.value.minutesList.count) {
           Text( String(self.viewStore.value.minutesList[$0])
           ).tag($0)
@@ -58,7 +64,7 @@ struct MeditationView: View {
       Spacer()
       Button(action: {
         self.store.send(
-          .startTimerPushed(startDate:Date(), duration: seconds, type: Type.allCases[self.selType].rawValue ))
+          .startTimerPushed(startDate:Date(), duration: self.viewStore.value.seconds, type: self.viewStore.value.currentType ))
       } ) {
         Text("Start")
           .font(.title)
@@ -72,7 +78,22 @@ extension MeditationView.Stater {
   init (userData: UserData) {
     self.minutesList = (1 ... 60).map(Double.init).map{$0}
     self.timeLeft = userData.timerData?.timeLeftLabel ?? ":"
+    self.types = [
+      "Concentration",
+      "Mindfullness of Breath",
+      "See Hear Feel",
+      "Self Inquiry",
+      "Do Nothing",
+      "Positive Feel",
+      "Yoga Still",
+      "Yoga Flow",
+      "Free Style",
+    ]
+    self.selType = userData.meditationTypeIndex
+    self.selMin = userData.meditationTimeIndex
   }
+  var seconds  : Double { self.minutesList[self.selMin]  * 60 }
+  var currentType : String { self.types[self.selType]}
 }
 
 //struct MeditationView_Previews: PreviewProvider {

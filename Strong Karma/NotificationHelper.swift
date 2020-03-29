@@ -14,7 +14,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
   
   static let singleton = NotificationHelper()
   
-  var store: OldStore<UserData, AppAction>?
+  var store: Store<UserData, AppAction>?
   
   override init() {
     let options: UNAuthorizationOptions = [.alert, .sound, .badge]

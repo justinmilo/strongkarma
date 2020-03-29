@@ -38,8 +38,8 @@ extension Meditation {
   )
 }
 
-extension OldStore where Value == UserData, Action == AppAction {
-    static var dummy = OldStore(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer)
+extension Store where Value == UserData, Action == AppAction {
+    static var dummy = Store(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer)
 }
 
 
