@@ -46,14 +46,10 @@ struct EditEntryView: View {
     }
   }
   func updateOnCommit() {
-
-      
       var med = self.meditation
       med.title = self.title
       med.entry = self.entry
-      print("Action should happen")
-      self.store.send(  .replaceOrAddMeditation(med) )
-    
+      self.store.send(  .dismissEditEntryView(med) )
   }
 }
 

@@ -92,7 +92,7 @@ extension MeditationView.Stater {
     self.selType = userData.meditationTypeIndex
     self.selMin = userData.meditationTimeIndex
   }
-  var seconds  : Double { self.minutesList[self.selMin]  * 60 }
+  var seconds  : Double { self.minutesList[self.selMin] * 60 }
   var currentType : String { self.types[self.selType]}
 }
 

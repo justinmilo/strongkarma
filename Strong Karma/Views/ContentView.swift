@@ -29,6 +29,16 @@ struct UserData {
   }
 }
 
+extension Array where Element == Meditation {
+  mutating func removeOrAdd(meditation : Meditation) {
+    guard let index = (self.firstIndex{ $0.id == meditation.id }) else {
+      self.append(meditation)
+      return
+    }
+    self[index] = meditation
+  }
+}
+
 func formatTime (time: Double) -> String? {
   let formatter = DateComponentsFormatter()
   formatter.unitsStyle = .positional // Use the appropriate positioning for the current locale
@@ -46,9 +56,7 @@ enum AppAction {
     case willPresentNotification
     case didRecieveResponse
   }
-  
-  case takeTimedMeditationOffDeck
-  
+    
   case pickTypeOfMeditation(Int)
   case pickMeditationTime(Int)
 
@@ -60,38 +68,34 @@ enum AppAction {
   case addMeditationWithDuration(Double)
   case startTimerPushed(startDate:Date, duration:Double, type:String)
   case timerFired
-  case replaceOrAddMeditation( Meditation)
   case saveData
   
   case timerBottom(TimerBottomAction)
+  
+  case dismissEditEntryView(Meditation)
 }
+
+
 
 import SwiftUI
 
 func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
   switch action {
     
- 
+  case .dismissEditEntryView(let med):
+    state.meditations.removeOrAdd(meditation: med)
+    return [Effect{ $0(.saveData) }]
     
   case .notification(.willPresentNotification):
-
-    return [Effect{callback in
-      callback(.takeTimedMeditationOffDeck)
-      }]
+    state.timedMeditation = nil
+    return []
 
   case .notification(.didRecieveResponse):
-    return [Effect{callback in
-      callback(.takeTimedMeditationOffDeck)
-      }]
+    state.timedMeditation = nil
+    return []
     
 
-  case .takeTimedMeditationOffDeck:
-    let tempMed = state.timedMeditation!
-    state.timedMeditation = nil
-    return [Effect{callback in
-      callback(.replaceOrAddMeditation(tempMed))
-      }]
-    
+   
   case .addButtonTapped:
    let med = Meditation(id: UUID(),
     date: Date().description,
@@ -111,7 +115,9 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
   case .addMeditationDismissed:
     let transfer = state.newMeditation!
     state.newMeditation = nil
-    return [Effect{ $0(.replaceOrAddMeditation(transfer))}]
+    state.meditations.removeOrAdd(meditation: transfer)
+    
+    return []
     
   case let .deleteMeditationAt(indexSet):
     var updated : [Meditation] = state.meditations.reversed()
@@ -146,6 +152,9 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
       currentDate < date,
       DateInterval(start: currentDate, end: date).duration >= 0 else {
         state.timerData = nil
+        let tempMed = state.timedMeditation!
+        state.timedMeditation = nil
+        state.meditations.removeOrAdd(meditation: tempMed)
         return []
     }
     
@@ -181,16 +190,6 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     ))
     return []
     
-  case let .replaceOrAddMeditation(meditation):
-    guard let index = (state.meditations.firstIndex { m in
-      m.id == meditation.id
-    }) else {
-      state.meditations.append(meditation)
-      return [Effect{ $0(.saveData) }]
-    }
-    
-    state.meditations[index] = meditation
-    return [Effect{ $0(.saveData) }]
     
   case .saveData:
     let meds = state.meditations
@@ -201,7 +200,7 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     
   case .timerBottom(_):
     return []
-  }
+   }
   
 }
 
@@ -286,7 +285,7 @@ struct ContentView : View {
             .lineLimit(3)
             .padding()
         }
-        .navigationBarTitle(Text("Practice Notes"))
+        .navigationBarTitle(Text("Strong Karma"))
         .navigationBarItems(trailing:
           Button(action: {
             self.store.send(.addButtonTapped)
@@ -310,7 +309,6 @@ struct ContentView : View {
           },
             action: { .timerBottom($0) }))
       }
-        
       else {
         CircleBottom(enabled: self.$popover)
       }
@@ -337,7 +335,6 @@ struct ContentView : View {
       
     }
     .edgesIgnoringSafeArea(.bottom)
-    .accentColor(Color(#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)))
 
   }
   
