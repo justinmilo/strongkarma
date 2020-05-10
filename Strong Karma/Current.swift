@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ComposableArchitecture
 
 extension Meditation {
     static var dummy = Meditation(
@@ -38,25 +39,13 @@ extension Meditation {
   )
 }
 
-extension Store where Value == UserData, Action == AppAction {
-    static var dummy = Store(initialValue: UserData(meditations: [Meditation.dummy, Meditation.dummy1, Meditation.dummy2,Meditation.dummy, Meditation.dummy1, Meditation.dummy2] ), reducer: appReducer)
-}
-
-
-struct World {
-  var file = FileIO()
-}
-var Current = World()
 
 typealias TypResult = Result<[Meditation], LoadError>
 
 
 struct FileIO {
-  var persistenceURL : URL? = getDocumentsURL()
-  var load : () -> [Meditation] = _load
-  var loadFromBundle : () -> [Meditation]  = _extraLoad("meditationsData.json")
-  var loadFromDocuments : () -> TypResult = _loadFromDocuments
-  var save : (Array<Meditation>) -> () = saveItems
+   var load : () -> [Meditation] = _load
+   var save : ([Meditation]) -> () = saveItems
 }
 
 enum LoadError : Error {
@@ -81,28 +70,21 @@ func getDocumentsURL() -> URL?{
 }
 
 func _load() -> [Meditation] {
-  let documentsResult = Current.file.loadFromDocuments()
+  let documentsResult = _loadFromDocuments()
   if case .success = documentsResult {
     print ("Document loadFromDocuments ")
     return try! documentsResult.get()
   }
-  let bundleResult = Current.file.loadFromBundle()
+ let bundleResult : [Meditation] = _extraLoad("meditationsData.json")()
   print ("Document loadFromBundle ")
 
-  //if case let .success(itemList) = bundleResult {
-  //TODO decouple
-  Current.file.save(bundleResult)//itemList)
+   saveItems(item: bundleResult)
   return bundleResult
-  //  return  try! documentsResult.get()
-//  }
-//
-//  return  try! bundleResult.get()
-  
 }
 
 func _loadFromDocuments() -> Result<[Meditation], LoadError>{
   
-  guard let url = Current.file.persistenceURL else {
+  guard let url = getDocumentsURL() else {
     print ("no persistenceURL ")
 
     return .failure( LoadError.badURL )
@@ -162,7 +144,7 @@ func saveItems(item: Array<Meditation>) {
   encoder.outputFormatting = .prettyPrinted
   let data = try! encoder.encode(item)
   do {
-    if let url = Current.file.persistenceURL {
+    if let url = getDocumentsURL() {
       try data.write(to: url)
     }else {
       fatalError()

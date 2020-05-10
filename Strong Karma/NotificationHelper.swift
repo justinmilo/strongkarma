@@ -8,6 +8,11 @@
 
 import Foundation
 import UserNotifications
+import ComposableArchitecture
+
+extension Notification.Name {
+   static let MeditationNotification = Notification.Name("MeditationNotification")
+}
 
 
 final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
@@ -15,6 +20,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
   static let singleton = NotificationHelper()
   
   var store: Store<UserData, AppAction>?
+   var viewStore: ViewStore<UserData, AppAction>?
   
   override init() {
     let options: UNAuthorizationOptions = [.alert, .sound, .badge]
@@ -72,7 +78,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     print ("userNotificationHere")
-    self.store?.send(.notification(.willPresentNotification))
+   self.viewStore?.send(.notification(.willPresentNotification))
     }
    
    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
@@ -80,7 +86,7 @@ final class NotificationHelper : NSObject, UNUserNotificationCenterDelegate {
    }
    
    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    self.store?.send(.notification(.didRecieveResponse))
+    self.viewStore?.send(.notification(.didRecieveResponse))
     completionHandler()
    }
 }

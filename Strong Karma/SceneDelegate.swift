@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-
+import ComposableArchitecture
 
 
 
@@ -31,7 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : Store<UserData, AppAction>  = Store(initialValue: UserData(meditations: Current.file.load() ), reducer: logging(appReducer))
+      let store : Store<UserData, AppAction>  = Store(
+         initialState: UserData(meditations: FileIO().load() ),
+         reducer: appReducer.debug(),
+         environment: AppEnvironment(mainQueue: DispatchQueue.main.eraseToAnyScheduler() ))
       //NotificationHelper.singleton.store = store
       window.rootViewController = UIHostingController(rootView:
         ContentView(store: store)

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct MeditationView: View {
   struct Stater : Equatable {
@@ -17,7 +18,7 @@ struct MeditationView: View {
     var types : [String]
   }
   var store: Store<UserData, AppAction>
-  @ObservedObject var viewStore : ViewStore<Stater>
+  @ObservedObject var viewStore : ViewStore<Stater, AppEnvironment>
   
   init(store:Store<UserData, AppAction> ) {
     self.store = store

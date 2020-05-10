@@ -11,7 +11,7 @@ import Foundation
 
 
 
-struct Meditation : Hashable, Identifiable, Codable {
+struct Meditation : Hashable, Identifiable, Codable, Equatable {
   var id : UUID
   var date : String
   var duration : Double

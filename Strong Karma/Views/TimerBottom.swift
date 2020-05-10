@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct TimerBottomState {
   var timerData : UserData.TimerData?
@@ -14,16 +15,16 @@ struct TimerBottomState {
   var enabled : Bool
 }
 
-enum TimerBottomAction {
-  case buttonPressed
-}
 
-let timerBottomReducer : Reducer<TimerBottomState,TimerBottomAction> = {
-  state, action in
+
+struct TimerEnvironment {}
+
+let timerBottomReducer = Reducer<TimerBottomState,TimerBottomAction, TimerEnvironment> {
+  state, action, env in
   switch action {
   case .buttonPressed:
     state.enabled = true
-    return []
+    return .none
   }
 }
 
@@ -43,7 +44,7 @@ struct TimerBottom : View {
   
   @Binding var enabled : Bool
   var store: Store<TimerBottomState, TimerBottomAction>
-  @ObservedObject var viewStore: ViewStore<State>
+  @ObservedObject var viewStore: ViewStore<State, TimerEnvironment>
 
 
   var body: some View {

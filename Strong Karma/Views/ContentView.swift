@@ -9,92 +9,29 @@
 import SwiftUI
 
 
-struct UserData {
-  var timerData : TimerData?
-  var showFavoritesOnly = false
-  var meditations : [Meditation]
-  var newMeditation : Meditation? = nil
-  var timedMeditation : Meditation? = nil
-
-  var meditationTypeIndex : Int = 0
-  var meditationTimeIndex : Int = 0
-  
-  struct TimerData {
-    var endDate : Date
-    var timeLeft : Double?
-    var timeLeftLabel : String {
-
-      return formatTime(time: self.timeLeft ?? 0.0) ?? "Empty"
-    }
-  }
-}
-
-extension Array where Element == Meditation {
-  mutating func removeOrAdd(meditation : Meditation) {
-    guard let index = (self.firstIndex{ $0.id == meditation.id }) else {
-      self.append(meditation)
-      return
-    }
-    self[index] = meditation
-  }
-}
-
-func formatTime (time: Double) -> String? {
-  let formatter = DateComponentsFormatter()
-  formatter.unitsStyle = .positional // Use the appropriate positioning for the current locale
-  formatter.allowedUnits = [ .hour, .minute, .second ] // Units to display in the formatted string
-  formatter.zeroFormattingBehavior = [ .pad ] // Pad with zeroes where appropriate for the locale
-
-  return  formatter.string(from: time)
-}
-
-enum AppAction {
-  
-  case notification(NotificationAction)
-  
-  enum NotificationAction{
-    case willPresentNotification
-    case didRecieveResponse
-  }
-    
-  case pickTypeOfMeditation(Int)
-  case pickMeditationTime(Int)
-
-  
-  case addButtonTapped
-  case updateNewMeditation(Meditation)
-  case addMeditationDismissed
-  case deleteMeditationAt(IndexSet)
-  case addMeditationWithDuration(Double)
-  case startTimerPushed(startDate:Date, duration:Double, type:String)
-  case timerFired
-  case saveData
-  
-  case timerBottom(TimerBottomAction)
-  
-  case dismissEditEntryView(Meditation)
-}
 
 
 
 import SwiftUI
+import ComposableArchitecture
 
-func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>] {
+
+
+let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, environment in
   switch action {
     
-  case .dismissEditEntryView(let med):
+  case .dismissEditEntryView:
+   let med = state.editMeditation!
     state.meditations.removeOrAdd(meditation: med)
-    return [Effect{ $0(.saveData) }]
+    return Effect(value: .saveData)
     
   case .notification(.willPresentNotification):
     state.timedMeditation = nil
-    return []
+    return .none
 
   case .notification(.didRecieveResponse):
     state.timedMeditation = nil
-    return []
-    
-
+    return .none
    
   case .addButtonTapped:
    let med = Meditation(id: UUID(),
@@ -105,25 +42,24 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
     entry: "",
     title: "Untitled")
    state.newMeditation = med
-    return []
-
+   return .none
     
   case let .updateNewMeditation(updated):
     state.newMeditation = updated
-    return []
+    return .none
 
   case .addMeditationDismissed:
     let transfer = state.newMeditation!
     state.newMeditation = nil
     state.meditations.removeOrAdd(meditation: transfer)
     
-    return []
+    return .none
     
   case let .deleteMeditationAt(indexSet):
     var updated : [Meditation] = state.meditations.reversed()
     updated.remove(atOffsets: indexSet)
     state.meditations = updated.reversed()
-    return []
+    return .none
 
   case let .startTimerPushed(startDate: date, duration:seconds, type: type):
     state.timerData = UserData.TimerData(endDate: date+seconds)
@@ -138,45 +74,41 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
 
     let duration = state.timedMeditation!.duration
        
-    return [
-      Effect{$0(.timerFired)},
-      Effect{ _ in
-        NotificationHelper.singleton.scheduleNotification(notificationType: "\(type) Complete", seconds: duration)
-      }
-    ]
-    
+    return  Effect.merge(
+      Effect(value: .timerFired),
+      Effect<AppAction, Never>.fireAndForget{ environment.scheduleNotification("\(type) Complete", duration)}
+   )
+   
   case .timerFired:
-    let currentDate = Date()
-    guard
+   struct TimerId: Hashable {}
+   
+   
+   let currentDate = Date()
+   guard
       let date = state.timerData?.endDate,
       currentDate < date,
       DateInterval(start: currentDate, end: date).duration >= 0 else {
-        state.timerData = nil
-        let tempMed = state.timedMeditation!
-        state.timedMeditation = nil
-        state.meditations.removeOrAdd(meditation: tempMed)
-        return []
-    }
-    
-    let seconds = DateInterval(start: currentDate, end: date).duration
-    state.timerData?.timeLeft = seconds
-    
-    return [Effect{callback in
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-      callback(.timerFired)
-       // Put any code you want to be delayed here
-    }
-    
-    }]
-  
-    
+         state.timerData = nil
+         let tempMed = state.timedMeditation!
+         state.timedMeditation = nil
+         state.meditations.removeOrAdd(meditation: tempMed)
+         return .none
+   }
+   
+   let seconds = DateInterval(start: currentDate, end: date).duration
+   state.timerData?.timeLeft = seconds
+   
+   return Effect.timer(id: TimerId(), every: 1.0, tolerance: .zero, on: environment.mainQueue)
+      .map { _ in AppAction.timerFired }
+
+   
   case .pickTypeOfMeditation(let index) :
     state.meditationTypeIndex = index
-    return []
+    return .none
     
   case .pickMeditationTime(let index) :
     state.meditationTimeIndex = index
-    return []
+    return .none
     
   case let .addMeditationWithDuration(seconds):
     state.meditations.append(
@@ -188,18 +120,25 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
                  entry: "",
                  title: "Untitled"
     ))
-    return []
+    return .none
     
     
   case .saveData:
     let meds = state.meditations
     
-    return [Effect{_ in
-      Current.file.save(meds)
-      }]
+    return
+      Effect.fireAndForget {
+         environment.file.save(meds)
+    }
     
   case .timerBottom(_):
-    return []
+   return .none
+  case .didEditEntryTitle(let txt):
+   state.editMeditation!.title = txt
+   return .none
+  case .didEditEntryText(let txt):
+   state.editMeditation!.entry = txt
+   return .none
    }
   
 }
@@ -207,38 +146,6 @@ func appReducer( state: inout UserData, action: AppAction) -> [Effect<AppAction>
 
 
 
-func date(from string: String) -> Date? {
-  let dateFormatter = DateFormatter()
-  dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-  dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-  //let date = dateFormatter.date(from:isoDate)!
-  
-  
- // let dateFormatter = ISO8601DateFormatter()
-  let date = dateFormatter.date(from:string)
-  return date
-}
-
-func formattedDate(from date:Date) -> String {
-  let dateFormatterPrint = DateFormatter()
-  dateFormatterPrint.dateFormat = "EEEE, MMMM d, yyyy"
-  return dateFormatterPrint.string(from: date)
-}
-
-
-/*
- 
- Wednesday, Sep 12, 2018           --> EEEE, MMM d, yyyy
- 09/12/2018                        --> MM/dd/yyyy
- 09-12-2018 14:11                  --> MM-dd-yyyy HH:mm
- Sep 12, 2:11 PM                   --> MMM d, h:mm a
- September 2018                    --> MMMM yyyy
- Sep 12, 2018                      --> MMM d, yyyy
- Wed, 12 Sep 2018 14:11:54 +0000   --> E, d MMM yyyy HH:mm:ss Z
- 2018-09-12T14:11:54+0000          --> yyyy-MM-dd'T'HH:mm:ssZ
- 12.09.18                          --> dd.MM.yy
- 10:41:02.112                      --> HH:mm:ss.SSS
- */
 
 
 import AVFoundation
@@ -255,114 +162,102 @@ struct ContentView : View {
   @State private var popover = false
   
   var store: Store<UserData, AppAction>
-  @ObservedObject var viewStore: ViewStore<Stater>
 
   @State private var timerGoing = true
   
   public init(store: Store<UserData, AppAction>) {
     self.store = store
-    self.viewStore = self.store
-      .scope(value: Stater.init(userData:), action: { $0 })
-      .view
   }
   
   var body: some View {
-    
-    
-    return VStack {
-      NavigationView {
-        List {
-          ForEach(viewStore.value.reversedMeditations) { med in
-            NavigationLink(destination:
-              EditEntryView(meditation: med, store: self.store)
-            ){
-              ListItemView(entry: med)
+   WithViewStore(self.store.scope(state: \.stater)) { viewStore in
+      VStack {
+          NavigationView {
+            List {
+              ForEach(viewStore.reversedMeditations) { med in
+                NavigationLink(destination:
+                  EditEntryView(store: self.store)
+                ){
+                  ListItemView(entry: med)
+                }
+              }.onDelete { (indexSet) in
+                viewStore.send(.deleteMeditationAt(indexSet))
+              }
+              Text("Welcome the arrising, see it, let it through")
+                .lineLimit(3)
+                .padding()
             }
-          }.onDelete { (indexSet) in
-            self.store.send(.deleteMeditationAt(indexSet))
+            .navigationBarTitle(Text("Strong Karma"))
+            .navigationBarItems(trailing:
+              Button(action: {
+                viewStore.send(.addButtonTapped)
+              }){
+              Circle()
+                .frame(width: 33.0, height: 33.0, alignment: .center)
+                .foregroundColor(.secondary)
+            })
+
           }
-          Text("Welcome the arrising, see it, let it through")
-            .lineLimit(3)
-            .padding()
+
+
+          if (viewStore.timedMeditation != nil) {
+            TimerBottom(
+              enabled: self.$popover,
+              store: self.store.scope(
+                state: { TimerBottomState(
+                  timerData: $0.timerData,
+                  timedMeditation: $0.timedMeditation,
+                  enabled: false)
+              },
+                action: { .timerBottom($0) }))
+          }
+          else {
+            CircleBottom(enabled: self.$popover)
+          }
+//
+          Text("")
+            .hidden()
+            .sheet(isPresented: self.$popover) {
+               MeditationView(store: self.store.scope(state: {$0}, action: {$0}))
+          }
+
+
+//
+//          Text("")
+//            .hidden()
+//            .sheet(
+//              isPresented:
+//              self.store.send({_ in .addMeditationDismissed },
+//                              viewStore: viewStore,
+//                              binding: \.addEntryPopover)
+//            ) { () -> EditEntryView in
+//              return EditEntryView(meditation: viewStore.newMeditation!,
+//                                   store: self.store)
+//          }
+          
         }
-        .navigationBarTitle(Text("Strong Karma"))
-        .navigationBarItems(trailing:
-          Button(action: {
-            self.store.send(.addButtonTapped)
-          }){
-          Circle()
-            .frame(width: 33.0, height: 33.0, alignment: .center)
-            .foregroundColor(.secondary)
-        })
-        
-      }
-      
-      
-      if (self.viewStore.value.timedMeditation != nil) {
-        TimerBottom(
-          enabled: self.$popover,
-          store: self.store.scope(
-            value: { TimerBottomState(
-              timerData: $0.timerData,
-              timedMeditation: $0.timedMeditation,
-              enabled: false)
-          },
-            action: { .timerBottom($0) }))
-      }
-      else {
-        CircleBottom(enabled: self.$popover)
-      }
-      
-      Text("")
-        .hidden()
-        .sheet(isPresented: self.$popover) {
-          MeditationView(store: self.store.scope(value: {$0}, action: {$0}))
-      }
-      
-      
-      
-      Text("")
-        .hidden()
-        .sheet(
-          isPresented:
-          self.store.send({_ in .addMeditationDismissed },
-                          viewStore: self.viewStore,
-                          binding: \.addEntryPopover)
-        ) { () -> EditEntryView in
-          return EditEntryView(meditation: self.viewStore.value.newMeditation!,
-                               store: self.store)
-      }
-      
-    }
-    .edgesIgnoringSafeArea(.bottom)
+        .edgesIgnoringSafeArea(.bottom)
 
-  }
-  
-  
+      
+   }
+   }
   
 }
 
+extension UserData {
+   var stater : ContentView.Stater {
+      return ContentView.Stater(userData: self)
+   }
+}
 extension ContentView.Stater {
-  init(userData: UserData) {
-    self.reversedMeditations = userData.meditations.reversed()
-    self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
-    self.timedMeditation = userData.timedMeditation
-    self.newMeditation = userData.newMeditation
-  }
+   init(userData: UserData) {
+     self.reversedMeditations = userData.meditations.reversed()
+     self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
+     self.timedMeditation = userData.timedMeditation
+     self.newMeditation = userData.newMeditation
+   }
 }
 
 
 
 
-
-//
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//  Group {
-//    ContentView(store: OldStore<UserData,AppAction>.dummy)
-//      .environment(\.colorScheme, .dark)
-//
-//    ContentView(store: OldStore<UserData,AppAction>.dummy)
-//      }
-//    }
-//}
