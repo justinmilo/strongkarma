@@ -20,11 +20,7 @@ import ComposableArchitecture
 let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, environment in
   switch action {
     
-  case .dismissEditEntryView:
-   let med = state.editMeditation!
-    state.meditations.removeOrAdd(meditation: med)
-    return Effect(value: .saveData)
-    
+ 
   case .notification(.willPresentNotification):
     state.timedMeditation = nil
     return .none
@@ -133,11 +129,21 @@ let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, e
     
   case .timerBottom(_):
    return .none
+   
+   case .dismissEditEntryView:
+     let med = state.editMeditation!
+      state.meditations.removeOrAdd(meditation: med)
+     state.editMeditation = nil
+      return Effect(value: .saveData)
+      
   case .didEditEntryTitle(let txt):
    state.editMeditation!.title = txt
    return .none
   case .didEditEntryText(let txt):
    state.editMeditation!.entry = txt
+   return .none
+  case .willEditEntry(let med):
+   state.editMeditation = med
    return .none
    }
   
@@ -155,6 +161,7 @@ struct ContentView : View {
   struct Stater: Equatable {
     var reversedMeditations : [Meditation]
     var addEntryPopover : Bool
+   var editEntryPopover : Bool
     var timedMeditation : Meditation?
     var newMeditation : Meditation?
   }
@@ -175,9 +182,13 @@ struct ContentView : View {
           NavigationView {
             List {
               ForEach(viewStore.reversedMeditations) { med in
-                NavigationLink(destination:
-                  EditEntryView(store: self.store)
-                ){
+                NavigationLink(destination: EditEntryView(store: self.store),
+                               isActive: viewStore.binding(
+                                 get: { $0.editEntryPopover },
+                                 send: { _ in AppAction.willEditEntry(med) }
+                                 ))
+                        
+                {
                   ListItemView(entry: med)
                 }
               }.onDelete { (indexSet) in
@@ -255,6 +266,7 @@ extension ContentView.Stater {
      self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
      self.timedMeditation = userData.timedMeditation
      self.newMeditation = userData.newMeditation
+      self.editEntryPopover = userData.editMeditation.map{ _ in true } ?? false
    }
 }
 

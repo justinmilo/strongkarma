@@ -37,7 +37,7 @@ enum AppAction {
    
    case didEditEntryTitle(String)
    case didEditEntryText(String)
-
+   case willEditEntry(Meditation)
 }
 
 enum TimerBottomAction {

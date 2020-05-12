@@ -37,32 +37,28 @@ struct TimerBottom : View {
   public init(enabled: Binding<Bool>, store: Store<TimerBottomState, TimerBottomAction>) {
     self._enabled = enabled
     self.store = store
-    self.viewStore = self.store
-      .scope(value: State.init(timerBottomState:), action: { $0 })
-      .view
   }
   
   @Binding var enabled : Bool
   var store: Store<TimerBottomState, TimerBottomAction>
-  @ObservedObject var viewStore: ViewStore<State, TimerEnvironment>
 
 
   var body: some View {
-
+   WithViewStore(self.store.scope(state: { TimerBottom.State(timerBottomState: $0) })) { viewStore in
     Button(action: {
       self.enabled = true
     }){
       VStack {
         HStack {
           Spacer()
-          Text(self.viewStore.value.timeLeftLabel)
+          Text(viewStore.timeLeftLabel)
             .font(.title)
             .foregroundColor(.accentColor)
           Spacer()
         }
         HStack {
           Spacer()
-          Text(self.viewStore.value.meditationTitle)
+          Text(viewStore.meditationTitle)
               .foregroundColor(.secondary)
           Spacer()
         }
@@ -75,6 +71,7 @@ struct TimerBottom : View {
       )
     }
   }
+   }
 }
 
 extension TimerBottom.State {
