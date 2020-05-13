@@ -7,38 +7,41 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct ListItemView : View {
-  var entry : Meditation
+   var store: Store<Meditation,EditAction>
   
   var body : some View {
+   WithViewStore(self.store ) { viewStore in
     VStack(alignment: HorizontalAlignment.leading, spacing: nil) {
       HStack{
-      Text(entry.title)
+      Text(viewStore.title)
         
         Spacer()
-        Text(formatTime(time: entry.duration) ?? "Empty")
+        Text(formatTime(time: viewStore.duration) ?? "Empty")
                .font(.footnote)
         .foregroundColor(.gray)
         
       }
-      date(from:entry.date).map{
+      date(from:viewStore.date).map{
         Text(formattedDate(from: $0))
           .foregroundColor(.gray)
       }
-      if entry.entry != "" {
+      if viewStore.entry != "" {
         Spacer()
-        Text(entry.entry)
+        Text(viewStore.entry)
           .foregroundColor(.gray)
       }
       Spacer()
     }
-  }
+   }
+   }
 }
 
-
-struct EntryCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListItemView(entry: Meditation.dummy)
-    }
-}
+//
+//struct EntryCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//      ListItemView(store: Meditation.dummy)
+//    }
+//}

@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
         let window = UIWindow(windowScene: windowScene)
       let store : Store<UserData, AppAction>  = Store(
-         initialState: UserData(meditations: FileIO().load() ),
+         initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
          reducer: appReducer.debug(),
          environment: AppEnvironment(mainQueue: DispatchQueue.main.eraseToAnyScheduler() ))
       //NotificationHelper.singleton.store = store

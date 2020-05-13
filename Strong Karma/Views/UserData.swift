@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import ComposableArchitecture
 
 struct UserData : Equatable {
   var timerData : TimerData?
   var showFavoritesOnly = false
-  var meditations : [Meditation]
-   var editMeditation : Meditation? = nil
+  var meditations : IdentifiedArrayOf<Meditation>
   var newMeditation : Meditation? = nil
   var timedMeditation : Meditation? = nil
 
@@ -29,7 +29,7 @@ struct UserData : Equatable {
   }
 }
 
-extension Array where Element == Meditation {
+extension IdentifiedArray where Element == Meditation, ID == UUID {
   mutating func removeOrAdd(meditation : Meditation) {
     guard let index = (self.firstIndex{ $0.id == meditation.id }) else {
       self.append(meditation)

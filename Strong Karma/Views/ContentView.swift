@@ -17,7 +17,9 @@ import ComposableArchitecture
 
 
 
-let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, environment in
+let appReducer = Reducer<UserData, AppAction, AppEnvironment>.combine(
+   todoReducer.forEach(state: \UserData.meditations, action: /AppAction.edit(id:action:), environment: { _ in EditEnvironment()}),
+Reducer{ state, action, environment in
   switch action {
     
  
@@ -52,9 +54,10 @@ let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, e
     return .none
     
   case let .deleteMeditationAt(indexSet):
-    var updated : [Meditation] = state.meditations.reversed()
-    updated.remove(atOffsets: indexSet)
-    state.meditations = updated.reversed()
+   // Set comes in reversed
+   let reversedSet : IndexSet = IndexSet(indexSet.reversed())
+   state.meditations.remove(atOffsets: reversedSet)
+    
     return .none
 
   case let .startTimerPushed(startDate: date, duration:seconds, type: type):
@@ -124,30 +127,23 @@ let appReducer = Reducer<UserData, AppAction, AppEnvironment> { state, action, e
     
     return
       Effect.fireAndForget {
-         environment.file.save(meds)
+         environment.file.save(Array(meds))
     }
     
   case .timerBottom(_):
    return .none
    
    case .dismissEditEntryView:
-     let med = state.editMeditation!
-      state.meditations.removeOrAdd(meditation: med)
-     state.editMeditation = nil
-      return Effect(value: .saveData)
+   return Effect(value: .saveData)
       
-  case .didEditEntryTitle(let txt):
-   state.editMeditation!.title = txt
-   return .none
-  case .didEditEntryText(let txt):
-   state.editMeditation!.entry = txt
-   return .none
-  case .willEditEntry(let med):
-   state.editMeditation = med
+  
+  
+  case .edit(id: let id, action: let action):
    return .none
    }
   
 }
+)
 
 
 
@@ -161,7 +157,6 @@ struct ContentView : View {
   struct Stater: Equatable {
     var reversedMeditations : [Meditation]
     var addEntryPopover : Bool
-   var editEntryPopover : Bool
     var timedMeditation : Meditation?
     var newMeditation : Meditation?
   }
@@ -181,19 +176,23 @@ struct ContentView : View {
       VStack {
           NavigationView {
             List {
-              ForEach(viewStore.reversedMeditations) { med in
-                NavigationLink(destination: EditEntryView(store: self.store),
-                               isActive: viewStore.binding(
-                                 get: { $0.editEntryPopover },
-                                 send: { _ in AppAction.willEditEntry(med) }
-                                 ))
-                        
-                {
-                  ListItemView(entry: med)
-                }
-              }.onDelete { (indexSet) in
-                viewStore.send(.deleteMeditationAt(indexSet))
+               ForEachStore( self.store.scope(
+                  state: { $0.meditations },
+                  action: AppAction.edit(id:action:)) )
+               { meditationStore in
+                     NavigationLink(destination:
+                        EditEntryView.init(store:meditationStore)
+                           .onDisappear {
+                              viewStore.send(.saveData)
+                        }){
+                        ListItemView(store: meditationStore)
+                     }
+                  
               }
+               .onDelete { (indexSet) in
+                  viewStore.send(.deleteMeditationAt(indexSet))
+               }
+               
               Text("Welcome the arrising, see it, let it through")
                 .lineLimit(3)
                 .padding()
@@ -209,7 +208,6 @@ struct ContentView : View {
             })
 
           }
-
 
           if (viewStore.timedMeditation != nil) {
             TimerBottom(
@@ -252,8 +250,8 @@ struct ContentView : View {
       
    }
    }
-  
 }
+
 
 extension UserData {
    var stater : ContentView.Stater {
@@ -266,7 +264,6 @@ extension ContentView.Stater {
      self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
      self.timedMeditation = userData.timedMeditation
      self.newMeditation = userData.newMeditation
-      self.editEntryPopover = userData.editMeditation.map{ _ in true } ?? false
    }
 }
 

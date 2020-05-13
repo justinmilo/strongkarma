@@ -10,32 +10,46 @@ import SwiftUI
 import ComposableArchitecture
 
 
+enum EditAction {
+   case didEditTitle(String)
+   case didEditText(String)
+}
+
+struct EditEnvironment {}
+
+let todoReducer = Reducer<Meditation, EditAction, EditEnvironment> { state, action, _ in
+  switch action {
+  case .didEditTitle(let text):
+    state.title = text
+     return .none
+
+  case .didEditText(let text):
+   state.entry = text
+    return .none
+  }
+}
+
+
 struct EditEntryView: View {
-  var store: Store<UserData, AppAction>
+  var store: Store<Meditation, EditAction>
   
   var body: some View {
    
-   WithViewStore(self.store) {
-      viewStore in
+   WithViewStore(self.store) { viewStore in
       VStack{
          TextField("Title", text: viewStore.binding(
-            get: { $0.editMeditation!.title },
-            send: { .didEditEntryTitle($0) }
+            get: { $0.title },
+            send: { .didEditTitle($0) }
          ))
-            //TextField("Title", text: self.$title, onEditingChanged: {_ in }, onCommit:updateOnCommit )
             .padding(EdgeInsets(top: 0, leading: 28, bottom: 0, trailing: 25))
             .font(.largeTitle)
          TextView(text: viewStore.binding(
-            get: { $0.editMeditation!.entry },
-            send: { .didEditEntryText($0) }
+            get: { $0.entry },
+            send: { .didEditText($0) }
          ))
-            //TextView( text: self.$entry, onCommit: updateOnCommit )
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             .padding(EdgeInsets(top: 5, leading: 25, bottom: 0, trailing: 25))
-      }.onDisappear() {
-         viewStore.send( .dismissEditEntryView )
-    }
-   
+      }
    }
   
    }
