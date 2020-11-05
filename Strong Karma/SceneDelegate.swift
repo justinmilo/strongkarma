@@ -34,7 +34,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let store : Store<UserData, AppAction>  = Store(
          initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
          reducer: appReducer.debug(),
-         environment: AppEnvironment(mainQueue: DispatchQueue.main.eraseToAnyScheduler() ))
+         environment:  AppEnvironment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            now: Date.init,
+            uuid: UUID.init
+         )
+      )
       //NotificationHelper.singleton.store = store
       window.rootViewController = UIHostingController(rootView:
         ContentView(store: store)

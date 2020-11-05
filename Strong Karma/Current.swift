@@ -14,8 +14,6 @@ extension Meditation {
         id: UUID(),
         date: "My Date",
         duration: 50,
-        hinderances: nil,
-        factors: nil,
         entry: "Some Entry",
         title:"Untitled"
     )
@@ -23,8 +21,6 @@ extension Meditation {
       id: UUID(),
       date: "11/11/11",
       duration: 50,
-      hinderances: nil,
-      factors: nil,
       entry: "Mindfulness of Breath",
       title:"Untitled"
   )
@@ -32,8 +28,6 @@ extension Meditation {
       id: UUID(),
       date: "12/12/12",
       duration: 50,
-      hinderances: nil,
-      factors: nil,
       entry: "A Journey In",
       title:"Untitled"
   )

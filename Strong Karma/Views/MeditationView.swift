@@ -18,68 +18,62 @@ struct MeditationView: View {
     var types : [String]
   }
   var store: Store<UserData, AppAction>
-  @ObservedObject var viewStore : ViewStore<Stater, AppAction>
-  
-  init(store:Store<UserData, AppAction> ) {
-    self.store = store
-    self.viewStore = ViewStore( store
-      .scope(state: \.medStater)
-   )
-
-  }
-  
-
+   
+   var scopedStore : Store<Stater, AppAction> { self.store.scope(state: { Stater(userData: $0)} ) }
   
   var body: some View {
-   EmptyView()
-//
-//    return VStack{
-//      Spacer()
-//      Text(self.viewStore.value.currentType)
-//        .font(.largeTitle)
-//      Spacer()
-//
-//      Text(self.viewStore.value.timeLeft) // timeLeft
-//        .foregroundColor(Color(#colorLiteral(red: 0.4843137264, green: 0.6065605269, blue: 0.9686274529, alpha: 1)))
-//        .font(.largeTitle)
-//
-//      Picker("Type", selection:
-//        self.store.send(
-//          {.pickTypeOfMeditation($0)},
-//          viewStore: self.viewStore,
-//          binding: \.selType)) {
-//            ForEach(0 ..< self.viewStore.value.types.count) { index in
-//              Text(self.viewStore.value.types[index]).tag(index)
-//            }
-//      }.labelsHidden()
-//
-//      Picker("Min", selection:
-//        self.store.send(
-//          {.pickMeditationTime($0)},
-//          viewStore: self.viewStore,
-//          binding: \.selMin)) {
-//        ForEach(0 ..< self.viewStore.value.minutesList.count) {
-//          Text( String(self.viewStore.value.minutesList[$0])
-//          ).tag($0)
-//        }
-//      }.labelsHidden()
-//
-//      Spacer()
-//      Button(action: {
-//        self.store.send(
-//          .startTimerPushed(startDate:Date(), duration: self.viewStore.value.seconds, type: self.viewStore.value.currentType ))
-//      } ) {
-//        Text("Start")
-//          .font(.title)
-//      }
-//      Spacer()
-//    }
-//
+   WithViewStore( self.scopedStore ) { viewStore in
+      VStack{
+         Spacer()
+         Text(viewStore.currentType)
+            .font(.largeTitle)
+         Spacer()
+         
+         Text(viewStore.timeLeft)
+            .foregroundColor(Color(#colorLiteral(red: 0.4843137264, green: 0.6065605269, blue: 0.9686274529, alpha: 1)))
+            .font(.largeTitle)
+         
+         
+         Picker("Type", selection:
+            viewStore.binding(
+               get: { $0.selType },
+               send: { AppAction.pickTypeOfMeditation($0) }
+            )
+         ){
+            ForEach(0 ..< viewStore.types.count) { index in
+               Text(viewStore.types[index]).tag(index)
+            }
+         }.labelsHidden()
+         
+         Picker("Min", selection:
+            
+            viewStore.binding(
+               get: { $0.selMin },
+               send: { AppAction.pickMeditationTime($0) }
+               )
+            ) {
+                 ForEach(0 ..< viewStore.minutesList.count) {
+                   Text( String(viewStore.minutesList[$0])
+                   ).tag($0)
+                 }
+               }.labelsHidden()
+         
+         Spacer()
+               Button(action: {
+                 viewStore.send(
+                   .startTimerPushed(startDate:Date(), duration: viewStore.seconds, type: viewStore.currentType ))
+               } ) {
+                 Text("Start")
+                   .font(.title)
+               }
+               Spacer()
+      }
+   }
   }
 }
 extension MeditationView.Stater {
   init (userData: UserData) {
-    self.minutesList = (1 ... 60).map(Double.init).map{$0}
+   self.minutesList = (1 ... 60).map(Double.init).map{$0}
     self.timeLeft = userData.timerData?.timeLeftLabel ?? ":"
     self.types = [
       "Concentration",
@@ -104,13 +98,33 @@ extension UserData {
    }
 }
 
-//struct MeditationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//      Group {
-//        MeditationView()
-//
-//      MeditationView()
-//         .environment(\.colorScheme, .dark)
-//    }
-//   }
-//}
+struct MeditationView_Previews: PreviewProvider {
+    static var previews: some View {
+      
+      Group {
+      MeditationView(store: Store(
+         initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
+         reducer: appReducer.debug(),
+         environment: AppEnvironment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            now: Date.init,
+            uuid: UUID.init
+         )
+         )
+      )
+      
+    
+      MeditationView(store: Store(
+         initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
+         reducer: appReducer.debug(),
+         environment: AppEnvironment(
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            now: Date.init,
+            uuid: UUID.init
+         )
+         )
+      )
+         .environment(\.colorScheme, .dark)
+    }
+   }
+}

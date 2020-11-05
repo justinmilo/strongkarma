@@ -10,7 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 
 
-enum EditAction {
+enum EditAction : Equatable {
    case didEditTitle(String)
    case didEditText(String)
 }
