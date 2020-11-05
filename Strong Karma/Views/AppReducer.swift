@@ -211,8 +211,6 @@ Reducer{ state, action, environment in
    state.timerData?.timeLeft = seconds
    
     return .none
-   return Effect.timer(id: TimerId(), every: 1.0, tolerance: .zero, on: environment.mainQueue)
-      .map { _ in AppAction.timerFired }
 
    
   case .pickTypeOfMeditation(let index) :
