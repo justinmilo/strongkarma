@@ -14,8 +14,15 @@ struct UserData : Equatable {
   var timerData : TimerData?
   var showFavoritesOnly = false
   var meditations : IdentifiedArrayOf<Meditation>
+  var meditationsReversed: IdentifiedArrayOf<Meditation> {
+    IdentifiedArrayOf<Meditation>( self.meditations.reversed() )
+  }
+
   var newMeditation : Meditation? = nil
   var timedMeditation : Meditation? = nil
+  var timedMeditationVisible: Bool = false
+  var addMeditationVisible: Bool = false
+
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
@@ -32,7 +39,7 @@ struct UserData : Equatable {
 extension IdentifiedArray where Element == Meditation, ID == UUID {
   mutating func removeOrAdd(meditation : Meditation) {
     guard let index = (self.firstIndex{ $0.id == meditation.id }) else {
-      self.append(meditation)
+      self.insert(meditation, at: 0)
       return
     }
     self[index] = meditation
@@ -105,12 +112,13 @@ enum AppAction : Equatable {
   case startTimerPushed(startDate:Date, duration:Double, type:String)
   case timerFired
   case saveData
-  
   case timerBottom(TimerBottomAction)
   
   case dismissEditEntryView
    
    case edit(id: UUID, action: EditAction)
+  case presentTimedMeditationButtonTapped
+  case editNew(EditAction)
 }
 
 enum TimerBottomAction {
@@ -147,6 +155,7 @@ Reducer{ state, action, environment in
     return .none
    
   case .addButtonTapped:
+    state.addMeditationVisible = true
    let med = Meditation(id: environment.uuid(),
                         date: environment.now().description,
                         duration: 300,
@@ -163,8 +172,9 @@ Reducer{ state, action, environment in
     let transfer = state.newMeditation!
     state.newMeditation = nil
     state.meditations.removeOrAdd(meditation: transfer)
+    state.addMeditationVisible = false
     
-    return .none
+    return Effect(value: .saveData)
     
   case let .deleteMeditationAt(indexSet):
    // Set comes in reversed
@@ -222,13 +232,13 @@ Reducer{ state, action, environment in
     return .none
     
   case let .addMeditationWithDuration(seconds):
-    state.meditations.append(
+    state.meditations.insert(
       Meditation(id: environment.uuid(),
                  date: environment.now().description,
                  duration: seconds,
                  entry: "",
                  title: "Untitled"
-    ))
+    ),at: 0)
     return .none
     
     
@@ -244,14 +254,28 @@ Reducer{ state, action, environment in
    return .none
    
    case .dismissEditEntryView:
+    state.timedMeditationVisible = false
+
    return Effect(value: .saveData)
       
   
   
   case .edit(id: let id, action: let action):
    return .none
+    
+  case .presentTimedMeditationButtonTapped:
+    state.timedMeditationVisible = true
+    return .none
+    
+  case .editNew(.didEditText(let string)):
+    state.newMeditation!.entry = string
+    return .none
+
+  case .editNew(.didEditTitle(let string)):
+    state.newMeditation!.title = string
+    return .none
+
    }
-  
 }
 )
 

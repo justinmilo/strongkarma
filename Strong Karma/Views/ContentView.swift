@@ -15,6 +15,9 @@ struct ContentState: Equatable {
   var addEntryPopover : Bool
   var timedMeditation : Meditation?
   var newMeditation : Meditation?
+  var addMeditationVisible: Bool
+  var presentTimed: Bool
+
 }
 extension UserData {
    var stater : ContentState {
@@ -27,17 +30,15 @@ extension ContentState {
      self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
      self.timedMeditation = userData.timedMeditation
      self.newMeditation = userData.newMeditation
+    self.addMeditationVisible = userData.addMeditationVisible
+    self.presentTimed = userData.timedMeditationVisible
    }
 }
 
 
 struct ContentView : View {
-  
-  
-  
+
   var store: Store<UserData, AppAction>
-  
-  @State private var popover = false
   @State private var timerGoing = true
   
   var body: some View {
@@ -75,12 +76,10 @@ struct ContentView : View {
                 .frame(width: 33.0, height: 33.0, alignment: .center)
                 .foregroundColor(.secondary)
             })
-
           }
 
           if (viewStore.timedMeditation != nil) {
             TimerBottom(
-              enabled: self.$popover,
               store: self.store.scope(
                 state: { TimerBottomState(
                   timerData: $0.timerData,
@@ -90,22 +89,55 @@ struct ContentView : View {
                 action: { .timerBottom($0) }))
           }
           else {
-            CircleBottom(enabled: self.$popover)
-          }
-//
-          Text("")
-            .hidden()
-            .sheet(isPresented: self.$popover) {
-               MeditationView(store: self.store.scope(state: {$0}, action: {$0}))
-          }
+            Button(action: {
+              viewStore.send(AppAction.presentTimedMeditationButtonTapped)
+            }){
+              Circle()
+                .frame(width: 44.0, height: 44.0, alignment: .center)
+                .foregroundColor(.secondary)
+              
+            }          }
 
           
-        }
-        .edgesIgnoringSafeArea(.bottom)
+        Text("")
+          .hidden()
+          .sheet(
+            isPresented: viewStore.binding(
+              get:  { $0.presentTimed },
+              send:  { _ in AppAction.dismissEditEntryView }
+            )
+          ) {
+            MeditationView(store: self.store.scope(state: {$0}, action: {$0}))
+          }
+        
+        Text("")
+          .hidden()
+          .sheet(
+            isPresented: viewStore.binding(
+              get:  { $0.addMeditationVisible },
+              send:  { _ in
+                
+                print("isPresented send")
 
-      
+                return AppAction.addMeditationDismissed
+                
+              }
+            )
+          ) {
+            IfLetStore( self.store.scope(
+                          state: {_ in viewStore.newMeditation },
+                          action: { return AppAction.editNew($0)}),
+                        then: { store in
+                          EditEntryView.init(store: store)
+                        },
+                        else: Text("Nothing here")
+            )
+            
+      }
+      .edgesIgnoringSafeArea(.bottom)
    }
-   }
+  }
+}
 }
 
 

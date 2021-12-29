@@ -34,19 +34,17 @@ struct TimerBottom : View {
     var meditationTitle : String
   }
  
-  public init(enabled: Binding<Bool>, store: Store<TimerBottomState, TimerBottomAction>) {
-    self._enabled = enabled
+  public init( store: Store<TimerBottomState, TimerBottomAction>) {
     self.store = store
   }
   
-  @Binding var enabled : Bool
   var store: Store<TimerBottomState, TimerBottomAction>
 
 
   var body: some View {
    WithViewStore(self.store.scope(state: { TimerBottom.State(timerBottomState: $0) })) { viewStore in
     Button(action: {
-      self.enabled = true
+      
     }){
       VStack {
         HStack {
@@ -81,16 +79,3 @@ extension TimerBottom.State {
   }
 }
 
-struct CircleBottom : View {
-  @Binding var enabled : Bool
-  var body: some View {
-    Button(action: {
-      self.enabled = true
-    }){
-      Circle()
-        .frame(width: 44.0, height: 44.0, alignment: .center)
-        .foregroundColor(.secondary)
-      
-    }
-  }
-}

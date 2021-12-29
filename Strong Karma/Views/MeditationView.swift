@@ -44,6 +44,7 @@ struct MeditationView: View {
                Text(viewStore.types[index]).tag(index)
             }
          }.labelsHidden()
+        .pickerStyle(.wheel)
          
          Picker("Min", selection:
             
@@ -57,6 +58,8 @@ struct MeditationView: View {
                    ).tag($0)
                  }
                }.labelsHidden()
+              .pickerStyle(.wheel)
+
          
          Spacer()
                Button(action: {
@@ -103,7 +106,7 @@ struct MeditationView_Previews: PreviewProvider {
       
       Group {
       MeditationView(store: Store(
-         initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
+        initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
          reducer: appReducer.debug(),
          environment: AppEnvironment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
@@ -115,7 +118,7 @@ struct MeditationView_Previews: PreviewProvider {
       
     
       MeditationView(store: Store(
-         initialState: UserData(meditations: IdentifiedArray(FileIO().load()) ),
+        initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
          reducer: appReducer.debug(),
          environment: AppEnvironment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
