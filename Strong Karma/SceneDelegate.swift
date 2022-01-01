@@ -32,20 +32,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
         let window = UIWindow(windowScene: windowScene)
       let store : Store<UserData, AppAction>  = Store(
-        initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
+        initialState: UserData(
+            listViewState: ListViewState(
+                meditations: IdentifiedArray(FileIO().load()),
+                addEntryPopover: false,
+                meditationView: nil,
+                collapsed: true,
+                newMeditation: nil,
+                addMeditationVisible: false)),
         reducer: appReducer.debug(),
-         environment:  AppEnvironment(
-            now: Date.init,
-            uuid: UUID.init,
-            medEnv: MediationViewEnvironment(
-                mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-                now: Date.init,
-                uuid: UUID.init)
-         )
+        environment:  AppEnvironment(
+            listEnv: ListEnv(
+                uuid: UUID.init, now: Date.init,
+                medEnv: MediationViewEnvironment(
+                    mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+                    now: Date.init,
+                    uuid: UUID.init)
+            )
+        )
       )
       //NotificationHelper.singleton.store = store
-      window.rootViewController = UIHostingController(rootView:
-        ListView(store: store)
+      window.rootViewController = UIHostingController(
+        rootView: ListView(store: store.scope(state:\.listViewState, action:AppAction.listAction))
       )
         self.window = window
         window.makeKeyAndVisible()

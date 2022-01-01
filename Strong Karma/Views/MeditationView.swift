@@ -10,8 +10,6 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MediationViewState: Equatable{
-    var timerData : TimerData?
-    var timeLeft: String = ":"
     let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
     var selType : Int = 0
     var selMin  : Int = 0
@@ -26,6 +24,7 @@ struct MediationViewState: Equatable{
         "Yoga Flow",
         "Free Style",
       ]
+    var timerData : TimerData?
     var timedMeditation: Meditation?
     var seconds  : Double { self.minutesList[self.selMin] * 60 }
     var currentType : String { self.types[self.selType]}
@@ -44,6 +43,7 @@ enum MediationViewAction: Equatable {
     case pickTypeOfMeditation(Int)
     case startTimerPushed(startDate:Date, duration:Double, type:String)
     case timerFired
+    case timerFinished
 }
 
 struct MediationViewEnvironment {
@@ -89,14 +89,17 @@ let mediationReducer = Reducer<MediationViewState, MediationViewAction, Mediatio
         guard let date = state.timerData?.endDate,
               currentDate < date,
               DateInterval(start: currentDate, end: date).duration >= 0 else {
-                  state.timerData = nil
-                  return Effect.cancel(id: TimerId())
+                  return Effect(value: .timerFinished)
               }
         
         let seconds = DateInterval(start: currentDate, end: date).duration
         state.timerData?.timeLeft = seconds
         
         return .none
+        
+    case .timerFinished:
+        state.timerData = nil
+        return Effect.cancel(id: TimerId())
     }
     
 }
@@ -112,7 +115,7 @@ struct MeditationView: View {
             .font(.largeTitle)
          Spacer()
          
-         Text(viewStore.timeLeft)
+          Text(viewStore.timerData?.timeLeftLabel ?? ":")
             .foregroundColor(Color(#colorLiteral(red: 0.4843137264, green: 0.6065605269, blue: 0.9686274529, alpha: 1)))
             .font(.largeTitle)
          
@@ -145,6 +148,8 @@ struct MeditationView: View {
 
          
          Spacer()
+          
+          
                Button(action: {
                  viewStore.send(
                    .startTimerPushed(startDate:Date(), duration: viewStore.seconds, type: viewStore.currentType ))

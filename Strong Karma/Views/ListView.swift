@@ -18,10 +18,8 @@ struct ListViewState: Equatable {
     var addEntryPopover : Bool
     var meditationView: MediationViewState?
     var collapsed: Bool
-  var timedMeditation : Meditation?
   var newMeditation : Meditation?
   var addMeditationVisible: Bool
-  var presentTimed: Bool
     var timerBottomState: TimerBottomState?{
         get{
             guard let meditationView = self.meditationView else { return nil }
@@ -37,7 +35,7 @@ struct ListViewState: Equatable {
     }
 }
 
-enum ListAction{
+enum ListAction: Equatable{
     case addButtonTapped
     case addMeditationDismissed
     case deleteMeditationAt(IndexSet)
@@ -102,6 +100,13 @@ let listReducer = Reducer<ListViewState, ListAction, ListEnv>.combine(
             state.newMeditation!.title = string
             return .none
             
+        case .meditation(.timerFinished):
+            let tempMed = state.meditationView!.timedMeditation!
+            state.meditationView!.timedMeditation = nil
+            state.meditations.removeOrAdd(meditation: tempMed)
+            
+            return .none
+            
         case .meditation(_):
             return .none
 
@@ -118,6 +123,7 @@ let listReducer = Reducer<ListViewState, ListAction, ListEnv>.combine(
                  environment.file.save(Array(meds))
             }
         case .timerBottom(.buttonPressed):
+            state.collapsed = false
             return .none
         }
     }

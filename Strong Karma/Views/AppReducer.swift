@@ -16,7 +16,6 @@ struct UserData : Equatable {
     var listViewState: ListViewState
 
   var newMeditation : Meditation? = nil
-  var addMeditationVisible: Bool = false
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
@@ -86,7 +85,6 @@ enum AppAction : Equatable {
   }
   
   case updateNewMeditation(Meditation)
-  case addMeditationWithDuration(Double)
 }
 
 enum TimerBottomAction {
@@ -127,28 +125,9 @@ Reducer{ state, action, environment in
     state.newMeditation = updated
     return .none
 
-  
-   
-  
-    
-  case let .addMeditationWithDuration(seconds):
-    state.meditations.insert(
-      Meditation(id: environment.uuid(),
-                 date: environment.now().description,
-                 duration: seconds,
-                 entry: "",
-                 title: "Untitled"
-    ),at: 0)
-    return .none
-    
-    
-    
-    
-  
-    
-    
-  
-   }
+  case .listAction(_):
+      return .none
+  }
 }
 )
 
