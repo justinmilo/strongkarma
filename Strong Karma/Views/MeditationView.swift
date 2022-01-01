@@ -158,38 +158,38 @@ struct MeditationView: View {
   }
 }
 
-struct MeditationView_Previews: PreviewProvider {
-    static var previews: some View {
-      
-      Group {
-      MeditationView(store: Store(
-        initialState:
-            MediationViewState(
-                userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
-                ),
-         reducer: appReducer.debug(),
-         environment: AppEnvironment(
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-            now: Date.init,
-            uuid: UUID.init
-         )
-         )
-      )
-      
-    
-      MeditationView(store: Store(
-        initialState: MediationViewState(
-            userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
-            ),
-         reducer: appReducer.debug(),
-         environment: AppEnvironment(
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
-            now: Date.init,
-            uuid: UUID.init
-         )
-         )
-      )
-         .environment(\.colorScheme, .dark)
-    }
-   }
-}
+//struct MeditationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//
+//      Group {
+//      MeditationView(store: Store(
+//        initialState:
+//            MediationViewState(
+//                userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
+//                ),
+//         reducer: appReducer.debug(),
+//         environment: AppEnvironment(
+//            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+//            now: Date.init,
+//            uuid: UUID.init
+//         )
+//         )
+//      )
+//
+//
+//      MeditationView(store: Store(
+//        initialState: MediationViewState(
+//            userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
+//            ),
+//         reducer: appReducer.debug(),
+//         environment: AppEnvironment(
+//            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+//            now: Date.init,
+//            uuid: UUID.init
+//         )
+//         )
+//      )
+//         .environment(\.colorScheme, .dark)
+//    }
+//   }
+//}

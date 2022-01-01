@@ -13,6 +13,8 @@ import AVFoundation
 struct ContentState: Equatable {
   var reversedMeditations : [Meditation]
   var addEntryPopover : Bool
+    var meditationView: MediationViewState?
+    var collapsed: Bool
   var timedMeditation : Meditation?
   var newMeditation : Meditation?
   var addMeditationVisible: Bool
@@ -28,10 +30,11 @@ extension ContentState {
    init(userData: UserData) {
      self.reversedMeditations = userData.meditations.reversed()
      self.addEntryPopover = userData.newMeditation.map{ _ in true } ?? false
-     self.timedMeditation = userData.timedMeditation
+     self.meditationView = userData.mediation
      self.newMeditation = userData.newMeditation
     self.addMeditationVisible = userData.addMeditationVisible
     self.presentTimed = userData.timedMeditationVisible
+       self.collapsed = userData.collapsed
    }
 }
 
@@ -77,46 +80,57 @@ struct ContentView : View {
                 .foregroundColor(.secondary)
             })
           }
-
-          if (viewStore.timedMeditation != nil) {
-            TimerBottom(
-              store: self.store.scope(
-                state: /UserData.timerBottomState,
-                action: { .timerBottom($0) }))
-          }
-          else {
-            Button(action: {
-              viewStore.send(AppAction.presentTimedMeditationButtonTapped)
-            }){
-              Circle()
-                .frame(width: 44.0, height: 44.0, alignment: .center)
-                .foregroundColor(.secondary)
-              
-            }          }
-
           
+          if (viewStore.collapsed){
+              IfLetStore(
+                self.store.scope(
+                    state: { $0.timerBottomState },
+                    action: AppAction.timerBottom),
+                then: { newStore in
+                    TimerBottom(store: newStore)
+                },
+                else:
+                    Button(action: {
+                        viewStore.send(AppAction.presentTimedMeditationButtonTapped)
+                    }){
+                        Circle()
+                            .frame(width: 44.0, height: 44.0, alignment: .center)
+                            .foregroundColor(.secondary)
+                    }
+              )
+          } else {
+             
+          }
+//
         Text("")
           .hidden()
           .sheet(
             isPresented: viewStore.binding(
-              get:  { $0.presentTimed },
+              get:  { !$0.collapsed },
               send:  { _ in AppAction.dismissEditEntryView }
             )
           ) {
-            MeditationView(store: self.store.scope(state: {$0}, action: {$0}))
+              IfLetStore(
+                self.store.scope(
+                    state: { $0.mediation },
+                    action: AppAction.meditation),
+                then: { newStore in
+                    MeditationView(store: newStore)
+                }
+              )
           }
-        
+//
         Text("")
           .hidden()
           .sheet(
             isPresented: viewStore.binding(
               get:  { $0.addMeditationVisible },
               send:  { _ in
-                
+
                 print("isPresented send")
 
                 return AppAction.addMeditationDismissed
-                
+
               }
             )
           ) {
@@ -128,9 +142,9 @@ struct ContentView : View {
                         },
                         else: Text("Nothing here")
             )
-            
+
       }
-      .edgesIgnoringSafeArea(.bottom)
+//      .edgesIgnoringSafeArea(.bottom)
    }
   }
 }

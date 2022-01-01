@@ -21,7 +21,7 @@ struct UserData : Equatable {
   var newMeditation : Meditation? = nil
   var timedMeditationVisible: Bool = false
   var addMeditationVisible: Bool = false
-
+    var collapsed: Bool = true
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
@@ -32,9 +32,11 @@ struct UserData : Equatable {
             
             return TimerBottomState(timerData: meditationView.timerData, timedMeditation: meditationView.timedMeditation, enabled: true)
             }
-        set{ newValue in
-            self.mediation!.timerData = newValue.timerData
-            self.mediation!.timedMeditation = newValue.timedMeditation
+        set{
+            if let newValue = newValue {
+                self.mediation!.timerData = newValue.timerData
+                self.mediation!.timedMeditation = newValue.timedMeditation
+            }
         }
     }
 }
@@ -216,6 +218,7 @@ Reducer{ state, action, environment in
    
    case .dismissEditEntryView:
     state.timedMeditationVisible = false
+      state.collapsed = true
 
    return Effect(value: .saveData)
       
@@ -226,6 +229,8 @@ Reducer{ state, action, environment in
     
   case .presentTimedMeditationButtonTapped:
     state.timedMeditationVisible = true
+      state.collapsed = false
+      state.mediation = MediationViewState()
     return .none
     
   case .editNew(.didEditText(let string)):
