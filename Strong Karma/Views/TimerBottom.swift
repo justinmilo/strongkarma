@@ -10,7 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 
 struct TimerBottomState {
-  var timerData : UserData.TimerData?
+  var timerData : TimerData?
   var timedMeditation : Meditation? = nil
   var enabled : Bool
 }

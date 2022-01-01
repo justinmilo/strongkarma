@@ -17,15 +17,26 @@ struct UserData : Equatable {
     IdentifiedArrayOf<Meditation>( self.meditations.reversed() )
   }
 
-    var mediation: MediationViewState? = nil
+    var mediation: MediationViewState?
   var newMeditation : Meditation? = nil
-  var timedMeditation : Meditation? = nil
   var timedMeditationVisible: Bool = false
   var addMeditationVisible: Bool = false
 
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
+    
+    var timerBottomState: TimerBottomState?{
+        get{
+            guard let meditationView = self.mediation else { return nil }
+            
+            return TimerBottomState(timerData: meditationView.timerData, timedMeditation: meditationView.timedMeditation, enabled: true)
+            }
+        set{ newValue in
+            self.mediation!.timerData = newValue.timerData
+            self.mediation!.timedMeditation = newValue.timedMeditation
+        }
+    }
 }
 
 extension IdentifiedArray where Element == Meditation, ID == UUID {
@@ -97,11 +108,12 @@ enum AppAction : Equatable {
   case addMeditationDismissed
   case deleteMeditationAt(IndexSet)
   case addMeditationWithDuration(Double)
-  case timerFired
   case saveData
   case timerBottom(TimerBottomAction)
   
   case dismissEditEntryView
+    
+    case meditation(MediationViewAction)
    
    case edit(id: UUID, action: EditAction)
   case presentTimedMeditationButtonTapped
@@ -115,36 +127,37 @@ enum TimerBottomAction {
 
 
 struct AppEnvironment {
-   let scheduleNotification : (String, TimeInterval ) -> Void = { NotificationHelper.singleton.scheduleNotification(notificationType: $0, seconds: $1)
-   }
    var file = FileIO()
-   var mainQueue: AnySchedulerOf<DispatchQueue>
    var now : ()->Date
    var uuid : ()->UUID
+    var medEnv: MediationViewEnvironment
 }
 
 
 let appReducer = Reducer<UserData, AppAction, AppEnvironment>.combine(
    todoReducer.forEach(state: \UserData.meditations, action: /AppAction.edit(id:action:), environment: { _ in EditEnvironment()}),
+   mediationReducer.optional.pullback(state: \UserData.mediation, action: /AppAction.meditation, environment: \AppEnvironment.medEnv),
+  
 Reducer{ state, action, environment in
    
   
    
   switch action {
-    
-  case .meditationView(.timer(.timerFired)):
-      let tempMed = state.timedMeditation!
-      state.timedMeditation = nil
-      state.meditations.removeOrAdd(meditation: tempMed)
-      
+  case .meditation(_):
       return .none
- 
+//  case .meditationView(.timer(.timerFired)):
+//      let tempMed = state.timedMeditation!
+//      state.timedMeditation = nil
+//      state.meditations.removeOrAdd(meditation: tempMed)
+//
+//      return .none
+//
   case .notification(.willPresentNotification):
-    state.timedMeditation = nil
+      state.mediation!.timedMeditation = nil
     return .none
 
   case .notification(.didRecieveResponse):
-    state.timedMeditation = nil
+      state.mediation!.timedMeditation = nil
     return .none
    
   case .addButtonTapped:

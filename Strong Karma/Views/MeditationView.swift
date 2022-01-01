@@ -39,7 +39,7 @@ struct TimerData : Equatable {
  var timeLeftLabel = ""
 }
 
-enum MediationViewAction {
+enum MediationViewAction: Equatable {
     case pickMeditationTime(Int)
     case pickTypeOfMeditation(Int)
     case startTimerPushed(startDate:Date, duration:Double, type:String)
@@ -79,8 +79,8 @@ let mediationReducer = Reducer<MediationViewState, MediationViewAction, Mediatio
          
       return  Effect.merge(
         Effect.timer(id: TimerId(), every: 1, on: environment.mainQueue)
-          .map { _ in AppAction.timerFired },
-        Effect<AppAction, Never>.fireAndForget{ environment.scheduleNotification("\(type) Complete", duration)}
+          .map { _ in MediationViewAction.timerFired },
+        Effect<MediationViewAction, Never>.fireAndForget{ environment.scheduleNotification("\(type) Complete", duration)}
      )
     case .timerFired:
         

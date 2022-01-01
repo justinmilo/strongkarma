@@ -35,9 +35,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
         reducer: appReducer.debug(),
          environment:  AppEnvironment(
-            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             now: Date.init,
-            uuid: UUID.init
+            uuid: UUID.init,
+            medEnv: MediationViewEnvironment(
+                mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+                now: Date.init,
+                uuid: UUID.init)
          )
       )
       //NotificationHelper.singleton.store = store
