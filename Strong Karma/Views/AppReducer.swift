@@ -11,13 +11,13 @@ import ComposableArchitecture
 
 
 struct UserData : Equatable {
-  var timerData : TimerData?
   var showFavoritesOnly = false
   var meditations : IdentifiedArrayOf<Meditation>
   var meditationsReversed: IdentifiedArrayOf<Meditation> {
     IdentifiedArrayOf<Meditation>( self.meditations.reversed() )
   }
 
+    var mediation: MediationViewState? = nil
   var newMeditation : Meditation? = nil
   var timedMeditation : Meditation? = nil
   var timedMeditationVisible: Bool = false
@@ -26,14 +26,6 @@ struct UserData : Equatable {
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
-  
-   struct TimerData : Equatable {
-    var endDate : Date
-    var timeLeft : Double? { didSet {
-      self.timeLeftLabel = formatTime(time: self.timeLeft ?? 0.0) ?? "Empty"
-    }}
-    var timeLeftLabel = ""
-  }
 }
 
 extension IdentifiedArray where Element == Meditation, ID == UUID {
@@ -99,17 +91,12 @@ enum AppAction : Equatable {
     case willPresentNotification
     case didRecieveResponse
   }
-    
-  case pickTypeOfMeditation(Int)
-  case pickMeditationTime(Int)
-
   
   case addButtonTapped
   case updateNewMeditation(Meditation)
   case addMeditationDismissed
   case deleteMeditationAt(IndexSet)
   case addMeditationWithDuration(Double)
-  case startTimerPushed(startDate:Date, duration:Double, type:String)
   case timerFired
   case saveData
   case timerBottom(TimerBottomAction)
@@ -141,10 +128,16 @@ let appReducer = Reducer<UserData, AppAction, AppEnvironment>.combine(
    todoReducer.forEach(state: \UserData.meditations, action: /AppAction.edit(id:action:), environment: { _ in EditEnvironment()}),
 Reducer{ state, action, environment in
    
-   struct TimerId: Hashable {}
+  
    
   switch action {
     
+  case .meditationView(.timer(.timerFired)):
+      let tempMed = state.timedMeditation!
+      state.timedMeditation = nil
+      state.meditations.removeOrAdd(meditation: tempMed)
+      
+      return .none
  
   case .notification(.willPresentNotification):
     state.timedMeditation = nil
@@ -182,54 +175,8 @@ Reducer{ state, action, environment in
    state.meditations.remove(atOffsets: reversedSet)
     
     return .none
-
-  case let .startTimerPushed(startDate: date, duration:seconds, type: type):
-    state.timerData = UserData.TimerData(endDate: date+seconds)
-    
-    state.timedMeditation =  Meditation(id: environment.uuid(),
-                      date: environment.now().description,
-                      duration: seconds,
-                      entry: "",
-                      title: type)
-
-    let duration = state.timedMeditation!.duration
-       
-    
-
-    return  Effect.merge(
-      Effect.timer(id: TimerId(), every: 1, on: environment.mainQueue)
-        .map { _ in AppAction.timerFired },
-      Effect<AppAction, Never>.fireAndForget{ environment.scheduleNotification("\(type) Complete", duration)}
-   )
    
-  case .timerFired:
-   
-   let currentDate = Date()
-   
-   guard let date = state.timerData?.endDate,
-      currentDate < date,
-      DateInterval(start: currentDate, end: date).duration >= 0 else {
-         state.timerData = nil
-         let tempMed = state.timedMeditation!
-         state.timedMeditation = nil
-         state.meditations.removeOrAdd(meditation: tempMed)
-
-         return Effect.cancel(id: TimerId())
-   }
-   
-   let seconds = DateInterval(start: currentDate, end: date).duration
-   state.timerData?.timeLeft = seconds
-   
-    return .none
-
-   
-  case .pickTypeOfMeditation(let index) :
-    state.meditationTypeIndex = index
-    return .none
-    
-  case .pickMeditationTime(let index) :
-    state.meditationTimeIndex = index
-    return .none
+  
     
   case let .addMeditationWithDuration(seconds):
     state.meditations.insert(
@@ -250,7 +197,8 @@ Reducer{ state, action, environment in
          environment.file.save(Array(meds))
     }
     
-  case .timerBottom(_):
+  case .timerBottom(.buttonPressed):
+      state.timedMeditationVisible = true
    return .none
    
    case .dismissEditEntryView:

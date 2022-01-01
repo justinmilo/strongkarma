@@ -81,11 +81,7 @@ struct ContentView : View {
           if (viewStore.timedMeditation != nil) {
             TimerBottom(
               store: self.store.scope(
-                state: { TimerBottomState(
-                  timerData: $0.timerData,
-                  timedMeditation: $0.timedMeditation,
-                  enabled: false)
-              },
+                state: /UserData.meditationview,
                 action: { .timerBottom($0) }))
           }
           else {

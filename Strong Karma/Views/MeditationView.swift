@@ -9,20 +9,103 @@
 import SwiftUI
 import ComposableArchitecture
 
+struct MediationViewState: Equatable{
+    var timerData : TimerData?
+    var timeLeft: String = ":"
+    let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
+    var selType : Int = 0
+    var selMin  : Int = 0
+    var types : [String] = [
+        "Concentration",
+        "Mindfullness of Breath",
+        "See Hear Feel",
+        "Self Inquiry",
+        "Do Nothing",
+        "Positive Feel",
+        "Yoga Still",
+        "Yoga Flow",
+        "Free Style",
+      ]
+    var timedMeditation: Meditation?
+    var seconds  : Double { self.minutesList[self.selMin] * 60 }
+    var currentType : String { self.types[self.selType]}
+}
+
+struct TimerData : Equatable {
+ var endDate : Date
+ var timeLeft : Double? { didSet {
+   self.timeLeftLabel = formatTime(time: self.timeLeft ?? 0.0) ?? "Empty"
+ }}
+ var timeLeftLabel = ""
+}
+
+enum MediationViewAction {
+    case pickMeditationTime(Int)
+    case pickTypeOfMeditation(Int)
+    case startTimerPushed(startDate:Date, duration:Double, type:String)
+    case timerFired
+}
+
+struct MediationViewEnvironment {
+   let scheduleNotification : (String, TimeInterval ) -> Void = { NotificationHelper.singleton.scheduleNotification(notificationType: $0, seconds: $1)
+   }
+   var mainQueue: AnySchedulerOf<DispatchQueue>
+   var now : ()->Date
+   var uuid : ()->UUID
+}
+
+let mediationReducer = Reducer<MediationViewState, MediationViewAction, MediationViewEnvironment>{
+    state, action, environment in
+    struct TimerId: Hashable {}
+
+    switch action {
+    case .pickTypeOfMeditation(let index):
+      state.selType = index
+      return .none
+      
+    case .pickMeditationTime(let index) :
+      state.selMin = index
+      return .none
+    case let .startTimerPushed(startDate: date, duration:seconds, type: type):
+      state.timerData = TimerData(endDate: date+seconds)
+      
+      state.timedMeditation =  Meditation(id: environment.uuid(),
+                        date: environment.now().description,
+                        duration: seconds,
+                        entry: "",
+                        title: type)
+
+      let duration = state.timedMeditation!.duration
+         
+      return  Effect.merge(
+        Effect.timer(id: TimerId(), every: 1, on: environment.mainQueue)
+          .map { _ in AppAction.timerFired },
+        Effect<AppAction, Never>.fireAndForget{ environment.scheduleNotification("\(type) Complete", duration)}
+     )
+    case .timerFired:
+        
+        let currentDate = Date()
+        
+        guard let date = state.timerData?.endDate,
+              currentDate < date,
+              DateInterval(start: currentDate, end: date).duration >= 0 else {
+                  state.timerData = nil
+                  return Effect.cancel(id: TimerId())
+              }
+        
+        let seconds = DateInterval(start: currentDate, end: date).duration
+        state.timerData?.timeLeft = seconds
+        
+        return .none
+    }
+    
+}
+
 struct MeditationView: View {
-  struct Stater : Equatable {
-    var timeLeft: String
-    let minutesList : [Double]
-    var selType : Int
-    var selMin  : Int
-    var types : [String]
-  }
-  var store: Store<UserData, AppAction>
-   
-   var scopedStore : Store<Stater, AppAction> { self.store.scope(state: { Stater(userData: $0)} ) }
+  var store: Store<MediationViewState, MediationViewAction>
   
   var body: some View {
-   WithViewStore( self.scopedStore ) { viewStore in
+   WithViewStore( self.store ) { viewStore in
       VStack{
          Spacer()
          Text(viewStore.currentType)
@@ -37,7 +120,7 @@ struct MeditationView: View {
          Picker("Type", selection:
             viewStore.binding(
                get: { $0.selType },
-               send: { AppAction.pickTypeOfMeditation($0) }
+               send: { .pickTypeOfMeditation($0) }
             )
          ){
             ForEach(0 ..< viewStore.types.count) { index in
@@ -50,7 +133,7 @@ struct MeditationView: View {
             
             viewStore.binding(
                get: { $0.selMin },
-               send: { AppAction.pickMeditationTime($0) }
+               send: { .pickMeditationTime($0) }
                )
             ) {
                  ForEach(0 ..< viewStore.minutesList.count) {
@@ -74,39 +157,16 @@ struct MeditationView: View {
    }
   }
 }
-extension MeditationView.Stater {
-  init (userData: UserData) {
-   self.minutesList = (1 ... 60).map(Double.init).map{$0}
-    self.timeLeft = userData.timerData?.timeLeftLabel ?? ":"
-    self.types = [
-      "Concentration",
-      "Mindfullness of Breath",
-      "See Hear Feel",
-      "Self Inquiry",
-      "Do Nothing",
-      "Positive Feel",
-      "Yoga Still",
-      "Yoga Flow",
-      "Free Style",
-    ]
-    self.selType = userData.meditationTypeIndex
-    self.selMin = userData.meditationTimeIndex
-  }
-  var seconds  : Double { self.minutesList[self.selMin] * 60 }
-  var currentType : String { self.types[self.selType]}
-}
-extension UserData {
-   var medStater : MeditationView.Stater {
-      return MeditationView.Stater(userData: self)
-   }
-}
 
 struct MeditationView_Previews: PreviewProvider {
     static var previews: some View {
       
       Group {
       MeditationView(store: Store(
-        initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
+        initialState:
+            MediationViewState(
+                userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
+                ),
          reducer: appReducer.debug(),
          environment: AppEnvironment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
@@ -118,7 +178,9 @@ struct MeditationView_Previews: PreviewProvider {
       
     
       MeditationView(store: Store(
-        initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
+        initialState: MediationViewState(
+            userData: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false )
+            ),
          reducer: appReducer.debug(),
          environment: AppEnvironment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),

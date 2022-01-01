@@ -44,7 +44,7 @@ struct TimerBottom : View {
   var body: some View {
    WithViewStore(self.store.scope(state: { TimerBottom.State(timerBottomState: $0) })) { viewStore in
     Button(action: {
-      
+        viewStore.send(TimerBottomAction.buttonPressed)
     }){
       VStack {
         HStack {

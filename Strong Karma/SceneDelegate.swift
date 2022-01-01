@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
       let store : Store<UserData, AppAction>  = Store(
         initialState: UserData(meditations: IdentifiedArray(FileIO().load()), timedMeditationVisible: false ),
-         reducer: appReducer,
+        reducer: appReducer.debug(),
          environment:  AppEnvironment(
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
             now: Date.init,
