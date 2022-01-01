@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       )
       //NotificationHelper.singleton.store = store
       window.rootViewController = UIHostingController(rootView:
-        ContentView(store: store)
+        ListView(store: store)
       )
         self.window = window
         window.makeKeyAndVisible()

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2150E089246893AB0056B07D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211EBB8C24688DF200FEB2ED /* AppReducer.swift */; };
 		2150E08A246893C80056B07D /* TimerBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21809C3E242FB3D600AEED4B /* TimerBottom.swift */; };
-		2150E08B246893E10056B07D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ContentView.swift */; };
+		2150E08B246893E10056B07D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ListView.swift */; };
 		21809C3D242FA26200AEED4B /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 21809C3C242FA26200AEED4B /* CasePaths */; };
 		21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21988BCC23730AD000A1E2FF /* NotificationHelper.swift */; };
 		219E35492420245D00FD0299 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219E35482420245D00FD0299 /* MeditationView.swift */; };
@@ -89,7 +89,7 @@
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D0B5422B22F7213800A0D90D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D0B5422B22F7213800A0D90D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		D0B5422D22F7213A00A0D90D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0B5423022F7213A00A0D90D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0B5423322F7213A00A0D90D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				211EBB8C24688DF200FEB2ED /* AppReducer.swift */,
-				D0B5422B22F7213800A0D90D /* ContentView.swift */,
+				D0B5422B22F7213800A0D90D /* ListView.swift */,
 				21809C3E242FB3D600AEED4B /* TimerBottom.swift */,
 				21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */,
 				D0ABD9E0231215310092698C /* Type.swift */,
@@ -352,7 +352,7 @@
 				21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */,
 				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
-				2150E08B246893E10056B07D /* ContentView.swift in Sources */,
+				2150E08B246893E10056B07D /* ListView.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,
 				21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */,
 				2150E089246893AB0056B07D /* AppReducer.swift in Sources */,

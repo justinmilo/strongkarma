@@ -12,33 +12,14 @@ import ComposableArchitecture
 
 struct UserData : Equatable {
   var showFavoritesOnly = false
-  var meditations : IdentifiedArrayOf<Meditation>
-  var meditationsReversed: IdentifiedArrayOf<Meditation> {
-    IdentifiedArrayOf<Meditation>( self.meditations.reversed() )
-  }
 
-    var mediation: MediationViewState?
+    var listViewState: ListViewState
+
   var newMeditation : Meditation? = nil
-  var timedMeditationVisible: Bool = false
   var addMeditationVisible: Bool = false
-    var collapsed: Bool = true
 
   var meditationTypeIndex : Int = 0
   var meditationTimeIndex : Int = 0
-    
-    var timerBottomState: TimerBottomState?{
-        get{
-            guard let meditationView = self.mediation else { return nil }
-            
-            return TimerBottomState(timerData: meditationView.timerData, timedMeditation: meditationView.timedMeditation, enabled: true)
-            }
-        set{
-            if let newValue = newValue {
-                self.mediation!.timerData = newValue.timerData
-                self.mediation!.timedMeditation = newValue.timedMeditation
-            }
-        }
-    }
 }
 
 extension IdentifiedArray where Element == Meditation, ID == UUID {
@@ -96,8 +77,7 @@ func formattedDate(from date:Date) -> String {
 
 
 enum AppAction : Equatable {
-   
-  
+  case listAction(ListAction)
   case notification(NotificationAction)
   
   enum NotificationAction{
@@ -105,21 +85,8 @@ enum AppAction : Equatable {
     case didRecieveResponse
   }
   
-  case addButtonTapped
   case updateNewMeditation(Meditation)
-  case addMeditationDismissed
-  case deleteMeditationAt(IndexSet)
   case addMeditationWithDuration(Double)
-  case saveData
-  case timerBottom(TimerBottomAction)
-  
-  case dismissEditEntryView
-    
-    case meditation(MediationViewAction)
-   
-   case edit(id: UUID, action: EditAction)
-  case presentTimedMeditationButtonTapped
-  case editNew(EditAction)
 }
 
 enum TimerBottomAction {
@@ -129,24 +96,16 @@ enum TimerBottomAction {
 
 
 struct AppEnvironment {
-   var file = FileIO()
-   var now : ()->Date
-   var uuid : ()->UUID
-    var medEnv: MediationViewEnvironment
+    var listEnv: ListEnv
 }
 
 
 let appReducer = Reducer<UserData, AppAction, AppEnvironment>.combine(
-   todoReducer.forEach(state: \UserData.meditations, action: /AppAction.edit(id:action:), environment: { _ in EditEnvironment()}),
-   mediationReducer.optional.pullback(state: \UserData.mediation, action: /AppAction.meditation, environment: \AppEnvironment.medEnv),
-  
+    listReducer.pullback(state: \.listViewState, action: /AppAction.listAction, environment: \AppEnvironment.listEnv),
 Reducer{ state, action, environment in
-   
-  
-   
+
   switch action {
-  case .meditation(_):
-      return .none
+ 
 //  case .meditationView(.timer(.timerFired)):
 //      let tempMed = state.timedMeditation!
 //      state.timedMeditation = nil
@@ -155,41 +114,20 @@ Reducer{ state, action, environment in
 //      return .none
 //
   case .notification(.willPresentNotification):
-      state.mediation!.timedMeditation = nil
+      state.listViewState.meditationView!.timedMeditation = nil
     return .none
 
   case .notification(.didRecieveResponse):
-      state.mediation!.timedMeditation = nil
+      state.listViewState.meditationView!.timedMeditation = nil
     return .none
    
-  case .addButtonTapped:
-    state.addMeditationVisible = true
-   let med = Meditation(id: environment.uuid(),
-                        date: environment.now().description,
-                        duration: 300,
-                        entry: "",
-                        title: "Untitled")
-   state.newMeditation = med
-   return .none
+  
     
   case let .updateNewMeditation(updated):
     state.newMeditation = updated
     return .none
 
-  case .addMeditationDismissed:
-    let transfer = state.newMeditation!
-    state.newMeditation = nil
-    state.meditations.removeOrAdd(meditation: transfer)
-    state.addMeditationVisible = false
-    
-    return Effect(value: .saveData)
-    
-  case let .deleteMeditationAt(indexSet):
-   // Set comes in reversed
-   let reversedSet : IndexSet = IndexSet(indexSet.reversed())
-   state.meditations.remove(atOffsets: reversedSet)
-    
-    return .none
+  
    
   
     
@@ -204,43 +142,12 @@ Reducer{ state, action, environment in
     return .none
     
     
-  case .saveData:
-    let meds = state.meditations
     
-    return
-      Effect.fireAndForget {
-         environment.file.save(Array(meds))
-    }
     
-  case .timerBottom(.buttonPressed):
-      state.timedMeditationVisible = true
-   return .none
-   
-   case .dismissEditEntryView:
-    state.timedMeditationVisible = false
-      state.collapsed = true
-
-   return Effect(value: .saveData)
-      
   
+    
+    
   
-  case .edit(id: let id, action: let action):
-   return .none
-    
-  case .presentTimedMeditationButtonTapped:
-    state.timedMeditationVisible = true
-      state.collapsed = false
-      state.mediation = MediationViewState()
-    return .none
-    
-  case .editNew(.didEditText(let string)):
-    state.newMeditation!.entry = string
-    return .none
-
-  case .editNew(.didEditTitle(let string)):
-    state.newMeditation!.title = string
-    return .none
-
    }
 }
 )
