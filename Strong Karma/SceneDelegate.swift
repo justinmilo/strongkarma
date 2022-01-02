@@ -31,8 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
       
         let window = UIWindow(windowScene: windowScene)
-      let store : Store<UserData, AppAction>  = Store(
-        initialState: UserData(
+      let store : Store<AppState, AppAction>  = Store(
+        initialState: AppState(
             listViewState: ListViewState(
                 meditations: IdentifiedArray(FileIO().load()),
                 addEntryPopover: false,

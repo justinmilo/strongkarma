@@ -8,6 +8,7 @@
 
 import Foundation
 import ComposableArchitecture
+import Models
 
 extension Meditation {
     static var dummy = Meditation(

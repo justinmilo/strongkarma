@@ -8,6 +8,8 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Models
+import PickerFeature
 
 struct MediationViewState: Equatable{
     let minutesList : [Double] = (1 ... 60).map(Double.init).map{$0}
@@ -27,6 +29,7 @@ struct MediationViewState: Equatable{
     var timerData : TimerData?
     var timedMeditation: Meditation?
     var seconds  : Double { self.minutesList[self.selMin] * 60 }
+    var minutes  : Double { self.minutesList[self.selMin] }
     var currentType : String { self.types[self.selType]}
 }
 
@@ -110,54 +113,34 @@ struct MeditationView: View {
   var body: some View {
    WithViewStore( self.store ) { viewStore in
       VStack{
-         Spacer()
-         Text(viewStore.currentType)
-            .font(.largeTitle)
-         Spacer()
-         
-          Text(viewStore.timerData?.timeLeftLabel ?? ":")
+          Spacer()
+          Text(viewStore.currentType)
+              .font(.largeTitle)
+          Spacer()
+          Text(viewStore.timerData?.timeLeftLabel ?? "\(viewStore.minutes)")
             .foregroundColor(Color(#colorLiteral(red: 0.4843137264, green: 0.6065605269, blue: 0.9686274529, alpha: 1)))
             .font(.largeTitle)
          
-         
-         Picker("Type", selection:
-            viewStore.binding(
-               get: { $0.selType },
-               send: { .pickTypeOfMeditation($0) }
-            )
-         ){
-            ForEach(0 ..< viewStore.types.count) { index in
-               Text(viewStore.types[index]).tag(index)
-            }
-         }.labelsHidden()
-        .pickerStyle(.wheel)
-         
-         Picker("Min", selection:
-            
-            viewStore.binding(
-               get: { $0.selMin },
-               send: { .pickMeditationTime($0) }
-               )
-            ) {
-                 ForEach(0 ..< viewStore.minutesList.count) {
-                   Text( String(viewStore.minutesList[$0])
-                   ).tag($0)
-                 }
-               }.labelsHidden()
-              .pickerStyle(.wheel)
-
-         
-         Spacer()
-          
-          
-               Button(action: {
-                 viewStore.send(
-                   .startTimerPushed(startDate:Date(), duration: viewStore.seconds, type: viewStore.currentType ))
-               } ) {
-                 Text("Start")
-                   .font(.title)
-               }
-               Spacer()
+          PickerFeature(
+            types: viewStore.types,
+            typeSelection:  viewStore.binding(
+                get: { $0.selType },
+                send: { .pickTypeOfMeditation($0) }
+            ),
+            minutesList: viewStore.minutesList,
+            minSelection: viewStore.binding(
+                get: { $0.selMin },
+                send: { .pickMeditationTime($0) }
+            ))
+          Spacer()
+          Button(
+            action: { viewStore.send(
+                .startTimerPushed(startDate:Date(), duration: viewStore.seconds, type: viewStore.currentType ))
+          }) {
+              Text("Start")
+                  .font(.title)
+          }
+          Spacer()
       }
    }
   }

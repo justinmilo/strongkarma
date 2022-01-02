@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Models
 
 struct TimerBottomState {
   var timerData : TimerData?

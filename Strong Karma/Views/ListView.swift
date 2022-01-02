@@ -9,6 +9,7 @@
 import SwiftUI
 import ComposableArchitecture
 import AVFoundation
+import Models
 
 struct ListViewState: Equatable {
     var meditations : IdentifiedArrayOf<Meditation>

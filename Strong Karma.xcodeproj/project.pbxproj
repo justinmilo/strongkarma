@@ -21,6 +21,8 @@
 		21F75840236C696A00EBB6AB /* PrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7583F236C696A00EBB6AB /* PrepView.swift */; };
 		21F94EA72485CCCC00239523 /* Strong_KarmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */; };
 		D00790E3232EBF8B00C2370F /* MiscViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00790E2232EBF8B00C2370F /* MiscViews.swift */; };
+		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
+		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
@@ -83,6 +85,7 @@
 		21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong_KarmaTests.swift; sourceTree = "<group>"; };
 		21F94EA82485CCCC00239523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D00790E2232EBF8B00C2370F /* MiscViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViews.swift; sourceTree = "<group>"; };
+		D03780F1278126C400585CB4 /* Strong Karma Folder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Strong Karma Folder"; path = ..; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D0ABD9E0231215310092698C /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -113,8 +116,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03780F3278128F100585CB4 /* Models in Frameworks */,
 				21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */,
 				21809C3D242FA26200AEED4B /* CasePaths in Frameworks */,
+				D03780F52781303800585CB4 /* PickerFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +178,7 @@
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
+				D03780F1278126C400585CB4 /* Strong Karma Folder */,
 				D0B5422622F7213800A0D90D /* Strong Karma */,
 				21F94EA52485CCCC00239523 /* Strong KarmaTests */,
 				D0B5422522F7213800A0D90D /* Products */,
@@ -262,6 +268,8 @@
 			packageProductDependencies = (
 				21809C3C242FA26200AEED4B /* CasePaths */,
 				21EF5441249560CA00D07AEC /* ComposableArchitecture */,
+				D03780F2278128F100585CB4 /* Models */,
+				D03780F42781303800585CB4 /* PickerFeature */,
 			);
 			productName = "Strong Karma";
 			productReference = D0B5422422F7213800A0D90D /* Strong Karma.app */;
@@ -481,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -536,7 +544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -651,6 +659,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		D03780F2278128F100585CB4 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		D03780F42781303800585CB4 /* PickerFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PickerFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -9,15 +9,3 @@
 import Foundation
 
 
-
-
-struct Meditation : Hashable, Identifiable, Codable, Equatable {
-  var id : UUID
-  var date : String
-  var duration : Double
-  var entry : String
-  var title : String
-}
-
-
-

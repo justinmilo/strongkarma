@@ -8,17 +8,11 @@
 
 import Foundation
 import ComposableArchitecture
+import Models
 
 
-struct UserData : Equatable {
-  var showFavoritesOnly = false
-
+struct AppState : Equatable {
     var listViewState: ListViewState
-
-  var newMeditation : Meditation? = nil
-
-  var meditationTypeIndex : Int = 0
-  var meditationTimeIndex : Int = 0
 }
 
 extension IdentifiedArray where Element == Meditation, ID == UUID {
@@ -83,22 +77,18 @@ enum AppAction : Equatable {
     case willPresentNotification
     case didRecieveResponse
   }
-  
-  case updateNewMeditation(Meditation)
 }
 
 enum TimerBottomAction {
   case buttonPressed
 }
 
-
-
 struct AppEnvironment {
     var listEnv: ListEnv
 }
 
 
-let appReducer = Reducer<UserData, AppAction, AppEnvironment>.combine(
+let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
     listReducer.pullback(state: \.listViewState, action: /AppAction.listAction, environment: \AppEnvironment.listEnv),
 Reducer{ state, action, environment in
 
@@ -117,12 +107,6 @@ Reducer{ state, action, environment in
 
   case .notification(.didRecieveResponse):
       state.listViewState.meditationView!.timedMeditation = nil
-    return .none
-   
-  
-    
-  case let .updateNewMeditation(updated):
-    state.newMeditation = updated
     return .none
 
   case .listAction(_):

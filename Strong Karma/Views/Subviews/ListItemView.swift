@@ -8,6 +8,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Models
 
 struct ListItemView : View {
    var store: Store<Meditation,EditAction>
