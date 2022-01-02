@@ -11,8 +11,6 @@
 		2150E08A246893C80056B07D /* TimerBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21809C3E242FB3D600AEED4B /* TimerBottom.swift */; };
 		2150E08B246893E10056B07D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ListView.swift */; };
 		21809C3D242FA26200AEED4B /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 21809C3C242FA26200AEED4B /* CasePaths */; };
-		21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21988BCC23730AD000A1E2FF /* NotificationHelper.swift */; };
-		219E35492420245D00FD0299 /* MeditationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219E35482420245D00FD0299 /* MeditationView.swift */; };
 		21CE37162369F0CA00DBCD53 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE37152369F0CA00DBCD53 /* TextView.swift */; };
 		21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 21EF5441249560CA00D07AEC /* ComposableArchitecture */; };
 		21EF5444249574DC00D07AEC /* AVComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EF5443249574DC00D07AEC /* AVComposition.swift */; };
@@ -23,6 +21,7 @@
 		D00790E3232EBF8B00C2370F /* MiscViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00790E2232EBF8B00C2370F /* MiscViews.swift */; };
 		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
 		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
+		D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F727816B7D00585CB4 /* ComposableUserNotifications */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
@@ -72,8 +71,6 @@
 /* Begin PBXFileReference section */
 		211EBB8C24688DF200FEB2ED /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		21809C3E242FB3D600AEED4B /* TimerBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBottom.swift; sourceTree = "<group>"; };
-		21988BCC23730AD000A1E2FF /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
-		219E35482420245D00FD0299 /* MeditationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationView.swift; sourceTree = "<group>"; };
 		21CE37152369F0CA00DBCD53 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		21EF5443249574DC00D07AEC /* AVComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AVComposition.swift; path = "Strong KarmaTests/AVComposition.swift"; sourceTree = SOURCE_ROOT; };
 		21EF54452495858F00D07AEC /* AVPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = AVPlayground.playground; path = ../../AVPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -117,6 +114,7 @@
 				D03780F3278128F100585CB4 /* Models in Frameworks */,
 				21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */,
 				21809C3D242FA26200AEED4B /* CasePaths in Frameworks */,
+				D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */,
 				D03780F52781303800585CB4 /* PickerFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,7 +148,6 @@
 				21809C3E242FB3D600AEED4B /* TimerBottom.swift */,
 				21F5DFC92364ACDC00C10E23 /* EditEntryView.swift */,
 				D0ABD9E0231215310092698C /* Type.swift */,
-				219E35482420245D00FD0299 /* MeditationView.swift */,
 				21CE37172369F0CF00DBCD53 /* Supplimental Views */,
 				21F75841236C734E00EBB6AB /* Subviews */,
 			);
@@ -201,7 +198,6 @@
 				D0ABD9DF2311E5680092698C /* Testing.playground */,
 				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
-				21988BCC23730AD000A1E2FF /* NotificationHelper.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
 				21F75842236C752E00EBB6AB /* Views */,
 				D0D0967A231360500066CE66 /* Current.swift */,
@@ -267,6 +263,7 @@
 				21EF5441249560CA00D07AEC /* ComposableArchitecture */,
 				D03780F2278128F100585CB4 /* Models */,
 				D03780F42781303800585CB4 /* PickerFeature */,
+				D03780F727816B7D00585CB4 /* ComposableUserNotifications */,
 			);
 			productName = "Strong Karma";
 			productReference = D0B5422422F7213800A0D90D /* Strong Karma.app */;
@@ -303,6 +300,7 @@
 			packageReferences = (
 				21809C3B242FA26200AEED4B /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 				21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				D03780F627816B7D00585CB4 /* XCRemoteSwiftPackageReference "composable-user-notifications" */,
 			);
 			productRefGroup = D0B5422522F7213800A0D90D /* Products */;
 			projectDirPath = "";
@@ -358,9 +356,7 @@
 				D0D0967B231360500066CE66 /* Current.swift in Sources */,
 				2150E08B246893E10056B07D /* ListView.swift in Sources */,
 				21F5DFCA2364ACDC00C10E23 /* EditEntryView.swift in Sources */,
-				21988BCD23730AD000A1E2FF /* NotificationHelper.swift in Sources */,
 				2150E089246893AB0056B07D /* AppReducer.swift in Sources */,
-				219E35492420245D00FD0299 /* MeditationView.swift in Sources */,
 				21F5DFCC2364B8F900C10E23 /* ListItemView.swift in Sources */,
 				D0ABD9E1231215310092698C /* Type.swift in Sources */,
 				D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */,
@@ -643,6 +639,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		D03780F627816B7D00585CB4 /* XCRemoteSwiftPackageReference "composable-user-notifications" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/miiha/composable-user-notifications";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -663,6 +667,11 @@
 		D03780F42781303800585CB4 /* PickerFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PickerFeature;
+		};
+		D03780F727816B7D00585CB4 /* ComposableUserNotifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D03780F627816B7D00585CB4 /* XCRemoteSwiftPackageReference "composable-user-notifications" */;
+			productName = ComposableUserNotifications;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

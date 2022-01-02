@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "combine-schedulers",
+        "repositoryURL": "https://github.com/pointfreeco/combine-schedulers",
+        "state": {
+          "branch": null,
+          "revision": "4cf088c29a20f52be0f2ca54992b492c54e0076b",
+          "version": "0.5.3"
+        }
+      },
+      {
+        "package": "composable-user-notifications",
+        "repositoryURL": "https://github.com/miiha/composable-user-notifications",
+        "state": {
+          "branch": null,
+          "revision": "dec82786e712f242e8e54ae81c26f30c61865673",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "swift-case-paths",
         "repositoryURL": "https://github.com/pointfreeco/swift-case-paths.git",
         "state": {
@@ -15,8 +33,17 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-composable-architecture",
         "state": {
           "branch": null,
-          "revision": "1005bbd39347f5cc6e993d25a1c0ffe52b8f42d4",
-          "version": "0.3.0"
+          "revision": "0fb6c9bfc306e39dc750786edf28a4a77e67749c",
+          "version": "0.14.0"
+        }
+      },
+      {
+        "package": "xctest-dynamic-overlay",
+        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
+        "state": {
+          "branch": null,
+          "revision": "50a70a9d3583fe228ce672e8923010c8df2deddd",
+          "version": "0.2.1"
         }
       }
     ]
