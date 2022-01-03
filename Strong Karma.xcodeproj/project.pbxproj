@@ -22,11 +22,11 @@
 		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
 		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
 		D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F727816B7D00585CB4 /* ComposableUserNotifications */; };
-		D0378132278298C800585CB4 /* MeditationViewPreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */; };
 		D0378136278298C900585CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378135278298C900585CB4 /* Assets.xcassets */; };
 		D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378138278298C900585CB4 /* Preview Assets.xcassets */; };
 		D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D037813D278298EA00585CB4 /* MeditationViewFeature */; };
 		D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D037813F278298F100585CB4 /* ComposableArchitecture */; };
+		D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03781432782A1F500585CB4 /* SceneDelegate.swift */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
@@ -88,9 +88,10 @@
 		D00790E2232EBF8B00C2370F /* MiscViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViews.swift; sourceTree = "<group>"; };
 		D03780F1278126C400585CB4 /* Strong Karma Folder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Strong Karma Folder"; path = ..; sourceTree = "<group>"; };
 		D037812F278298C800585CB4 /* MeditationViewPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeditationViewPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationViewPreviewApp.swift; sourceTree = "<group>"; };
 		D0378135278298C900585CB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0378138278298C900585CB4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D03781432782A1F500585CB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D03781452782A5A700585CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D0ABD9E0231215310092698C /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -191,7 +192,8 @@
 		D0378130278298C800585CB4 /* MeditationViewPreview */ = {
 			isa = PBXGroup;
 			children = (
-				D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */,
+				D03781452782A5A700585CB4 /* Info.plist */,
+				D03781432782A1F500585CB4 /* SceneDelegate.swift */,
 				D0378135278298C900585CB4 /* Assets.xcassets */,
 				D0378137278298C900585CB4 /* Preview Content */,
 			);
@@ -421,7 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0378132278298C800585CB4 /* MeditationViewPreviewApp.swift in Sources */,
+				D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +524,7 @@
 				DEVELOPMENT_TEAM = V69QAU95S7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeditationViewPreview/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -553,6 +556,7 @@
 				DEVELOPMENT_TEAM = V69QAU95S7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MeditationViewPreview/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
