@@ -27,7 +27,8 @@
 		D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D037813D278298EA00585CB4 /* MeditationViewFeature */; };
 		D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D037813F278298F100585CB4 /* ComposableArchitecture */; };
 		D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03781432782A1F500585CB4 /* SceneDelegate.swift */; };
-		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
+		D037814827832E3F00585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
+		D037814927832E4400585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D037814627832D4600585CB4 /* bell.caf */; };
 		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
@@ -92,6 +93,7 @@
 		D0378138278298C900585CB4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03781432782A1F500585CB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D03781452782A5A700585CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D037814627832D4600585CB4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D0ABD9E0231215310092698C /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				D03781452782A5A700585CB4 /* Info.plist */,
 				D03781432782A1F500585CB4 /* SceneDelegate.swift */,
+				D037814627832D4600585CB4 /* bell.caf */,
 				D0378135278298C900585CB4 /* Assets.xcassets */,
 				D0378137278298C900585CB4 /* Preview Content */,
 			);
@@ -389,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D037814927832E4400585CB4 /* bell.caf in Resources */,
 				D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */,
 				D0378136278298C900585CB4 /* Assets.xcassets in Resources */,
 			);
@@ -403,7 +407,7 @@
 				D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */,
 				D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */,
 				D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */,
-				D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */,
+				D037814827832E3F00585CB4 /* bell.caf in Resources */,
 				D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
