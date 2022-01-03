@@ -38,7 +38,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 }
 
-@UIApplicationMain
+
+@main
+struct FSApp: App {
+  @UIApplicationDelegateAdaptor var delegate: AppDelegate
+
+  var body: some Scene {
+    WindowGroup {
+        MeditationView(store: store)
+    }
+  }
+}
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(
