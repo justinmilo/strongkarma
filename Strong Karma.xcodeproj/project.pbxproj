@@ -22,6 +22,11 @@
 		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
 		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
 		D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F727816B7D00585CB4 /* ComposableUserNotifications */; };
+		D0378132278298C800585CB4 /* MeditationViewPreviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */; };
+		D0378136278298C900585CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378135278298C900585CB4 /* Assets.xcassets */; };
+		D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378138278298C900585CB4 /* Preview Assets.xcassets */; };
+		D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D037813D278298EA00585CB4 /* MeditationViewFeature */; };
+		D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D037813F278298F100585CB4 /* ComposableArchitecture */; };
 		D0ABD9DE2311BF3B0092698C /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
@@ -82,6 +87,10 @@
 		21F94EA82485CCCC00239523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D00790E2232EBF8B00C2370F /* MiscViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscViews.swift; sourceTree = "<group>"; };
 		D03780F1278126C400585CB4 /* Strong Karma Folder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Strong Karma Folder"; path = ..; sourceTree = "<group>"; };
+		D037812F278298C800585CB4 /* MeditationViewPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeditationViewPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationViewPreviewApp.swift; sourceTree = "<group>"; };
+		D0378135278298C900585CB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0378138278298C900585CB4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D0ABD9E0231215310092698C /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
@@ -104,6 +113,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D037812C278298C800585CB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */,
+				D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,12 +188,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D0378130278298C800585CB4 /* MeditationViewPreview */ = {
+			isa = PBXGroup;
+			children = (
+				D0378131278298C800585CB4 /* MeditationViewPreviewApp.swift */,
+				D0378135278298C900585CB4 /* Assets.xcassets */,
+				D0378137278298C900585CB4 /* Preview Content */,
+			);
+			path = MeditationViewPreview;
+			sourceTree = "<group>";
+		};
+		D0378137278298C900585CB4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D0378138278298C900585CB4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
 				D03780F1278126C400585CB4 /* Strong Karma Folder */,
 				D0B5422622F7213800A0D90D /* Strong Karma */,
 				21F94EA52485CCCC00239523 /* Strong KarmaTests */,
+				D0378130278298C800585CB4 /* MeditationViewPreview */,
 				D0B5422522F7213800A0D90D /* Products */,
 				21F94EAE2485CD7700239523 /* Frameworks */,
 			);
@@ -186,6 +223,7 @@
 			children = (
 				D0B5422422F7213800A0D90D /* Strong Karma.app */,
 				21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */,
+				D037812F278298C800585CB4 /* MeditationViewPreview.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,6 +282,27 @@
 			productReference = 21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D037812E278298C800585CB4 /* MeditationViewPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D037813A278298C900585CB4 /* Build configuration list for PBXNativeTarget "MeditationViewPreview" */;
+			buildPhases = (
+				D037812B278298C800585CB4 /* Sources */,
+				D037812C278298C800585CB4 /* Frameworks */,
+				D037812D278298C800585CB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeditationViewPreview;
+			packageProductDependencies = (
+				D037813D278298EA00585CB4 /* MeditationViewFeature */,
+				D037813F278298F100585CB4 /* ComposableArchitecture */,
+			);
+			productName = MeditationViewPreview;
+			productReference = D037812F278298C800585CB4 /* MeditationViewPreview.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D0B5422322F7213800A0D90D /* Strong Karma */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0B5423822F7213A00A0D90D /* Build configuration list for PBXNativeTarget "Strong Karma" */;
@@ -275,13 +334,16 @@
 		D0B5421C22F7213800A0D90D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = "Justin Smith";
 				TargetAttributes = {
 					21F94EA32485CCCC00239523 = {
 						CreatedOnToolsVersion = 11.5;
 						TestTargetID = D0B5422322F7213800A0D90D;
+					};
+					D037812E278298C800585CB4 = {
+						CreatedOnToolsVersion = 13.2.1;
 					};
 					D0B5422322F7213800A0D90D = {
 						CreatedOnToolsVersion = 11.0;
@@ -308,6 +370,7 @@
 			targets = (
 				D0B5422322F7213800A0D90D /* Strong Karma */,
 				21F94EA32485CCCC00239523 /* Strong KarmaTests */,
+				D037812E278298C800585CB4 /* MeditationViewPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -317,6 +380,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D037812D278298C800585CB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */,
+				D0378136278298C900585CB4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +414,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F94EA72485CCCC00239523 /* Strong_KarmaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D037812B278298C800585CB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0378132278298C800585CB4 /* MeditationViewPreviewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +507,68 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Strong Karma.app/Strong Karma";
+			};
+			name = Release;
+		};
+		D037813B278298C900585CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeditationViewPreview/Preview Content\"";
+				DEVELOPMENT_TEAM = V69QAU95S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = build.heini.dev.MeditationViewPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D037813C278298C900585CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeditationViewPreview/Preview Content\"";
+				DEVELOPMENT_TEAM = V69QAU95S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = build.heini.dev.MeditationViewPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -602,6 +744,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D037813A278298C900585CB4 /* Build configuration list for PBXNativeTarget "MeditationViewPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D037813B278298C900585CB4 /* Debug */,
+				D037813C278298C900585CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D0B5421F22F7213800A0D90D /* Build configuration list for PBXProject "Strong Karma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -672,6 +823,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D03780F627816B7D00585CB4 /* XCRemoteSwiftPackageReference "composable-user-notifications" */;
 			productName = ComposableUserNotifications;
+		};
+		D037813D278298EA00585CB4 /* MeditationViewFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MeditationViewFeature;
+		};
+		D037813F278298F100585CB4 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
