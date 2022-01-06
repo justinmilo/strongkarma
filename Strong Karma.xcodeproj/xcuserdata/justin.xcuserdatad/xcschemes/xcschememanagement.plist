@@ -14,7 +14,7 @@
 		<key>MeditationViewPreview.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>3</integer>
 		</dict>
 		<key>MeditationViewPreviewApp.xcscheme_^#shared#^_</key>
 		<dict>
@@ -41,7 +41,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 	</dict>
 </dict>
