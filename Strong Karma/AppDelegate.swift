@@ -7,26 +7,44 @@
 //
 
 import UIKit
+import ComposableArchitecture
+import MeditationViewFeature
+import ComposableUserNotifications
+
+let store : Store<AppState, AppAction>  = Store(
+  initialState: AppState(
+      listViewState: ListViewState(
+          meditations: IdentifiedArray(FileIO().load()),
+          addEntryPopover: false,
+          meditationView: nil,
+          collapsed: true,
+          newMeditation: nil,
+          addMeditationVisible: false)),
+  reducer: appReducer.debug(),
+  environment:  AppEnvironment(
+      listEnv: ListEnv(
+          uuid: UUID.init, now: Date.init,
+          medEnv: MediationViewEnvironment(
+            remoteClient: .randomDelayed,
+            userNotificationClient: UserNotificationClient.live,
+            mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
+            now: Date.init,
+            uuid: UUID.init)
+      )
+  )
+)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
- 
-  
-  
-  
-
-
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
     
-    UNUserNotificationCenter.current().delegate = NotificationHelper.singleton
-    
-    return true
-  }
+    func application(
+      _ application: UIApplication,
+      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
 
- 
-  
+        ViewStore(store).send(.listAction(.meditation(.didFinishLaunching(notification: launchOptions?.notification))))
+      return true
+    }
   
   // MARK: UISceneSession Lifecycle
 
@@ -41,8 +59,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
   }
-  
-
 
 }
 
+private extension Dictionary where Key == UIApplication.LaunchOptionsKey, Value == Any {
+  var notification: UserNotification? {
+    self[.remoteNotification]
+      .flatMap { $0 as? [AnyHashable: Any] }
+      .flatMap(UserNotification.init)
+  }
+}

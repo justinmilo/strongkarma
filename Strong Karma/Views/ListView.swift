@@ -10,6 +10,7 @@ import SwiftUI
 import ComposableArchitecture
 import AVFoundation
 import Models
+import MeditationViewFeature
 
 struct ListViewState: Equatable {
     var meditations : IdentifiedArrayOf<Meditation>
@@ -58,7 +59,7 @@ struct ListEnv{
 
 let listReducer = Reducer<ListViewState, ListAction, ListEnv>.combine(
     todoReducer.forEach(state: \.meditations, action: /ListAction.edit(id:action:), environment: { _ in EditEnvironment()}),
-    mediationReducer.optional.pullback(state: \.meditationView, action: /ListAction.meditation, environment: \ListEnv.medEnv),
+    mediationReducer.optional().pullback(state: \.meditationView, action: /ListAction.meditation, environment: { global in global.medEnv }),
     Reducer{ state, action, environment in
         switch action {
         case .addButtonTapped:

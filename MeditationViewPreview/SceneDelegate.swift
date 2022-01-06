@@ -61,16 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-extension RemoteClient {
-  static let randomDelayed = RemoteClient(
-    fetchRemoteCount: {
-      Effect(value: Int.random(in: 0...10))
-        .delay(for: 2, scheduler: DispatchQueue.main)
-        .eraseToEffect()
-    }
-  )
-}
-
 private extension Dictionary where Key == UIApplication.LaunchOptionsKey, Value == Any {
   var notification: UserNotification? {
     self[.remoteNotification]

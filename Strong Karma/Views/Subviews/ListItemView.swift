@@ -20,7 +20,7 @@ struct ListItemView : View {
       Text(viewStore.title)
         
         Spacer()
-        Text(formatTime(time: viewStore.duration) ?? "Empty")
+        Text(viewStore.durationFormatted ?? "Empty")
                .font(.footnote)
         .foregroundColor(.gray)
         
