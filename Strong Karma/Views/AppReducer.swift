@@ -9,6 +9,8 @@
 import Foundation
 import ComposableArchitecture
 import Models
+import MeditationViewFeature
+import ComposableUserNotifications
 
 
 struct AppState : Equatable {
@@ -42,12 +44,9 @@ extension IdentifiedArray where Element == Meditation, ID == UUID {
 
 enum AppAction : Equatable {
   case listAction(ListAction)
-  case notification(NotificationAction)
-  
-  enum NotificationAction{
-    case willPresentNotification
-    case didRecieveResponse
-  }
+    case didFinishLaunching(notification: UserNotification?)
+    case userNotification(UserNotificationClient.Action)
+    case requestAuthorizationResponse(Result<Bool, UserNotificationClient.Error>)
 }
 
 enum TimerBottomAction {
@@ -72,18 +71,33 @@ Reducer{ state, action, environment in
 //
 //      return .none
 //
-  case .notification(.willPresentNotification):
-      state.listViewState.meditationView!.timedMeditation = nil
-    return .none
-
-  case .notification(.didRecieveResponse):
-      state.listViewState.meditationView!.timedMeditation = nil
-    return .none
 
   case .listAction(_):
       return .none
+  case .requestAuthorizationResponse:
+    return .none
+  case .didFinishLaunching(notification: let notification):
+
+      return .merge(
+        environment.listEnv.medEnv.userNotificationClient
+          .delegate()
+          .map(AppAction.userNotification),
+        environment.listEnv.medEnv.userNotificationClient.requestAuthorization([.alert, .badge, .sound])
+          .catchToEffect()
+          .map(AppAction.requestAuthorizationResponse)
+        )
+  case let .userNotification(.didReceiveResponse(response, completion)):
+      let notification = UserNotification(userInfo: response.notification.request.content.userInfo())
+
+      return .fireAndForget(completion)
+  case .userNotification(.willPresentNotification(_, completion: let completion)):
+      return .fireAndForget {
+           completion([.list, .banner, .sound])
+         }
+  case .userNotification(.openSettingsForNotification(_)):
+      return .none
   }
-}
+  }
 )
 
 
