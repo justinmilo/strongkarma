@@ -9,6 +9,7 @@
 import SwiftUI
 import ComposableArchitecture
 import Models
+import EditEntryViewFeature
 
 struct ListItemView : View {
    var store: Store<Meditation,EditAction>
@@ -17,12 +18,11 @@ struct ListItemView : View {
    WithViewStore(self.store ) { viewStore in
     VStack(alignment: HorizontalAlignment.leading, spacing: nil) {
       HStack{
-      Text(viewStore.title)
-        
-        Spacer()
-        Text(viewStore.durationFormatted ?? "Empty")
-               .font(.footnote)
-        .foregroundColor(.gray)
+          Text(viewStore.title)
+          Spacer()
+          Text(viewStore.durationFormatted ?? "Empty")
+              .font(.footnote)
+              .foregroundColor(.gray)
         
       }
       date(from:viewStore.date).map{

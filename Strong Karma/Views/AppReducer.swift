@@ -49,9 +49,7 @@ enum AppAction : Equatable {
     case requestAuthorizationResponse(Result<Bool, UserNotificationClient.Error>)
 }
 
-enum TimerBottomAction {
-  case buttonPressed
-}
+
 
 struct AppEnvironment {
     var listEnv: ListEnv
