@@ -8,12 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2150E089246893AB0056B07D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211EBB8C24688DF200FEB2ED /* AppReducer.swift */; };
-		2150E08B246893E10056B07D /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422B22F7213800A0D90D /* ListView.swift */; };
 		21809C3D242FA26200AEED4B /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 21809C3C242FA26200AEED4B /* CasePaths */; };
 		21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 21EF5441249560CA00D07AEC /* ComposableArchitecture */; };
-		21EF5444249574DC00D07AEC /* AVComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EF5443249574DC00D07AEC /* AVComposition.swift */; };
-		21F5DFCC2364B8F900C10E23 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F5DFCB2364B8F900C10E23 /* ListItemView.swift */; };
-		21F75840236C696A00EBB6AB /* PrepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7583F236C696A00EBB6AB /* PrepView.swift */; };
 		21F94EA72485CCCC00239523 /* Strong_KarmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */; };
 		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
 		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
@@ -25,20 +21,16 @@
 		D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03781432782A1F500585CB4 /* SceneDelegate.swift */; };
 		D037814827832E3F00585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D037814927832E4400585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D037814627832D4600585CB4 /* bell.caf */; };
-		D04FFF242787ACFE00478F16 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04FFF232787ACFE00478F16 /* DateHelpers.swift */; };
 		D04FFF262787B51800478F16 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF252787B51800478F16 /* MeditationViewFeature */; };
 		D04FFF282787DE8A00478F16 /* EditEntryViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF272787DE8A00478F16 /* EditEntryViewFeature */; };
 		D04FFF2A2787E18400478F16 /* TimerBottomFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF292787E18400478F16 /* TimerBottomFeature */; };
-		D0ABD9E1231215310092698C /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABD9E0231215310092698C /* Type.swift */; };
+		D04FFF2C2787E90900478F16 /* ListViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF2B2787E90900478F16 /* ListViewFeature */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
 		D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B5422D22F7213A00A0D90D /* Assets.xcassets */; };
 		D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423022F7213A00A0D90D /* Preview Assets.xcassets */; };
 		D0B5423422F7213A00A0D90D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */; };
 		D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423F22F78B6900A0D90D /* meditationsData.json */; };
-		D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */; };
-		D0B5424422FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav in Resources */ = {isa = PBXBuildFile; fileRef = D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */; };
-		D0D0967B231360500066CE66 /* Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D0967A231360500066CE66 /* Current.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,10 +68,6 @@
 
 /* Begin PBXFileReference section */
 		211EBB8C24688DF200FEB2ED /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		21EF5443249574DC00D07AEC /* AVComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AVComposition.swift; path = "Strong KarmaTests/AVComposition.swift"; sourceTree = SOURCE_ROOT; };
-		21EF54452495858F00D07AEC /* AVPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = AVPlayground.playground; path = ../../AVPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		21F5DFCB2364B8F900C10E23 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
-		21F7583F236C696A00EBB6AB /* PrepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepView.swift; sourceTree = "<group>"; };
 		21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Strong KarmaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong_KarmaTests.swift; sourceTree = "<group>"; };
 		21F94EA82485CCCC00239523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,22 +78,15 @@
 		D03781432782A1F500585CB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D03781452782A5A700585CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D037814627832D4600585CB4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
-		D04FFF232787ACFE00478F16 /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
-		D0ABD9DF2311E5680092698C /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		D0ABD9E0231215310092698C /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D0B5422B22F7213800A0D90D /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		D0B5422D22F7213A00A0D90D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0B5423022F7213A00A0D90D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0B5423322F7213A00A0D90D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0B5423522F7213A00A0D90D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0B5423F22F78B6900A0D90D /* meditationsData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = meditationsData.json; sourceTree = "<group>"; };
-		D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "91196__surly__buddhist-prayer-bell.wav"; sourceTree = "<group>"; };
-		D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "91196__surly__buddhist-prayer-bell-cut.wav"; sourceTree = "<group>"; };
-		D0D0967A231360500066CE66 /* Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Current.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +115,7 @@
 				21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */,
 				21809C3D242FA26200AEED4B /* CasePaths in Frameworks */,
 				D04FFF2A2787E18400478F16 /* TimerBottomFeature in Frameworks */,
+				D04FFF2C2787E90900478F16 /* ListViewFeature in Frameworks */,
 				D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */,
 				D04FFF282787DE8A00478F16 /* EditEntryViewFeature in Frameworks */,
 				D03780F52781303800585CB4 /* PickerFeature in Frameworks */,
@@ -143,27 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21F75841236C734E00EBB6AB /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				21F5DFCB2364B8F900C10E23 /* ListItemView.swift */,
-				21F7583F236C696A00EBB6AB /* PrepView.swift */,
-			);
-			path = Subviews;
-			sourceTree = "<group>";
-		};
-		21F75842236C752E00EBB6AB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				211EBB8C24688DF200FEB2ED /* AppReducer.swift */,
-				D0B5422B22F7213800A0D90D /* ListView.swift */,
-				D0ABD9E0231215310092698C /* Type.swift */,
-				21F75841236C734E00EBB6AB /* Subviews */,
-				D04FFF232787ACFE00478F16 /* DateHelpers.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		21F94EA52485CCCC00239523 /* Strong KarmaTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,20 +186,14 @@
 		D0B5422622F7213800A0D90D /* Strong Karma */ = {
 			isa = PBXGroup;
 			children = (
-				21EF54452495858F00D07AEC /* AVPlayground.playground */,
-				21EF5443249574DC00D07AEC /* AVComposition.swift */,
-				D0ABD9DF2311E5680092698C /* Testing.playground */,
 				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
-				21F75842236C752E00EBB6AB /* Views */,
-				D0D0967A231360500066CE66 /* Current.swift */,
+				211EBB8C24688DF200FEB2ED /* AppReducer.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
 				D0B5423522F7213A00A0D90D /* Info.plist */,
 				D0B5423F22F78B6900A0D90D /* meditationsData.json */,
-				D0B5424122F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav */,
-				D0B5424322FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav */,
 				D0B5422F22F7213A00A0D90D /* Preview Content */,
 			);
 			path = "Strong Karma";
@@ -320,6 +275,7 @@
 				D04FFF252787B51800478F16 /* MeditationViewFeature */,
 				D04FFF272787DE8A00478F16 /* EditEntryViewFeature */,
 				D04FFF292787E18400478F16 /* TimerBottomFeature */,
+				D04FFF2B2787E90900478F16 /* ListViewFeature */,
 			);
 			productName = "Strong Karma";
 			productReference = D0B5422422F7213800A0D90D /* Strong Karma.app */;
@@ -395,10 +351,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B5423422F7213A00A0D90D /* LaunchScreen.storyboard in Resources */,
-				D0B5424422FA693800A0D90D /* 91196__surly__buddhist-prayer-bell-cut.wav in Resources */,
 				D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */,
 				D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */,
-				D0B5424222F9FBED00A0D90D /* 91196__surly__buddhist-prayer-bell.wav in Resources */,
 				D037814827832E3F00585CB4 /* bell.caf in Resources */,
 				D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */,
 			);
@@ -428,15 +382,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
-				D04FFF242787ACFE00478F16 /* DateHelpers.swift in Sources */,
-				21F75840236C696A00EBB6AB /* PrepView.swift in Sources */,
-				D0D0967B231360500066CE66 /* Current.swift in Sources */,
-				2150E08B246893E10056B07D /* ListView.swift in Sources */,
 				2150E089246893AB0056B07D /* AppReducer.swift in Sources */,
-				21F5DFCC2364B8F900C10E23 /* ListItemView.swift in Sources */,
-				D0ABD9E1231215310092698C /* Type.swift in Sources */,
 				D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */,
-				21EF5444249574DC00D07AEC /* AVComposition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +788,10 @@
 		D04FFF292787E18400478F16 /* TimerBottomFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TimerBottomFeature;
+		};
+		D04FFF2B2787E90900478F16 /* ListViewFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ListViewFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

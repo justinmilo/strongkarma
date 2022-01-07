@@ -10,11 +10,12 @@ import UIKit
 import ComposableArchitecture
 import MeditationViewFeature
 import ComposableUserNotifications
+import ListViewFeature
 
 let store : Store<AppState, AppAction>  = Store(
   initialState: AppState(
       listViewState: ListViewState(
-          meditations: IdentifiedArray(FileIO().load()),
+        meditations: IdentifiedArray(FileClient.live.load()),
           addEntryPopover: false,
           meditationView: nil,
           collapsed: true,
@@ -23,7 +24,7 @@ let store : Store<AppState, AppAction>  = Store(
   reducer: appReducer.debug(),
   environment:  AppEnvironment(
       listEnv: ListEnv(
-          uuid: UUID.init, now: Date.init,
+        file: FileClient.live, uuid: UUID.init, now: Date.init,
           medEnv: MediationViewEnvironment(
             remoteClient: .randomDelayed,
             userNotificationClient: UserNotificationClient.live,
