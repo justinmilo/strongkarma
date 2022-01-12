@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2150E089246893AB0056B07D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211EBB8C24688DF200FEB2ED /* AppReducer.swift */; };
 		21809C3D242FA26200AEED4B /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 21809C3C242FA26200AEED4B /* CasePaths */; };
 		21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 21EF5441249560CA00D07AEC /* ComposableArchitecture */; };
 		21F94EA72485CCCC00239523 /* Strong_KarmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */; };
@@ -67,7 +66,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		211EBB8C24688DF200FEB2ED /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Strong KarmaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong_KarmaTests.swift; sourceTree = "<group>"; };
 		21F94EA82485CCCC00239523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				D0ABD9DD2311BC390092698C /* bell.caf */,
 				D0B5422722F7213800A0D90D /* AppDelegate.swift */,
 				D0B5422922F7213800A0D90D /* SceneDelegate.swift */,
-				211EBB8C24688DF200FEB2ED /* AppReducer.swift */,
 				D0B5422D22F7213A00A0D90D /* Assets.xcassets */,
 				D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */,
 				D0B5423522F7213A00A0D90D /* Info.plist */,
@@ -382,7 +379,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */,
-				2150E089246893AB0056B07D /* AppReducer.swift in Sources */,
 				D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
