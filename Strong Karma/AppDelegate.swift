@@ -11,6 +11,7 @@ import ComposableArchitecture
 import MeditationViewFeature
 import ComposableUserNotifications
 import ListViewFeature
+import AppFeature
 
 let store : Store<AppState, AppAction>  = Store(
   initialState: AppState(
