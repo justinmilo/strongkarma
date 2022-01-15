@@ -11,13 +11,13 @@ import SwiftUI
 
 import ComposableArchitecture
 import SwiftUI
-import MeditationViewFeature
+import TimedSessionViewFeature
 import ComposableArchitecture
 import ComposableUserNotifications
 
-private let store = Store(initialState: MediationViewState(),
+private let store = Store(initialState: TimedSessionViewState(),
                           reducer: mediationReducer.debug(),
-                          environment: MediationViewEnvironment(
+                          environment: TimedSessionViewEnvironment(
                             remoteClient: .randomDelayed,
                             userNotificationClient: UserNotificationClient.live,
                             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
@@ -32,7 +32,7 @@ struct FSApp: App {
 
   var body: some Scene {
     WindowGroup {
-        MeditationView(store: store)
+        TimedSessionView(store: store)
     }
   }
 }

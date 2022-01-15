@@ -15,21 +15,21 @@
 		D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F727816B7D00585CB4 /* ComposableUserNotifications */; };
 		D0378136278298C900585CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378135278298C900585CB4 /* Assets.xcassets */; };
 		D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378138278298C900585CB4 /* Preview Assets.xcassets */; };
-		D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D037813D278298EA00585CB4 /* MeditationViewFeature */; };
 		D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D037813F278298F100585CB4 /* ComposableArchitecture */; };
 		D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03781432782A1F500585CB4 /* SceneDelegate.swift */; };
 		D037814827832E3F00585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
 		D037814927832E4400585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D037814627832D4600585CB4 /* bell.caf */; };
-		D04FFF262787B51800478F16 /* MeditationViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF252787B51800478F16 /* MeditationViewFeature */; };
 		D04FFF282787DE8A00478F16 /* EditEntryViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF272787DE8A00478F16 /* EditEntryViewFeature */; };
 		D04FFF2A2787E18400478F16 /* TimerBottomFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF292787E18400478F16 /* TimerBottomFeature */; };
 		D04FFF2C2787E90900478F16 /* ListViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF2B2787E90900478F16 /* ListViewFeature */; };
+		D0A3C79727934B0000E89C28 /* TimedSessionViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3C79627934B0000E89C28 /* TimedSessionViewFeature */; };
 		D0B5422822F7213800A0D90D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422722F7213800A0D90D /* AppDelegate.swift */; };
 		D0B5422A22F7213800A0D90D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B5422922F7213800A0D90D /* SceneDelegate.swift */; };
 		D0B5422E22F7213A00A0D90D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B5422D22F7213A00A0D90D /* Assets.xcassets */; };
 		D0B5423122F7213A00A0D90D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423022F7213A00A0D90D /* Preview Assets.xcassets */; };
 		D0B5423422F7213A00A0D90D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423222F7213A00A0D90D /* LaunchScreen.storyboard */; };
 		D0B5424022F78F9D00A0D90D /* meditationsData.json in Resources */ = {isa = PBXBuildFile; fileRef = D0B5423F22F78B6900A0D90D /* meditationsData.json */; };
+		D0CD8B82279329FA000A7F19 /* TimedSessionViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D0CD8B81279329FA000A7F19 /* TimedSessionViewFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */,
-				D037813E278298EA00585CB4 /* MeditationViewFeature in Frameworks */,
+				D0A3C79727934B0000E89C28 /* TimedSessionViewFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D04FFF262787B51800478F16 /* MeditationViewFeature in Frameworks */,
 				D03780F3278128F100585CB4 /* Models in Frameworks */,
 				21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */,
 				21809C3D242FA26200AEED4B /* CasePaths in Frameworks */,
@@ -116,6 +115,7 @@
 				D04FFF2C2787E90900478F16 /* ListViewFeature in Frameworks */,
 				D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */,
 				D04FFF282787DE8A00478F16 /* EditEntryViewFeature in Frameworks */,
+				D0CD8B82279329FA000A7F19 /* TimedSessionViewFeature in Frameworks */,
 				D03780F52781303800585CB4 /* PickerFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,8 +242,8 @@
 			);
 			name = MeditationViewPreview;
 			packageProductDependencies = (
-				D037813D278298EA00585CB4 /* MeditationViewFeature */,
 				D037813F278298F100585CB4 /* ComposableArchitecture */,
+				D0A3C79627934B0000E89C28 /* TimedSessionViewFeature */,
 			);
 			productName = MeditationViewPreview;
 			productReference = D037812F278298C800585CB4 /* MeditationViewPreview.app */;
@@ -269,10 +269,10 @@
 				D03780F2278128F100585CB4 /* Models */,
 				D03780F42781303800585CB4 /* PickerFeature */,
 				D03780F727816B7D00585CB4 /* ComposableUserNotifications */,
-				D04FFF252787B51800478F16 /* MeditationViewFeature */,
 				D04FFF272787DE8A00478F16 /* EditEntryViewFeature */,
 				D04FFF292787E18400478F16 /* TimerBottomFeature */,
 				D04FFF2B2787E90900478F16 /* ListViewFeature */,
+				D0CD8B81279329FA000A7F19 /* TimedSessionViewFeature */,
 			);
 			productName = "Strong Karma";
 			productReference = D0B5422422F7213800A0D90D /* Strong Karma.app */;
@@ -764,18 +764,10 @@
 			package = D03780F627816B7D00585CB4 /* XCRemoteSwiftPackageReference "composable-user-notifications" */;
 			productName = ComposableUserNotifications;
 		};
-		D037813D278298EA00585CB4 /* MeditationViewFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MeditationViewFeature;
-		};
 		D037813F278298F100585CB4 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		D04FFF252787B51800478F16 /* MeditationViewFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MeditationViewFeature;
 		};
 		D04FFF272787DE8A00478F16 /* EditEntryViewFeature */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -788,6 +780,14 @@
 		D04FFF2B2787E90900478F16 /* ListViewFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ListViewFeature;
+		};
+		D0A3C79627934B0000E89C28 /* TimedSessionViewFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimedSessionViewFeature;
+		};
+		D0CD8B81279329FA000A7F19 /* TimedSessionViewFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimedSessionViewFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
