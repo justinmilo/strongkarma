@@ -9,29 +9,29 @@
 import UIKit
 import SwiftUI
 import ListViewFeature
-
+import ParsingHelpers
 import ComposableArchitecture
 import Foundation
 import Models
-import MeditationViewFeature
+import TimedSessionViewFeature
 import ComposableUserNotifications
 import Parsing
 
 
 
-let deepLinker = PathComponent("one")
-    .take(inventoryDeepLinker2)
-    .map(AppRoute.one)
-  .orElse(
-    PathComponent("inventory")
-      .take(inventoryDeepLinker)
-      .map(AppRoute.inventory)
-  )
-  .orElse(
-    PathComponent("three")
-      .skip(PathEnd())
-      .map { .three }
-  )
+//let deepLinker = PathComponent("one")
+//    .take(inventoryDeepLinker2)
+//    .map(AppRoute.one)
+//  .orElse(
+//    PathComponent("inventory")
+//      .take(inventoryDeepLinker)
+//      .map(AppRoute.inventory)
+//  )
+//  .orElse(
+//    PathComponent("three")
+//      .skip(PathEnd())
+//      .map { .three }
+//  )
 
 struct AppState : Equatable {
     var listViewState: ListViewState
@@ -50,7 +50,7 @@ struct AppEnvironment {
 }
 
 let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
-    listReducer.pullback(state: \.listViewState, action: /AppAction.listAction, environment: \AppEnvironment.listEnv),
+    //listReducer.pullback(state: \.listViewState, action: /AppAction.listAction, environment: \AppEnvironment.listEnv),
     Reducer{ state, action, environment in
         
         switch action {
@@ -78,25 +78,26 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
             }
         case .userNotification(.openSettingsForNotification(_)):
             return .none
-        case .open(_):
+        case .open(let url):
             var request = DeepLinkRequest(url: url)
-            if let route = deepLinker.parse(&request) {
-              switch route {
-              case let .one(inventoryRoute):
-                self.selectedTab = .one
-                  self.inventoryViewModel2.navigate(to: inventoryRoute)
-
-              case let .inventory(inventoryRoute):
-                self.selectedTab = .inventory
-                self.inventoryViewModel.navigate(to: inventoryRoute)
-
-              case .three:
-                self.selectedTab = .three
-              }
-            }
+//            if let route = deepLinker.parse(&request) {
+//              switch route {
+//              case let .one(inventoryRoute):
+//                self.selectedTab = .one
+//                  self.inventoryViewModel2.navigate(to: inventoryRoute)
+//
+//              case let .inventory(inventoryRoute):
+//                self.selectedTab = .inventory
+//                self.inventoryViewModel.navigate(to: inventoryRoute)
+//
+//              case .three:
+//                self.selectedTab = .three
+//              }
+            return .none
         }
     }
 )
+
 
 
 

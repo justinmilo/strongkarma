@@ -8,25 +8,22 @@
 
 import UIKit
 import ComposableArchitecture
-import MeditationViewFeature
+import TimedSessionViewFeature
 import ComposableUserNotifications
 import ListViewFeature
 import AppFeature
 
 let store : Store<AppState, AppAction>  = Store(
   initialState: AppState(
-      listViewState: ListViewState(
+    listViewState: ListViewState(
         meditations: IdentifiedArray(FileClient.live.load()),
-          addEntryPopover: false,
-          meditationView: nil,
-          collapsed: true,
-          newMeditation: nil,
-          addMeditationVisible: false)),
+        route: .timedSession(TimedSessionViewState())
+  )),
   reducer: appReducer.debug(),
   environment:  AppEnvironment(
       listEnv: ListEnv(
         file: FileClient.live, uuid: UUID.init, now: Date.init,
-          medEnv: MediationViewEnvironment(
+          medEnv: TimedSessionViewEnvironment(
             remoteClient: .randomDelayed,
             userNotificationClient: UserNotificationClient.live,
             mainQueue: DispatchQueue.main.eraseToAnyScheduler(),
