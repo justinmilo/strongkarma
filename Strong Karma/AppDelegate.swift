@@ -17,7 +17,9 @@ let store : Store<AppState, AppAction>  = Store(
   initialState: AppState(
     listViewState: ListViewState(
         meditations: IdentifiedArray(FileClient.live.load()),
-        route: .timedSession(TimedSessionViewState())
+        route:
+                .closed(nil, nil)
+                //.open(TimedSessionViewState())
   )),
   reducer: appReducer.debug(),
   environment:  AppEnvironment(
