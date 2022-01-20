@@ -16,7 +16,7 @@ import ComposableArchitecture
 import ComposableUserNotifications
 
 private let store = Store(initialState: TimedSessionViewState(),
-                          reducer: mediationReducer.debug(),
+                          reducer: timedSessionReducer.debug(),
                           environment: TimedSessionViewEnvironment(
                             remoteClient: .randomDelayed,
                             userNotificationClient: UserNotificationClient.live,
