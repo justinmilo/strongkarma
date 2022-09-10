@@ -10,15 +10,16 @@
 		21809C3D242FA26200AEED4B /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 21809C3C242FA26200AEED4B /* CasePaths */; };
 		21EF5442249560CA00D07AEC /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 21EF5441249560CA00D07AEC /* ComposableArchitecture */; };
 		21F94EA72485CCCC00239523 /* Strong_KarmaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */; };
+		D02751E6279A7A6900466062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D02751E5279A7A6900466062 /* Assets.xcassets */; };
+		D02751E9279A7A6900466062 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D02751E8279A7A6900466062 /* Preview Assets.xcassets */; };
+		D02751EE279A7A7100466062 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02751ED279A7A7100466062 /* SceneDelegate.swift */; };
+		D02751F0279A7ABC00466062 /* TimedSessionViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D02751EF279A7ABC00466062 /* TimedSessionViewFeature */; };
+		D02751F2279A7AC100466062 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D02751F1279A7AC100466062 /* ComposableArchitecture */; };
 		D03780F3278128F100585CB4 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F2278128F100585CB4 /* Models */; };
 		D03780F52781303800585CB4 /* PickerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F42781303800585CB4 /* PickerFeature */; };
 		D03780F827816B7D00585CB4 /* ComposableUserNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = D03780F727816B7D00585CB4 /* ComposableUserNotifications */; };
-		D0378136278298C900585CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378135278298C900585CB4 /* Assets.xcassets */; };
-		D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0378138278298C900585CB4 /* Preview Assets.xcassets */; };
 		D0378140278298F100585CB4 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D037813F278298F100585CB4 /* ComposableArchitecture */; };
-		D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03781432782A1F500585CB4 /* SceneDelegate.swift */; };
 		D037814827832E3F00585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0ABD9DD2311BC390092698C /* bell.caf */; };
-		D037814927832E4400585CB4 /* bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = D037814627832D4600585CB4 /* bell.caf */; };
 		D04FFF282787DE8A00478F16 /* EditEntryViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF272787DE8A00478F16 /* EditEntryViewFeature */; };
 		D04FFF2A2787E18400478F16 /* TimerBottomFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF292787E18400478F16 /* TimerBottomFeature */; };
 		D04FFF2C2787E90900478F16 /* ListViewFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D04FFF2B2787E90900478F16 /* ListViewFeature */; };
@@ -70,14 +71,14 @@
 		21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Strong KarmaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F94EA62485CCCC00239523 /* Strong_KarmaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strong_KarmaTests.swift; sourceTree = "<group>"; };
 		21F94EA82485CCCC00239523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D02751DF279A7A6800466062 /* TimedSessionViewPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimedSessionViewPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D02751E5279A7A6900466062 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D02751E8279A7A6900466062 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D02751ED279A7A7100466062 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D03780F1278126C400585CB4 /* Strong Karma Folder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Strong Karma Folder"; path = ..; sourceTree = "<group>"; };
 		D037812F278298C800585CB4 /* MeditationViewPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeditationViewPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0378135278298C900585CB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D0378138278298C900585CB4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D03781432782A1F500585CB4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D03781452782A5A700585CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D037814627832D4600585CB4 /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
 		D0ABD9DD2311BC390092698C /* bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.caf; sourceTree = "<group>"; };
+		D0AFFA7227B81AC2008D6740 /* AVPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = AVPlayground.playground; sourceTree = "<group>"; };
 		D0B5422422F7213800A0D90D /* Strong Karma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Strong Karma.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B5422722F7213800A0D90D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0B5422922F7213800A0D90D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +94,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D02751DC279A7A6800466062 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D02751F2279A7AC100466062 /* ComposableArchitecture in Frameworks */,
+				D02751F0279A7ABC00466062 /* TimedSessionViewFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,22 +151,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D0378130278298C800585CB4 /* MeditationViewPreview */ = {
+		D02751E0279A7A6800466062 /* TimedSessionViewPreview */ = {
 			isa = PBXGroup;
 			children = (
-				D03781452782A5A700585CB4 /* Info.plist */,
-				D03781432782A1F500585CB4 /* SceneDelegate.swift */,
-				D037814627832D4600585CB4 /* bell.caf */,
-				D0378135278298C900585CB4 /* Assets.xcassets */,
-				D0378137278298C900585CB4 /* Preview Content */,
+				D02751ED279A7A7100466062 /* SceneDelegate.swift */,
+				D02751E5279A7A6900466062 /* Assets.xcassets */,
+				D02751E7279A7A6900466062 /* Preview Content */,
 			);
-			path = MeditationViewPreview;
+			path = TimedSessionViewPreview;
 			sourceTree = "<group>";
 		};
-		D0378137278298C900585CB4 /* Preview Content */ = {
+		D02751E7279A7A6900466062 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				D0378138278298C900585CB4 /* Preview Assets.xcassets */,
+				D02751E8279A7A6900466062 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -164,10 +172,11 @@
 		D0B5421B22F7213800A0D90D = {
 			isa = PBXGroup;
 			children = (
+				D0AFFA7227B81AC2008D6740 /* AVPlayground.playground */,
 				D03780F1278126C400585CB4 /* Strong Karma Folder */,
 				D0B5422622F7213800A0D90D /* Strong Karma */,
 				21F94EA52485CCCC00239523 /* Strong KarmaTests */,
-				D0378130278298C800585CB4 /* MeditationViewPreview */,
+				D02751E0279A7A6800466062 /* TimedSessionViewPreview */,
 				D0B5422522F7213800A0D90D /* Products */,
 				21F94EAE2485CD7700239523 /* Frameworks */,
 			);
@@ -179,6 +188,7 @@
 				D0B5422422F7213800A0D90D /* Strong Karma.app */,
 				21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */,
 				D037812F278298C800585CB4 /* MeditationViewPreview.app */,
+				D02751DF279A7A6800466062 /* TimedSessionViewPreview.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,6 +239,27 @@
 			productName = "Strong KarmaTests";
 			productReference = 21F94EA42485CCCC00239523 /* Strong KarmaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D02751DE279A7A6800466062 /* TimedSessionViewPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D02751EA279A7A6900466062 /* Build configuration list for PBXNativeTarget "TimedSessionViewPreview" */;
+			buildPhases = (
+				D02751DB279A7A6800466062 /* Sources */,
+				D02751DC279A7A6800466062 /* Frameworks */,
+				D02751DD279A7A6800466062 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TimedSessionViewPreview;
+			packageProductDependencies = (
+				D02751EF279A7ABC00466062 /* TimedSessionViewFeature */,
+				D02751F1279A7AC100466062 /* ComposableArchitecture */,
+			);
+			productName = TimedSessionViewPreview;
+			productReference = D02751DF279A7A6800466062 /* TimedSessionViewPreview.app */;
+			productType = "com.apple.product-type.application";
 		};
 		D037812E278298C800585CB4 /* MeditationViewPreview */ = {
 			isa = PBXNativeTarget;
@@ -295,6 +326,9 @@
 						CreatedOnToolsVersion = 11.5;
 						TestTargetID = D0B5422322F7213800A0D90D;
 					};
+					D02751DE279A7A6800466062 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					D037812E278298C800585CB4 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -324,6 +358,7 @@
 				D0B5422322F7213800A0D90D /* Strong Karma */,
 				21F94EA32485CCCC00239523 /* Strong KarmaTests */,
 				D037812E278298C800585CB4 /* MeditationViewPreview */,
+				D02751DE279A7A6800466062 /* TimedSessionViewPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -336,13 +371,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D02751DD279A7A6800466062 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D02751E9279A7A6900466062 /* Preview Assets.xcassets in Resources */,
+				D02751E6279A7A6900466062 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D037812D278298C800585CB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D037814927832E4400585CB4 /* bell.caf in Resources */,
-				D0378139278298C900585CB4 /* Preview Assets.xcassets in Resources */,
-				D0378136278298C900585CB4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,11 +410,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D02751DB279A7A6800466062 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D02751EE279A7A7100466062 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D037812B278298C800585CB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03781442782A1F500585CB4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +496,68 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Strong Karma.app/Strong Karma";
+			};
+			name = Release;
+		};
+		D02751EB279A7A6900466062 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TimedSessionViewPreview/Preview Content\"";
+				DEVELOPMENT_TEAM = V69QAU95S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = build.heini.dev.TimedSessionViewPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D02751EC279A7A6900466062 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TimedSessionViewPreview/Preview Content\"";
+				DEVELOPMENT_TEAM = V69QAU95S7;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = build.heini.dev.TimedSessionViewPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -687,6 +797,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D02751EA279A7A6900466062 /* Build configuration list for PBXNativeTarget "TimedSessionViewPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D02751EB279A7A6900466062 /* Debug */,
+				D02751EC279A7A6900466062 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D037813A278298C900585CB4 /* Build configuration list for PBXNativeTarget "MeditationViewPreview" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -750,6 +869,15 @@
 			productName = CasePaths;
 		};
 		21EF5441249560CA00D07AEC /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		D02751EF279A7ABC00466062 /* TimedSessionViewFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TimedSessionViewFeature;
+		};
+		D02751F1279A7AC100466062 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 21B0951124620BA300C2994C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
